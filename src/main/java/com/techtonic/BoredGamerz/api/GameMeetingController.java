@@ -1,0 +1,118 @@
+package com.techtonic.BoredGamerz.api;
+
+import com.techtonic.BoredGamerz.ServerUtil.Exceptions.BlankBodyException;
+import com.techtonic.BoredGamerz.ServerUtil.Exceptions.SQLDeleteFail;
+import com.techtonic.BoredGamerz.ServerUtil.Exceptions.SQLSaveFail;
+import com.techtonic.BoredGamerz.dto.GameMeetingDataTransferObject;
+import com.techtonic.BoredGamerz.model.GameMeeting;
+import com.techtonic.BoredGamerz.service.GameMeetingService;
+import com.techtonic.BoredGamerz.service.UserService;
+import com.techtonic.BoredGamerz.service.UserToGameMeetingService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.UUID;
+
+/*
+Created: in progress
+Authors: Grant Fields
+(c) Copyright by Company: Techtonic
+Details: Handles http requests related to creating, finding, or deleting game meetings
+ */
+
+@RequestMapping("bored-gamerz/api/game-meeting")
+@RestController
+public class GameMeetingController {
+
+    private final GameMeetingService GM_SERVICE;
+    private final UserToGameMeetingService UTGM_SERVICE;
+    private final UserService USER_SERVICE;
+
+    @Autowired
+    public GameMeetingController(GameMeetingService GM_SERVICE,
+                          UserToGameMeetingService UTGM_SERVICE,
+                                 UserService USER_SERVICE){
+
+        this.GM_SERVICE = GM_SERVICE;
+        this.UTGM_SERVICE = UTGM_SERVICE;
+        this.USER_SERVICE = USER_SERVICE;
+    }
+
+    @PostMapping
+    public int add(@RequestBody GameMeetingDataTransferObject gm){
+
+        if(GM_SERVICE.add(gm, UTGM_SERVICE, USER_SERVICE) == 0) throw new SQLSaveFail();
+
+        return 201;
+    }
+
+    @GetMapping
+    public Iterable<GameMeeting> getAll(){
+
+        return GM_SERVICE.getAll();
+    }
+
+    @GetMapping(path = "/{id}")
+    public Optional<GameMeeting> getByGameMeetingId(@PathVariable("id") UUID gameMeetingId){
+
+        Optional<GameMeeting> output = GM_SERVICE.getById(gameMeetingId);
+
+        if(output.isEmpty()) throw new NoSuchElementException();
+
+        return output;
+    }
+
+    @GetMapping(path = "/host/{UUID}")
+    public Iterable<GameMeeting> getAllByHostId(@PathVariable("UUID") UUID hostId){
+
+        return GM_SERVICE.getAllByHostId(hostId);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public int deleteAllByGameMeetingId(@PathVariable("id") UUID gameMeetingId){
+
+        if(GM_SERVICE.delete(gameMeetingId, UTGM_SERVICE) == 0) throw new SQLDeleteFail();
+
+        return 200;
+    }
+
+    //CAUTION!!! DO NOT USE YET, THINGS WILL PROBABLY BREAK, TOO MANY FACTORS.
+    @PutMapping
+    public int updateGameMeeting(@RequestBody GameMeeting gameMeeting){
+
+        return GM_SERVICE.update(gameMeeting);
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<String> handle(NoSuchElementException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The entity does not exist");
+    }
+
+    @ExceptionHandler(BlankBodyException.class)
+    public ResponseEntity<String> handle(BlankBodyException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Body did not contain required attributes");
+    }
+
+    @ExceptionHandler(SQLSaveFail.class)
+    public ResponseEntity<String> handle(SQLSaveFail e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Body did not save to sql database");
+    }
+
+    @ExceptionHandler(SQLDeleteFail.class)
+    public ResponseEntity<String> handle(SQLDeleteFail e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Entity could not be deleted");
+    }
+}
