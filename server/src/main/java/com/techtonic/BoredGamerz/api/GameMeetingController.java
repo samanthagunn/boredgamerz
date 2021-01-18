@@ -65,8 +65,8 @@ public class GameMeetingController {
         return GM_SERVICE.getAll();
     }
 
-    @GetMapping(path = "/{id}")
-    public Optional<GameMeeting> getByGameMeetingId(@PathVariable("id") UUID gameMeetingId){
+    @GetMapping(path = "/{UUID}")
+    public Optional<GameMeeting> getByGameMeetingId(@PathVariable("UUID") UUID gameMeetingId){
 
         Optional<GameMeeting> output = GM_SERVICE.getById(gameMeetingId);
 
@@ -81,8 +81,8 @@ public class GameMeetingController {
         return GM_SERVICE.getAllByHostId(hostId);
     }
 
-    @DeleteMapping(path = "/{id}")
-    public int deleteAllByGameMeetingId(@PathVariable("id") UUID gameMeetingId){
+    @DeleteMapping(path = "/{UUID}")
+    public int deleteAllByGameMeetingId(@PathVariable("UUID") UUID gameMeetingId){
 
         if(GM_SERVICE.delete(gameMeetingId, UTGM_SERVICE) == 0) throw new SQLDeleteFail();
 

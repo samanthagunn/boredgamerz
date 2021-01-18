@@ -29,6 +29,7 @@ public class UserToGameMeetingDataTransferObject {
                                                @JsonProperty("gameMeetingId") UUID gameMeetingId){
         this.userId = userId;
         this.gameMeetingId = gameMeetingId;
+        id = "" + gameMeetingId + userId;
     }
 
     public boolean isValid(){
