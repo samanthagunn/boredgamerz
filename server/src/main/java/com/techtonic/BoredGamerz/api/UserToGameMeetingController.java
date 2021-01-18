@@ -87,7 +87,7 @@ public class UserToGameMeetingController {
     }
 
     @DeleteMapping(path = "/unjoin")
-    public int deleteAllByGameMeetingId(@RequestBody UserToGameMeetingDataTransferObject unjoin){
+    public int deleteAllByGameMeetingId(@RequestBody UserToGameMeetingDataTransferObject  unjoin){
 
         if(UTGM_SERVICE.delete(unjoin, GM_SERVICE) == 0) throw new SQLDeleteFail();
 
