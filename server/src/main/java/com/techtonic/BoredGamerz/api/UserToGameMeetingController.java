@@ -74,19 +74,19 @@ public class UserToGameMeetingController {
         return output;
     }
 
-    @GetMapping(path = "/user/{id}")
-    public Iterable<UserToGameMeetingJoin> getByUserId(@PathVariable("id") UUID id){
+    @GetMapping(path = "/user/{UUID}")
+    public Iterable<UserToGameMeetingJoin> getByUserId(@PathVariable("UUID") UUID id){
 
         return UTGM_SERVICE.getAllByUserId(id);
     }
 
-    @GetMapping(path = "/game-meeting/{id}")
-    public Iterable<UserToGameMeetingJoin> getByGameMeetingId(@PathVariable("id") UUID id){
+    @GetMapping(path = "/game-meeting/{UUID}")
+    public Iterable<UserToGameMeetingJoin> getByGameMeetingId(@PathVariable("UUID") UUID id){
 
         return UTGM_SERVICE.getAllByGameMeetingId(id);
     }
 
-    @DeleteMapping(path = "/unjoin}")
+    @DeleteMapping(path = "/unjoin")
     public int deleteAllByGameMeetingId(@RequestBody UserToGameMeetingDataTransferObject unjoin){
 
         if(UTGM_SERVICE.delete(unjoin, GM_SERVICE) == 0) throw new SQLDeleteFail();
