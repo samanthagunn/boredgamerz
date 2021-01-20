@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The footer component... matches the snapshot. 1`] = `
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>
+      Copyright 2020 Bored Gamerz
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>
+`;

@@ -24,6 +24,7 @@ import './theme/variables.css';
 import Profile from './pages/profile';
 import Home from './pages/Home';
 import Header from './components/header';
+import Footer from './components/footer';
 //mimic "/" path to ensure no unauthed users access profiles
 const App = () => (
   <IonApp>
@@ -35,6 +36,7 @@ const App = () => (
         <Route path="/profile" component={Profile} exact={true}/>
       </IonRouterOutlet>
     </IonReactRouter>
+    <Footer />
   </IonApp>
 );
 
