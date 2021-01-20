@@ -1,15 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import ErrorBoundary from "./errorboundary";
 import { Auth0Provider } from "@auth0/auth0-react"
+import App from "./App";
 
 ReactDOM.render(
   <Auth0Provider
-    domain="Test"
-    clientId="ID"
-    redirectUri={window.location.origin}
+    domain="dev-z2irz81c.us.auth0.com"
+    clientId="lbS5AAGz6OmsB863eb48BPPg7sYep1Ys"
+    redirectUri= "http://localhost:3000/profile"
     >
     <ErrorBoundary>
       <App />
