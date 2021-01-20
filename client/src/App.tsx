@@ -22,7 +22,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import Profile from './pages/profile';
-import Home from './pages/home';
+import Home from './pages/Home';
 //mimic "/" path to ensure no unauthed users access profiles
 const App = () => (
   <IonApp>
