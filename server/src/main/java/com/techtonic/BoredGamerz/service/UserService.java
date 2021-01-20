@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -34,14 +35,14 @@ public class UserService {
     public int add(UserDataTransferObject user){
 
         if(!user.isValid()) throw new BlankBodyException();
+        User tempUser = new User(user);
+        USER_DAO.save(tempUser);
 
-        USER_DAO.save(new User(user));
-
-        if(USER_DAO.existsById(user.getId())) return 1;
+        if(USER_DAO.existsById(tempUser.getId())) return 1;
 
         return 0;
     }
-
+    @Transactional
     public int delete(UUID userId,
                       GameMeetingService gmService,
                       UserToGameMeetingService utgmService){
