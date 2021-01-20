@@ -4,7 +4,7 @@ import {
   fireEvent,
 } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import Home from "../pages/home";
+import Home from "../pages/Home";
 import { useAuth0 } from "@auth0/auth0-react";
 jest.mock("@auth0/auth0-react");
 jest.mock("react-router");
