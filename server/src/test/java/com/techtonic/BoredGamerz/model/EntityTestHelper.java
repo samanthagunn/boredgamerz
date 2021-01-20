@@ -30,9 +30,10 @@ public class EntityTestHelper {
             "Herb",
             "Brown",
             "Donald",
-            "Rober",
+            "Robert",
             "Nick",
-            "Charles"};
+            "Charles",
+            "Willy"};
 
     String[] countries = new String[]{
             "USA",
@@ -42,7 +43,11 @@ public class EntityTestHelper {
             "Japan",
             "Mexico",
             "Canada",
-            "Italy"
+            "Italy",
+            "The Moon",
+            "Wakanda",
+            "Oz",
+            "Middle Earth"
     };
 
     String[] games = new String[]{
@@ -53,7 +58,11 @@ public class EntityTestHelper {
             "Sorry",
             "Magic",
             "Munchkins",
-            "Cards Against Humanity"
+            "Cards Against Humanity",
+            "Battleship",
+            "Risk",
+            "Twister",
+            "Life"
     };
 
     String[] addresses = new String[]{
@@ -62,7 +71,9 @@ public class EntityTestHelper {
             "Into the sunset",
             "The 7/11",
             "Any target",
-            "An empty parking lot"
+            "An empty parking lot",
+            "On a boat",
+            "The Oval Office"
     };
 
     String[] categories = new String[]{

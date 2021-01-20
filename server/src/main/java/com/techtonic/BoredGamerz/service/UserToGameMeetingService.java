@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -71,7 +72,7 @@ public class UserToGameMeetingService {
 
         return UTGMJ_DAO.existsById(utgmj.getId()) ? 0 : 1;
     }
-
+    @Transactional
     public int deleteAllByGameMeetingId(UUID gameMeetingId){
         UTGMJ_DAO.deleteAllByGameMeetingId(gameMeetingId);
 
@@ -100,5 +101,9 @@ public class UserToGameMeetingService {
 
     public Optional<UserToGameMeetingJoin> getByCompositeId(String compositeId){
         return UTGMJ_DAO.findById(compositeId);
+    }
+
+    public boolean existsByUserId(UUID userId){
+        return  UTGMJ_DAO.existsByUserId(userId);
     }
 }
