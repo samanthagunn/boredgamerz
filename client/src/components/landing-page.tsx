@@ -2,7 +2,6 @@ import React from "react";
 import "./ExploreContainer.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { IonButton, IonSpinner } from "@ionic/react";
-import { useHistory } from "react-router";
 
 const LandingPage = () => {
   const { loginWithRedirect, isAuthenticated, isLoading, user } = useAuth0();
