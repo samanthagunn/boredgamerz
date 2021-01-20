@@ -23,9 +23,11 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import Profile from './pages/profile';
 import Home from './pages/Home';
+import Header from './components/header';
 //mimic "/" path to ensure no unauthed users access profiles
 const App = () => (
   <IonApp>
+    <Header />
     <IonReactRouter>
       <IonRouterOutlet>
         <Route path="/home" component={Home} exact={true} />
