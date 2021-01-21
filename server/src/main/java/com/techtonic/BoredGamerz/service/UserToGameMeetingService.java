@@ -79,10 +79,11 @@ public class UserToGameMeetingService {
         return UTGMJ_DAO.existsByGameMeetingId(gameMeetingId) ? 0 : 1;
     }
 
+    @Transactional
     public int deleteAllByUserId(UUID userId){
         UTGMJ_DAO.deleteAllByUserId(userId);
 
-        return UTGMJ_DAO.existsByGameMeetingId(userId) ? 0 : 1;
+        return  1; //UTGMJ_DAO.existsByGameMeetingId(userId) ? 0 : 1;
     }
 
     public Iterable<UserToGameMeetingJoin> getAllByUserId(UUID userId){

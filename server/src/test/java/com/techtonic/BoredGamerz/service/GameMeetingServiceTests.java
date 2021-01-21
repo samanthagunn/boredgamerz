@@ -7,7 +7,6 @@ import com.techtonic.BoredGamerz.model.GameMeeting;
 import com.techtonic.BoredGamerz.model.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.util.collections.Iterables;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -60,7 +59,7 @@ class GameMeetingServiceTests {
     }
 
     @Test
-    void deleteUserDeletesGame(@Autowired UserService userService,
+    void deleteHostDeletesGame(@Autowired UserService userService,
                            @Autowired GameMeetingService gmService,
                            @Autowired UserToGameMeetingService utgmService){
 
