@@ -54,15 +54,9 @@ public class UserService {
 
         Iterable<UserToGameMeetingJoin> seatList = utgmService.getAllByUserId(userId);
 
-        for(UserToGameMeetingJoin seat: seatList){
-
-            if(seat.getGameMeeting().getHost().getId().equals(userId)){
-
-                gmService.delete(seat.getGameMeeting().getId(), utgmService);
-            }
-        }
-
+        utgmService.deleteAllByHostId(userId);
         utgmService.deleteAllByUserId(userId);
+        gmService.deleteAllByHostId(userId);
         USER_DAO.deleteById(userId);
 
         return 1; //USER_DAO.existsById(userId) ? 0 : 1;

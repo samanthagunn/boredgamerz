@@ -81,6 +81,13 @@ public class GameMeetingService {
         return GM_DAO.existsById(gameMeetingId) ? 0 : 1;
     }
 
+    public int deleteAllByHostId(UUID hostId){
+
+        GM_DAO.deleteAllByHostId(hostId);
+
+        return 1;
+    }
+
     //Currently not safe to use
     public int update(GameMeeting gm){
         if(gm.getId() != null){

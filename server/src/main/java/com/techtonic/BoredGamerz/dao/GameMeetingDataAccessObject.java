@@ -19,5 +19,7 @@ public interface GameMeetingDataAccessObject extends JpaRepository<GameMeeting, 
 
     Iterable<GameMeeting> findAllByHostId(UUID hostId);
 
+    void deleteAllByHostId(UUID hostId);
+
     boolean existsByHostId(UUID hostId);
 }

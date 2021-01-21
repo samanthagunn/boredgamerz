@@ -122,6 +122,8 @@ class UserToGameMeetingServiceTests {
             counter++;
         }
 
+        Assertions.assertNotEquals(utgmService.existsByUserId(userPlayer.getId()),false);
+
         userService.delete(userHost.getId(),gmService,utgmService);
 
         Assertions.assertNotEquals(utgmService.existsByUserId(userPlayer.getId()),true);

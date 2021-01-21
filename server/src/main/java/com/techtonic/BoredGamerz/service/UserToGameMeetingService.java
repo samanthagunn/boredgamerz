@@ -72,6 +72,14 @@ public class UserToGameMeetingService {
 
         return UTGMJ_DAO.existsById(utgmj.getId()) ? 0 : 1;
     }
+
+    public int deleteAllByHostId(UUID hostId){
+
+        UTGMJ_DAO.deleteAllByGameMeetingHostId(hostId);
+
+        return 1;
+    }
+
     @Transactional
     public int deleteAllByGameMeetingId(UUID gameMeetingId){
         UTGMJ_DAO.deleteAllByGameMeetingId(gameMeetingId);
