@@ -27,6 +27,7 @@ import Header from './components/header';
 import Footer from './components/footer';
 import MyGames from './pages/MyGames.jsx';
 import FindGames from './pages/FindGames';
+import CreateGame from './pages/CreateGames';
 //mimic "/" path to ensure no unauthed users access profiles
 const App = () => (
   <IonApp>
@@ -37,6 +38,7 @@ const App = () => (
         <Route path="/profile" component={Profile} exact={true}/>
         <Route path="/profile/games" component={MyGames} exact={true} />
         <Route path="/games" component={FindGames} exact={true} />
+        <Route path="/games/create" component={CreateGame} exact={true} />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

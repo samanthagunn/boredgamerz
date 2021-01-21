@@ -1,0 +1,80 @@
+{
+  "games": [{
+      "id": 1,
+      "title": "Marks DND Game",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Auctor eu augue ut lectus arcu bibendum. Metus dictum at tempor commodo ullamcorper a lacus vestibulum sed. Ipsum a arcu cursus vitae congue mauris. Aenean sed adipiscing diam donec adipiscing tristique. Dui id ornare arcu odio ut sem nulla pharetra diam. Condimentum vitae sapien pellentesque habitant. Commodo nulla facilisi nullam vehicula. Sagittis purus sit amet volutpat consequat mauris nunc. Commodo sed egestas egestas fringilla phasellus faucibus scelerisque. Viverra nibh cras pulvinar mattis nunc sed blandit. A iaculis at erat pellentesque adipiscing commodo. Sed cras ornare arcu dui vivamus arcu. Malesuada fames ac turpis egestas sed tempus urna et pharetra. Malesuada pellentesque elit eget gravida cum sociis natoque penatibus et. Tincidunt eget nullam non nisi.",
+      "gameName": "Dungeons & Dragon",
+      "category": "Role-playing games",
+      "availableSeats": 6,
+      "address": "1234 ACME Street Omaha, Nebraska, 68100",
+      "date": "12/20/2021",
+      "hostId": 1,
+      "location": {"lat": 39.7531332, "lng": -105.0087434}
+    },
+    {
+      "id": 2,
+      "title": "Sam's Clue Game",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus in metus vulputate eu scelerisque felis imperdiet proin fermentum. Tellus at urna condimentum mattis. Neque ornare aenean euismod elementum nisi quis eleifend quam adipiscing. Venenatis a condimentum vitae sapien pellentesque habitant morbi tristique senectus. Id eu nisl nunc mi. Ullamcorper sit amet risus nullam eget felis eget nunc. Egestas fringilla phasellus faucibus scelerisque eleifend donec pretium. Odio euismod lacinia at quis risus sed vulputate odio. Gravida dictum fusce ut placerat orci nulla pellentesque dignissim. Mauris vitae ultricies leo integer. Elit eget gravida cum sociis natoque. Facilisis volutpat est velit egestas dui id. Viverra adipiscing at in tellus integer feugiat scelerisque. Penatibus et magnis dis parturient.",
+      "gameName": "Clue",
+      "category": "Mystery",
+      "availableSeats": 4,
+      "address": "4567 EAMC Street Omaha, Nebraska, 68102",
+      "date": "01/21/2021",
+      "hostId": 2,
+      "location": {"lat": 41.2573403, "lng": -95.9715007}
+    },
+    {
+      "id": 3,
+      "title": "Grant's UNO Game",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vulputate ut pharetra sit amet aliquam id diam. Faucibus nisl tincidunt eget nullam non nisi. In egestas erat imperdiet sed euismod nisi. Aliquet risus feugiat in ante metus dictum at. Eu mi bibendum neque egestas. Ac auctor augue mauris augue. Quisque non tellus orci ac auctor. In fermentum posuere urna nec tincidunt praesent semper feugiat. Lectus sit amet est placerat in.",
+      "gameName": "UNO",
+      "category": "Card Game",
+      "availableSeats": 3,
+      "address": "4567 EMAC Street Frankfort, Kentucky, 40601",
+      "date": "Always required",
+      "hostId": 3
+    },
+    {
+      "id": 4,
+      "title": "Christian Monopoly Game",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tempus quam pellentesque nec nam aliquam sem et tortor. At ultrices mi tempus imperdiet nulla. Eget arcu dictum varius duis at consectetur lorem donec massa. Magna fringilla urna porttitor rhoncus. Velit aliquet sagittis id consectetur purus ut. Vel facilisis volutpat est velit egestas dui id. Proin nibh nisl condimentum id. Aliquam etiam erat velit scelerisque in. Elit ullamcorper dignissim cras tincidunt lobortis feugiat. Maecenas volutpat blandit aliquam etiam erat velit. Condimentum vitae sapien pellentesque habitant morbi tristique. Mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Sed nisi lacus sed viverra tellus in hac habitasse platea. Elit ullamcorper dignissim cras tincidunt lobortis feugiat. Velit aliquet sagittis id consectetur purus ut faucibus pulvinar. Euismod in pellentesque massa placerat duis.",
+      "gameName": "Monopoly",
+      "category": "Strategy",
+      "availableSeats": 5,
+      "address": "1701 Wynkoop Street Denver, Colorado 80202",
+      "date": "11/19/2021",
+      "location": {"lat": 41.2594517, "lng": -95.9168336},
+      "hostId": 4
+    }
+  ],
+  "users": [
+    {
+      "username": "Christian Glassiognon",
+      "email": "Christian.Glassiognon@techtonic.com",
+      "firstName": "Christian",
+      "lastName": "Glassiognon",
+      "country": "United States of America"
+    },
+    {
+      "username": "Samantha Hatfield",
+      "email": "Samantha.Hatfield@techtonic.com",
+      "firstName": "Samantha",
+      "lastName": "Hatfield",
+      "country": "United States of America"
+    },
+    {
+      "username": "Mark Thompson",
+      "email": "Mark.Thompson@techtonic.com",
+      "firstName": "Mark",
+      "lastName": "Thompson",
+      "country": "United States of America"
+    },
+    {
+      "username": "Grant Fields",
+      "email": "Grant.Fields@techtonic.com",
+      "firstName": "Grant",
+      "lastName": "Fields",
+      "country": "United States of America"
+    }
+  ]
+}

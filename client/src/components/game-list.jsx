@@ -2,13 +2,12 @@ import { IonList } from "@ionic/react";
 import React from "react"
 import GameItem from "./game-item";
 
-const GameList = () => { // props of api call //optional props or cords to google api
-    let gameList = [1,2,3] // replace API here and test
+const GameList = ({seeData}) => { // props of api call //optional props or cords to google api
     return (
         <IonList>
-            {gameList.map(() => (<GameItem />))}
+            {seeData.map((data) => (<GameItem game={data}/>))}
         </IonList>
     )
 }
 
-export default GameList;
+export default GameList; 
