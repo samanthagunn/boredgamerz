@@ -18,8 +18,9 @@ const Header = () => {
     event: undefined,
   });
   return (
-    <IonToolbar>
-      <IonTitle>Bored Gamerz</IonTitle>
+    <IonToolbar color="primary">
+      <img alt="BoredGamerz Logo" height="120"  src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png"/>
+      <IonTitle> </IonTitle>
       {isAuthenticated ? (
         <IonButtons slot="primary">
           <IonButton href="/profile/games">My Games</IonButton>
@@ -32,7 +33,7 @@ const Header = () => {
             }}
           >
             Profile
-            <img src={user.picture}></img>
+            <img alt="profile" src={user.picture}></img>
           </IonButton>
           <IonPopover
             event={popoverState.event}
