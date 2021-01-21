@@ -54,7 +54,7 @@ public class UserService {
 
         Iterable<UserToGameMeetingJoin> seatList = utgmService.getAllByUserId(userId);
 
-        utgmService.deleteAllByHostId(userId);
+        utgmService.deleteAllByGameMeetingHostId(userId);
         utgmService.deleteAllByUserId(userId);
         gmService.deleteAllByHostId(userId);
         USER_DAO.deleteById(userId);

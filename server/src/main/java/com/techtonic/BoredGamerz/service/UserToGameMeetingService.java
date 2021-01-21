@@ -73,7 +73,7 @@ public class UserToGameMeetingService {
         return UTGMJ_DAO.existsById(utgmj.getId()) ? 0 : 1;
     }
 
-    public int deleteAllByHostId(UUID hostId){
+    public int deleteAllByGameMeetingHostId(UUID hostId){
 
         UTGMJ_DAO.deleteAllByGameMeetingHostId(hostId);
 
@@ -114,5 +114,10 @@ public class UserToGameMeetingService {
 
     public boolean existsByUserId(UUID userId){
         return  UTGMJ_DAO.existsByUserId(userId);
+    }
+
+    public boolean existsByUserIdAndGameMeetingHostId(UUID userId, UUID hostId){
+
+        return UTGMJ_DAO.existsByUserIdAndGameMeetingHostId(userId, hostId);
     }
 }

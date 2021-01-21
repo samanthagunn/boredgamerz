@@ -28,6 +28,8 @@ public interface UserToGameMeetingJoinDataAccessObject
 
     void deleteAllByGameMeetingHostId(UUID hostId);
 
+    boolean existsByUserIdAndGameMeetingHostId(UUID userId, UUID hostId);
+
     boolean existsByGameMeetingId(UUID gameMeetingId);
 
     boolean existsByUserId(UUID userId);
