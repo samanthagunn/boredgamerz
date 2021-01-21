@@ -70,6 +70,7 @@ class UserToGameMeetingServiceTests {
 
         Assertions.assertNotEquals(utgmService.existsByUserId(userPlayer.getId()),true);
 
+        userService.delete(userHost.getId(),gmService,utgmService);
     }
 
     @Test

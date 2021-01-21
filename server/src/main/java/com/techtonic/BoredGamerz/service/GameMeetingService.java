@@ -73,10 +73,8 @@ public class GameMeetingService {
 
     public int delete(UUID gameMeetingId, UserToGameMeetingService utgmService){
 
-
         utgmService.deleteAllByGameMeetingId(gameMeetingId);
         GM_DAO.deleteById(gameMeetingId);
-
 
         return GM_DAO.existsById(gameMeetingId) ? 0 : 1;
     }

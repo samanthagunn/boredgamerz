@@ -49,7 +49,6 @@ class GameMeetingServiceTests {
 
         //Iterate through gameMeetingList
         for (GameMeeting gm : gameMeetingList){
-            System.out.println(gm.getId());
             counter++;
             Assertions.assertEquals(gmService.delete(gm.getId(),utgmService),1);
         }
@@ -88,24 +87,15 @@ class GameMeetingServiceTests {
         gmService.add(gameDTO2,utgmService,userService);
         gmService.add(gameDTO3,utgmService,userService);
 
+        Assertions.assertEquals(userService.delete(user1.getId(),gmService,utgmService),1);
+
         //Create iterable of all games hosted by user1
         Iterable<GameMeeting> gameMeetingList = gmService.getAllByHostId(user1.getId());
-
-
-        //Iterate through gameMeetingList
-        for (GameMeeting gm : gameMeetingList){
-            System.out.println(gm.getId());
-            Assertions.assertEquals(userService.delete(gm.getHost().getId(),gmService,utgmService),1);
-            break;
-        }
-
-        gameMeetingList = gmService.getAllByHostId(user1.getId());
 
         int counter = 0;
 
         //Iterate through gameMeetingList
         for (GameMeeting gm : gameMeetingList){
-            System.out.println(gm.getId());
             counter++;
         }
 
