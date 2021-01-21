@@ -73,19 +73,17 @@ public class GameMeetingService {
 
     public int delete(UUID gameMeetingId, UserToGameMeetingService utgmService){
 
-
         utgmService.deleteAllByGameMeetingId(gameMeetingId);
         GM_DAO.deleteById(gameMeetingId);
-
 
         return GM_DAO.existsById(gameMeetingId) ? 0 : 1;
     }
 
-    @Transactional
     public int deleteAllByHostId(UUID hostId){
+
         GM_DAO.deleteAllByHostId(hostId);
 
-        return 1; //GM_DAO.existsByHostId(hostId) ? 0 : 1;
+        return 1;
     }
 
     //Currently not safe to use
