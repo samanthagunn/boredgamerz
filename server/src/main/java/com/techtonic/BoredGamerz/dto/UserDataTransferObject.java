@@ -27,7 +27,7 @@ Details: Handles the transfer of data from an http request to a
 
 public class UserDataTransferObject {
 
-    private UUID id;
+    private UUID id = UUID.randomUUID();
 
     private String username;
     private String email;
@@ -45,7 +45,8 @@ public class UserDataTransferObject {
                 @JsonProperty("lastName") String lastName,
                 @JsonProperty("country") String country,
                 @JsonProperty("username") String username){
-        this.id = id;
+        if(id != null)
+            this.id = id;
         this.email = email;
         this.username = username;
         this.firstName = firstName;

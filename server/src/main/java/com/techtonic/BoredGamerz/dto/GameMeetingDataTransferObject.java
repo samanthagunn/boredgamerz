@@ -81,17 +81,17 @@ public class GameMeetingDataTransferObject {
 
     public boolean isValid(){
 
-        if( hostId == null ||
-            availableSeats == null ||
-            date == null ||
-            date.getTime() < System.currentTimeMillis() ||
-            title == null ||
-            description == null ||
-            gameName == null ||
-            category == null ||
-            address == null) return false;
-
-        return true;
+        return(
+                hostId != null &&
+                availableSeats != null &&
+                date != null &&
+                date.getTime() > System.currentTimeMillis() &&
+                title != null &&
+                description != null &&
+                gameName != null &&
+                category != null &&
+                address != null
+        );
     }
 
     public UUID getId() {

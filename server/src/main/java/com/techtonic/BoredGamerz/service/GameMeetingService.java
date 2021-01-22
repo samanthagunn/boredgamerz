@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -52,27 +53,38 @@ public class GameMeetingService {
                    UserToGameMeetingService utgmService,
                    UserService userService){
 
-        User host;
-        GameMeeting gameMeeting;
-
-        if(gm.getHost() == null) throw new BlankBodyException();
-
-        if(GM_DAO.countByHostId(gm.getHost()) >= 8) throw new MaxGamesException();
-
-        host = userService.getById(gm.getHost()).get();
-
-        if(host == null) throw new BlankBodyException();
-
-        gameMeeting = new GameMeeting(gm);
-        gameMeeting.setHost(host);
-
+        //Check if this can be converted to a valid Game Meeting model
         if(!gm.isValid()) {
+            //Dig deeper what caused it to be invalid?
             if(gm.getDate().getTime() < System.currentTimeMillis()){
                 throw new GameMeetingDateException();
             }
             else{
                 throw new BlankBodyException();
             }
+        }
+
+        //User hosting is restricted to no more than 8 games
+        if(GM_DAO.countByHostId(gm.getHost()) >= 8) throw new MaxGamesException();
+
+        //grab host object
+        Optional hostWrapper = userService.getById(gm.getHost());
+
+        //Check if host is exists
+        if(!hostWrapper.isPresent()) throw new NoSuchElementException();
+
+        User host = (User)hostWrapper.get();
+
+        //Create new Game Meeting model based on DTO info
+        GameMeeting gameMeeting = new GameMeeting(gm);
+
+        //Declare the host
+        gameMeeting.setHost(host);
+
+        //make sure there's no collisions
+        while(GM_DAO.existsById(gameMeeting.getId())){
+
+            gameMeeting.setId(UUID.randomUUID());
         }
 
         GM_DAO.save(gameMeeting);

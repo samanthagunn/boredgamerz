@@ -1,9 +1,6 @@
 package com.techtonic.BoredGamerz.api;
 
-import com.techtonic.BoredGamerz.ServerUtil.Exceptions.AlreadyJoinedException;
-import com.techtonic.BoredGamerz.ServerUtil.Exceptions.BlankBodyException;
-import com.techtonic.BoredGamerz.ServerUtil.Exceptions.SQLDeleteFail;
-import com.techtonic.BoredGamerz.ServerUtil.Exceptions.SQLSaveFail;
+import com.techtonic.BoredGamerz.ServerUtil.Exceptions.*;
 import com.techtonic.BoredGamerz.dto.UserToGameMeetingDataTransferObject;
 import com.techtonic.BoredGamerz.model.UserToGameMeetingJoin;
 import com.techtonic.BoredGamerz.service.GameMeetingService;
@@ -117,6 +114,11 @@ public class UserToGameMeetingController {
     @ExceptionHandler(AlreadyJoinedException.class)
     public ResponseEntity<String> handle(AlreadyJoinedException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User has already joined this game");
+    }
+
+    @ExceptionHandler(GameFullException.class)
+    public ResponseEntity<String> handle(GameFullException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Game has no available seats");
     }
 
     @ExceptionHandler(SQLSaveFail.class)
