@@ -89,9 +89,9 @@ public class GameMeetingController {
         return 200;
     }
 
-    //CAUTION!!! DO NOT USE YET, THINGS WILL PROBABLY BREAK, TOO MANY FACTORS.
+    //CAUTION!!! please don't abuse seats.
     @PutMapping
-    public int updateGameMeeting(@RequestBody GameMeeting gameMeeting){
+    public int updateGameMeeting(@RequestBody GameMeetingDataTransferObject gameMeeting){
 
         return GM_SERVICE.update(gameMeeting);
     }

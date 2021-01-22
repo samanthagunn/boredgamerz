@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import com.techtonic.BoredGamerz.ServerUtil.ConsoleUtil;
 
+import com.techtonic.BoredGamerz.model.GameMeeting;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
@@ -19,7 +20,7 @@ Details: Handles the transfer of data from an http request to a database
 
 public class GameMeetingDataTransferObject {
 
-    private final UUID id = UUID.randomUUID();
+    private UUID id = UUID.randomUUID();
     private UUID hostId;
 
     private Integer availableSeats;
@@ -36,6 +37,7 @@ public class GameMeetingDataTransferObject {
 
     @Autowired
     public GameMeetingDataTransferObject(
+            @JsonProperty("id") UUID id,
             @JsonProperty("availableSeats") Integer availableSeats,
             @JsonProperty("date") Date date,
             @JsonProperty("title") String title,
@@ -44,6 +46,7 @@ public class GameMeetingDataTransferObject {
             @JsonProperty("category") String category,
             @JsonProperty("address") String address,
             @JsonProperty("hostId") UUID hostId){
+        this.id = id;
         this.availableSeats = availableSeats;
         this.date = date;
         this.title = title;
@@ -54,11 +57,24 @@ public class GameMeetingDataTransferObject {
         this.hostId = hostId;
     }
 
+    public GameMeetingDataTransferObject(GameMeeting gm){
+        this.id = gm.getId();
+        this.availableSeats = gm.getAvailableSeats();
+        this.date = gm.getDate();
+        this.title = gm.getTitle();
+        this.description = gm.getDescription();
+        this.gameName = gm.getGameName();
+        this.category = gm.getCategory();
+        this.address = gm.getAddress();
+        this.hostId = gm.getHost().getId();
+    }
+
     public boolean isValid(){
 
         if( hostId == null ||
             availableSeats == null ||
             date == null ||
+            date.getTime() < System.currentTimeMillis() ||
             title == null ||
             description == null ||
             gameName == null ||
@@ -70,6 +86,10 @@ public class GameMeetingDataTransferObject {
 
     public UUID getId() {
         return id;
+    }
+
+    public void setId(UUID id){
+        this.id = id;
     }
 
     public UUID getHost() {

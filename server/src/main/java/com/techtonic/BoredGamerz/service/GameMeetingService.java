@@ -87,10 +87,20 @@ public class GameMeetingService {
     }
 
     //Currently not safe to use
-    public int update(GameMeeting gm){
+    public int update(GameMeetingDataTransferObject gm){
         if(gm.getId() != null){
 
-            GM_DAO.save(gm);
+            GameMeeting gameMeeting = GM_DAO.findById(gm.getId()).get();
+            GameMeeting gameMeetingUpdate = new GameMeeting(gm);
+
+            gameMeetingUpdate.setHost(gameMeeting.getHost());
+
+            if(gameMeetingUpdate.getDate().getTime() < System.currentTimeMillis() ||
+                !(gameMeeting.getGameName().equals(gameMeetingUpdate.getGameName())))
+                return 0;
+
+            GM_DAO.save(gameMeetingUpdate);
+
             return 1;
         }
         else{

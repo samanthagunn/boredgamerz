@@ -41,6 +41,7 @@
 >
 > ```json
 > {
+>   "id": "only required when updating",
 >   "title": "Always required",
 >   "description": "Always required",
 >   "gameName": "Always required",

@@ -68,6 +68,7 @@ public class GameMeeting {
     public GameMeeting(){}
 
     public GameMeeting(GameMeetingDataTransferObject gameMeeting){
+        this.id = gameMeeting.getId();
         this.availableSeats = gameMeeting.getAvailableSeats();
         this.date = gameMeeting.getDate();
         this.title = gameMeeting.getTitle();

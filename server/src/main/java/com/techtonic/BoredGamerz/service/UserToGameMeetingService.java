@@ -2,6 +2,7 @@ package com.techtonic.BoredGamerz.service;
 
 import com.techtonic.BoredGamerz.ServerUtil.Exceptions.BlankBodyException;
 import com.techtonic.BoredGamerz.dao.UserToGameMeetingJoinDataAccessObject;
+import com.techtonic.BoredGamerz.dto.GameMeetingDataTransferObject;
 import com.techtonic.BoredGamerz.dto.UserToGameMeetingDataTransferObject;
 import com.techtonic.BoredGamerz.model.GameMeeting;
 import com.techtonic.BoredGamerz.model.User;
@@ -46,11 +47,15 @@ public class UserToGameMeetingService {
         user = userService.getById(utgmj.getUser()).get();
         gm = gmService.getById(utgmj.getGameMeeting()).get();
 
+        GameMeetingDataTransferObject gmUpdate = new GameMeetingDataTransferObject(gm);
+
         if(user == null || gm == null) throw new BlankBodyException();
 
         //Check if a game has available seats, if it does remove a seat and add the user
         if(gm.getAvailableSeats() > 0) {
-            gm.setAvailableSeats(gm.getAvailableSeats() - 1);
+            gmUpdate.setAvailableSeats(gmUpdate.getAvailableSeats() - 1);
+
+            gmService.update(gmUpdate);
 
             UTGMJ_DAO.save(new UserToGameMeetingJoin(user, gm));
 
@@ -64,10 +69,12 @@ public class UserToGameMeetingService {
                       GameMeetingService gmService){
 
         //When we unjoin a user we want to add their seat back to the available seats
-        GameMeeting gm = gmService.getById(utgmj.getGameMeeting()).get();
-        gm.setAvailableSeats(gm.getAvailableSeats() + 1);
+        GameMeetingDataTransferObject gmUpdate =
+                new GameMeetingDataTransferObject(gmService.getById(utgmj.getGameMeeting()).get());
 
-        gmService.update(gm);
+        gmUpdate.setAvailableSeats(gmUpdate.getAvailableSeats() + 1);
+
+        gmService.update(gmUpdate);
         UTGMJ_DAO.deleteById(utgmj.getId());
 
         return UTGMJ_DAO.existsById(utgmj.getId()) ? 0 : 1;
