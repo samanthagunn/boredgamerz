@@ -88,10 +88,13 @@ public class GameMeetingController {
 
         return 200;
     }
-
-    //CAUTION!!! please don't abuse seats.
+    
     @PutMapping
     public int updateGameMeeting(@RequestBody GameMeetingDataTransferObject gameMeeting){
+
+        if(gameMeeting.getAvailableSeats() !=
+                GM_SERVICE.getById(gameMeeting.getId()).get().getAvailableSeats())
+            throw new IllegalArgumentException();
 
         return GM_SERVICE.update(gameMeeting);
     }
@@ -104,6 +107,11 @@ public class GameMeetingController {
     @ExceptionHandler(BlankBodyException.class)
     public ResponseEntity<String> handle(BlankBodyException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Body did not contain required attributes");
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handle(IllegalArgumentException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Can't change number of seats in a game meeting");
     }
 
     @ExceptionHandler(SQLSaveFail.class)
