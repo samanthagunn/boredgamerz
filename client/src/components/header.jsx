@@ -18,48 +18,50 @@ const Header = () => {
     event: undefined,
   });
   return (
-    <IonToolbar>
-      <IonTitle>Bored Gamerz</IonTitle>
-      {isAuthenticated ? (
-        <IonButtons slot="primary">
-          <IonButton href="/profile/games">My Games</IonButton>
-          <IonButton href="/games">Find Games</IonButton>
-          <IonButton href="/games/create">Create A Game</IonButton>
-          <IonButton
-            onClick={(e) => {
-              e.persist();
-              setShowPopover({ showPopover: true, event: e });
-            }}
-          >
-            Profile
-            <img src={user.picture}></img>
-          </IonButton>
-          <IonPopover
-            event={popoverState.event}
-            isOpen={popoverState.showPopover}
-            onDidDismiss={() =>
-              setShowPopover({ showPopover: false, event: undefined })
-            }
-          >
-            <IonList>
-              <IonItem>
-                <IonButton href="/profile">Profile</IonButton>
-              </IonItem>
-              <IonItem>
-                <IonButton href="/profile/games">My Games</IonButton>
-              </IonItem>
-              <IonItem>
-                <IonButton onClick={logout}>Sign Out</IonButton>
-              </IonItem>
-            </IonList>
-          </IonPopover>
-        </IonButtons>
-      ) : (
-        <IonButtons slot="primary">
-          <IonButton onClick={loginWithRedirect}>Login</IonButton>
-        </IonButtons>
-      )}
-    </IonToolbar>
+    <IonHeader>
+      <IonToolbar>
+        <IonTitle>Bored Gamerz</IonTitle>
+        {isAuthenticated ? (
+          <IonButtons slot="primary">
+            <IonButton href="/profile/games">My Games</IonButton>
+            <IonButton href="/games">Find Games</IonButton>
+            <IonButton href="/games/create">Create A Game</IonButton>
+            <IonButton
+              onClick={(e) => {
+                e.persist();
+                setShowPopover({ showPopover: true, event: e });
+              }}
+            >
+              Profile
+              <img src={user.picture}></img>
+            </IonButton>
+            <IonPopover
+              event={popoverState.event}
+              isOpen={popoverState.showPopover}
+              onDidDismiss={() =>
+                setShowPopover({ showPopover: false, event: undefined })
+              }
+            >
+              <IonList>
+                <IonItem>
+                  <IonButton href="/profile">Profile</IonButton>
+                </IonItem>
+                <IonItem>
+                  <IonButton href="/profile/games">My Games</IonButton>
+                </IonItem>
+                <IonItem>
+                  <IonButton onClick={logout}>Sign Out</IonButton>
+                </IonItem>
+              </IonList>
+            </IonPopover>
+          </IonButtons>
+        ) : (
+          <IonButtons slot="primary">
+            <IonButton onClick={loginWithRedirect}>Login</IonButton>
+          </IonButtons>
+        )}
+      </IonToolbar>
+    </IonHeader>
   );
 };
 

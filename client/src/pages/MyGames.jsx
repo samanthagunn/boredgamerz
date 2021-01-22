@@ -23,11 +23,8 @@ const MyGames = () => {
     axios.get("http://localhost:8080/games").then((resp) => resp.data).then(data => setData(data))
   }, [])
   return (
-    <IonPage>
-      <IonHeader>
-        <Header />
-      </IonHeader>
       <IonContent>
+      <IonTitle>MyGames</IonTitle>
         <IonSegment
           onIonChange={(e) => {
             setSegmentState({ ...segmentState,  state: e.detail.value });
@@ -41,9 +38,8 @@ const MyGames = () => {
             <h1>Hosted Games</h1>
           </IonSegmentButton>
         </IonSegment>
-        <IonList>{segmentState.state === "Joined" ? <GameList seeData={data}/> : <h1>h2</h1>}</IonList>
+        <IonList>{segmentState.state === "Joined" ? <GameList seeData={data}/> : <GameList seeData={data} editMode={true}/> }</IonList>
       </IonContent>
-    </IonPage>
   );
 };
 

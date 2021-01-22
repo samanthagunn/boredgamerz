@@ -1,5 +1,6 @@
 import { Loader } from "@googlemaps/js-api-loader";
 import {
+  IonButton,
   IonCard,
   IonCardContent,
   IonCardHeader,
@@ -9,13 +10,13 @@ import {
 } from "@ionic/react";
 import React, { useState } from "react";
 
-const GameItem = ({ game }) => {
+const GameItem = ({ game, edit }) => {
   console.log(game);
   const [show, setShow] = useState(false);
   let map;
   let marker;
   const loader = new Loader({
-    apiKey: "AIzaSyDcIytfVAvhm1Ia51mHHxDMaq-DUuaSlZE",
+    apiKey: process.env.REACT_GCP_MAPS_KEY,
     version: "weekly",
   });
 
@@ -42,7 +43,9 @@ const GameItem = ({ game }) => {
           if (!show) {
             loadMap();
           }
-          setShow(!show);
+          if(!edit) {
+            setShow(!show);
+          }
         }}
       >
         <IonCardHeader>
@@ -55,6 +58,7 @@ const GameItem = ({ game }) => {
           <h3>Date: {game.date}</h3>
           <h4>Location: {game.address}</h4>
           {show ? <p>{game.description}</p> : undefined}
+          {edit ? <IonButton href={`games/edit/${game.hostId}`}>Edit</IonButton> : false}
         </IonCardContent>
       </IonCard>
     </IonItem>
