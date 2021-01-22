@@ -6,9 +6,10 @@ import './Home.css';
 const Home: React.FC = () => {
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Blank</IonTitle>
+      <IonHeader >
+        <IonToolbar color="primary">
+        <img className="logo-hero" alt="BoredGamerz Logo" src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png" />
+          <IonTitle></IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
