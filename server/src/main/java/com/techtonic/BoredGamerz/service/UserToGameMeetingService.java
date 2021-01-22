@@ -66,7 +66,7 @@ public class UserToGameMeetingService {
         GameMeetingDataTransferObject gmUpdate = new GameMeetingDataTransferObject(gm);
 
         //Check if a game has available seats, if it does remove a seat and add the user
-        if(gm.getAvailableSeats() > 0) throw new GameFullException();
+        if(gm.getAvailableSeats() <= 0) throw new GameFullException();
 
         gmUpdate.setAvailableSeats(gmUpdate.getAvailableSeats() - 1);
 
