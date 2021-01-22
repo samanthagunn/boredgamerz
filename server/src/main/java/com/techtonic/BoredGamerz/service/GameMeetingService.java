@@ -1,6 +1,7 @@
 package com.techtonic.BoredGamerz.service;
 
 import com.techtonic.BoredGamerz.ServerUtil.Exceptions.BlankBodyException;
+import com.techtonic.BoredGamerz.ServerUtil.Exceptions.MaxGamesException;
 import com.techtonic.BoredGamerz.dao.GameMeetingDataAccessObject;
 import com.techtonic.BoredGamerz.dao.UserToGameMeetingJoinDataAccessObject;
 import com.techtonic.BoredGamerz.dto.GameMeetingDataTransferObject;
@@ -45,6 +46,8 @@ public class GameMeetingService {
         GameMeeting gameMeeting;
 
         if(gm.getHost() == null) throw new BlankBodyException();
+
+        if(GM_DAO.countByHostId(gm.getHost()) >= 8) throw new MaxGamesException();
 
         host = userService.getById(gm.getHost()).get();
 

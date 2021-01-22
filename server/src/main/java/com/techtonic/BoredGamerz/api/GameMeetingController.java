@@ -1,6 +1,7 @@
 package com.techtonic.BoredGamerz.api;
 
 import com.techtonic.BoredGamerz.ServerUtil.Exceptions.BlankBodyException;
+import com.techtonic.BoredGamerz.ServerUtil.Exceptions.MaxGamesException;
 import com.techtonic.BoredGamerz.ServerUtil.Exceptions.SQLDeleteFail;
 import com.techtonic.BoredGamerz.ServerUtil.Exceptions.SQLSaveFail;
 import com.techtonic.BoredGamerz.dto.GameMeetingDataTransferObject;
@@ -88,7 +89,7 @@ public class GameMeetingController {
 
         return 200;
     }
-    
+
     @PutMapping
     public int updateGameMeeting(@RequestBody GameMeetingDataTransferObject gameMeeting){
 
@@ -102,6 +103,11 @@ public class GameMeetingController {
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<String> handle(NoSuchElementException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The entity does not exist");
+    }
+
+    @ExceptionHandler(MaxGamesException.class)
+    public ResponseEntity<String> handle(MaxGamesException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User is already hosting max amount of games");
     }
 
     @ExceptionHandler(BlankBodyException.class)
