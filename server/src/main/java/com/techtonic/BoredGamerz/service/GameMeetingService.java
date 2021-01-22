@@ -1,6 +1,7 @@
 package com.techtonic.BoredGamerz.service;
 
 import com.techtonic.BoredGamerz.ServerUtil.Exceptions.BlankBodyException;
+import com.techtonic.BoredGamerz.ServerUtil.Exceptions.GameMeetingDateException;
 import com.techtonic.BoredGamerz.ServerUtil.Exceptions.MaxGamesException;
 import com.techtonic.BoredGamerz.dao.GameMeetingDataAccessObject;
 import com.techtonic.BoredGamerz.dao.UserToGameMeetingJoinDataAccessObject;
@@ -56,7 +57,14 @@ public class GameMeetingService {
         gameMeeting = new GameMeeting(gm);
         gameMeeting.setHost(host);
 
-        if(!gm.isValid()) throw new BlankBodyException();
+        if(!gm.isValid()) {
+            if(gm.getDate().getTime() < System.currentTimeMillis()){
+                throw new GameMeetingDateException();
+            }
+            else{
+                throw new BlankBodyException();
+            }
+        }
 
         GM_DAO.save(gameMeeting);
 

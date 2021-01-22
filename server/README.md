@@ -48,7 +48,7 @@
 >   "category": "Always required",
 >   "availableSeats": "Always required",
 >   "address": "Always required",
->   "date": "Always required",
+>   "date": "Always required, needs to be in milliseconds",
 >   "hostId": "Always required"
 > }
 > ```

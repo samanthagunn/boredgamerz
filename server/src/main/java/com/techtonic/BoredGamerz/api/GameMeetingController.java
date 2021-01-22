@@ -1,9 +1,6 @@
 package com.techtonic.BoredGamerz.api;
 
-import com.techtonic.BoredGamerz.ServerUtil.Exceptions.BlankBodyException;
-import com.techtonic.BoredGamerz.ServerUtil.Exceptions.MaxGamesException;
-import com.techtonic.BoredGamerz.ServerUtil.Exceptions.SQLDeleteFail;
-import com.techtonic.BoredGamerz.ServerUtil.Exceptions.SQLSaveFail;
+import com.techtonic.BoredGamerz.ServerUtil.Exceptions.*;
 import com.techtonic.BoredGamerz.dto.GameMeetingDataTransferObject;
 import com.techtonic.BoredGamerz.model.GameMeeting;
 import com.techtonic.BoredGamerz.service.GameMeetingService;
@@ -103,6 +100,11 @@ public class GameMeetingController {
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<String> handle(NoSuchElementException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The entity does not exist");
+    }
+
+    @ExceptionHandler(GameMeetingDateException.class)
+    public ResponseEntity<String> handle(GameMeetingDateException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The date has already expired");
     }
 
     @ExceptionHandler(MaxGamesException.class)
