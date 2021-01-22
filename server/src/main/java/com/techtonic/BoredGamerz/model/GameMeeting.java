@@ -1,5 +1,6 @@
 package com.techtonic.BoredGamerz.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.techtonic.BoredGamerz.ServerUtil.ConsoleUtil;
 import com.techtonic.BoredGamerz.dto.GameMeetingDataTransferObject;
 
@@ -52,6 +53,9 @@ public class GameMeeting {
 
     @NotNull
     @Column(name = "date")
+    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
+    //for an actual date
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd-yyyy HH:mm:ss.SSSZ")
     private Date date;
 
     @NotBlank

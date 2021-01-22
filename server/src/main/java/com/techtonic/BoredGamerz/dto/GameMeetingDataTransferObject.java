@@ -55,7 +55,8 @@ public class GameMeetingDataTransferObject {
             @JsonProperty("category") String category,
             @JsonProperty("address") String address,
             @JsonProperty("hostId") UUID hostId){
-        this.id = id;
+        if(id != null)
+            this.id = id;
         this.availableSeats = availableSeats;
         this.date = date;
         this.title = title;
