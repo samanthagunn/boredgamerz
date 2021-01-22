@@ -1,3 +1,17 @@
+/*
+Created:
+in progress
+
+Authors:
+Grant Fields
+Christian Glassiognon
+Mark Thompson
+Samantha Hatfield
+
+(c) Copyright by Company:
+Techtonic
+ */
+
 package com.techtonic.BoredGamerz;
 
 import org.springframework.boot.SpringApplication;
