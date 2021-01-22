@@ -1,0 +1,13 @@
+spring:
+    security:
+        oauth2:
+            client:
+                client-id: first-client
+                client-secret: noonewilleverguess
+    datasource:
+        username: root
+        password: PWfields!
+        url: jdbc:mysql://localhost:3306/boredgamerzdb
+    jpa:
+        hibernate:
+            ddl-auto: update
