@@ -1,5 +1,6 @@
 package com.techtonic.BoredGamerz.service;
 
+import com.techtonic.BoredGamerz.ServerUtil.Exceptions.AlreadyJoinedException;
 import com.techtonic.BoredGamerz.ServerUtil.Exceptions.BlankBodyException;
 import com.techtonic.BoredGamerz.dao.UserToGameMeetingJoinDataAccessObject;
 import com.techtonic.BoredGamerz.dto.GameMeetingDataTransferObject;
@@ -41,6 +42,8 @@ public class UserToGameMeetingService {
 
         User user;
         GameMeeting gm;
+
+        if(UTGMJ_DAO.existsById(utgmj.getId())) throw new AlreadyJoinedException();
 
         if(!utgmj.isValid()) throw new BlankBodyException();
 

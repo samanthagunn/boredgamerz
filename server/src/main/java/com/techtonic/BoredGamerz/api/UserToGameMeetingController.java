@@ -1,5 +1,6 @@
 package com.techtonic.BoredGamerz.api;
 
+import com.techtonic.BoredGamerz.ServerUtil.Exceptions.AlreadyJoinedException;
 import com.techtonic.BoredGamerz.ServerUtil.Exceptions.BlankBodyException;
 import com.techtonic.BoredGamerz.ServerUtil.Exceptions.SQLDeleteFail;
 import com.techtonic.BoredGamerz.ServerUtil.Exceptions.SQLSaveFail;
@@ -102,6 +103,11 @@ public class UserToGameMeetingController {
     @ExceptionHandler(BlankBodyException.class)
     public ResponseEntity<String> handle(BlankBodyException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Body did not contain required attributes");
+    }
+
+    @ExceptionHandler(AlreadyJoinedException.class)
+    public ResponseEntity<String> handle(AlreadyJoinedException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User has already joined this game");
     }
 
     @ExceptionHandler(SQLSaveFail.class)
