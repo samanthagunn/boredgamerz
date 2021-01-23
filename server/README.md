@@ -41,13 +41,14 @@
 >
 > ```json
 > {
+>   "id": "only required when updating",
 >   "title": "Always required",
 >   "description": "Always required",
 >   "gameName": "Always required",
 >   "category": "Always required",
 >   "availableSeats": "Always required",
 >   "address": "Always required",
->   "date": "Always required",
+>   "date": "Always required, needs to be in milliseconds",
 >   "hostId": "Always required"
 > }
 > ```

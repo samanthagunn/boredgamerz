@@ -15,9 +15,18 @@ import java.util.Optional;
 import java.util.UUID;
 
 /*
-Created: in progress
-Authors: Grant Fields
-(c) Copyright by Company: Techtonic
+Created:
+in progress
+
+Authors:
+Grant Fields
+Christian Glassiognon
+Mark Thompson
+Samantha Hatfield
+
+(c) Copyright by Company:
+Techtonic
+
 Details: Handles the process of taking an http request and converting that to
          a DB action for the user table
  */
@@ -36,7 +45,15 @@ public class UserService {
     public int add(UserDataTransferObject user){
 
         if(!user.isValid()) throw new BlankBodyException();
+
+        //make sure there's no collisions
+        while(USER_DAO.existsById(user.getId())){
+
+            user.setId(UUID.randomUUID());
+        }
+
         User tempUser = new User(user);
+
         USER_DAO.save(tempUser);
 
         if(USER_DAO.existsById(tempUser.getId())) return 1;
@@ -73,9 +90,8 @@ public class UserService {
             USER_DAO.save(new User(user));
             return 1;
         }
-        else{
-            return 0;
-        }
+
+        return 0;
     }
 
     public Iterable<User> getAll(){
@@ -96,8 +112,7 @@ public class UserService {
         //Search for a list of emails with a specific hashcode, then search that smaller
         //list for a matching email
         for (User user : list) {
-            if(email.equals(user.getEmail()))
-                output = Optional.of(user);
+            if(email.equals(user.getEmail())) output = Optional.of(user);
         }
 
         if(output == null) throw new NullPointerException("Email not found");

@@ -1,8 +1,6 @@
 package com.techtonic.BoredGamerz.api;
 
-import com.techtonic.BoredGamerz.ServerUtil.Exceptions.BlankBodyException;
-import com.techtonic.BoredGamerz.ServerUtil.Exceptions.SQLDeleteFail;
-import com.techtonic.BoredGamerz.ServerUtil.Exceptions.SQLSaveFail;
+import com.techtonic.BoredGamerz.ServerUtil.Exceptions.*;
 import com.techtonic.BoredGamerz.dto.GameMeetingDataTransferObject;
 import com.techtonic.BoredGamerz.model.GameMeeting;
 import com.techtonic.BoredGamerz.service.GameMeetingService;
@@ -27,9 +25,18 @@ import java.util.Optional;
 import java.util.UUID;
 
 /*
-Created: in progress
-Authors: Grant Fields
-(c) Copyright by Company: Techtonic
+Created:
+in progress
+
+Authors:
+Grant Fields
+Christian Glassiognon
+Mark Thompson
+Samantha Hatfield
+
+(c) Copyright by Company:
+Techtonic
+
 Details: Handles http requests related to creating, finding, or deleting game meetings
  */
 
@@ -89,9 +96,12 @@ public class GameMeetingController {
         return 200;
     }
 
-    //CAUTION!!! DO NOT USE YET, THINGS WILL PROBABLY BREAK, TOO MANY FACTORS.
     @PutMapping
-    public int updateGameMeeting(@RequestBody GameMeeting gameMeeting){
+    public int updateGameMeeting(@RequestBody GameMeetingDataTransferObject gameMeeting){
+
+        if(gameMeeting.getAvailableSeats() !=
+                GM_SERVICE.getById(gameMeeting.getId()).get().getAvailableSeats())
+            throw new IllegalArgumentException();
 
         return GM_SERVICE.update(gameMeeting);
     }
@@ -101,9 +111,24 @@ public class GameMeetingController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The entity does not exist");
     }
 
+    @ExceptionHandler(GameMeetingDateException.class)
+    public ResponseEntity<String> handle(GameMeetingDateException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The date has already expired");
+    }
+
+    @ExceptionHandler(MaxGamesException.class)
+    public ResponseEntity<String> handle(MaxGamesException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User is already hosting max amount of games");
+    }
+
     @ExceptionHandler(BlankBodyException.class)
     public ResponseEntity<String> handle(BlankBodyException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Body did not contain required attributes");
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handle(IllegalArgumentException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Can't change number of seats in a game meeting");
     }
 
     @ExceptionHandler(SQLSaveFail.class)

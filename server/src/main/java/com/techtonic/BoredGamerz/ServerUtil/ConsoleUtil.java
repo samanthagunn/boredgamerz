@@ -4,9 +4,18 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 /*
-Created: 01/11/2021
-Authors: Grant Fields
-(c) Copyright by Company: Techtonic
+Created:
+in progress
+
+Authors:
+Grant Fields
+Christian Glassiognon
+Mark Thompson
+Samantha Hatfield
+
+(c) Copyright by Company:
+Techtonic
+
 Details: Tools to assist application testing
 */
 
