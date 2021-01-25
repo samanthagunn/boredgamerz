@@ -15,7 +15,7 @@ const GameItem = ({ game }) => {
   let map;
   let marker;
   const loader = new Loader({
-    apiKey: "AIzaSyDcIytfVAvhm1Ia51mHHxDMaq-DUuaSlZE",
+    apiKey: "AIzaSyDuZ32gfmKD4XNcQoWGoTkSLGZ--LUo_L4",
     version: "weekly",
   });
 
