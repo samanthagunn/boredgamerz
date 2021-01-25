@@ -16,7 +16,7 @@ const GameItem = ({ game, edit }) => {
   let map;
   let marker;
   const loader = new Loader({
-    apiKey: process.env.REACT_GCP_MAPS_KEY,
+    apiKey: "AIzaSyDuZ32gfmKD4XNcQoWGoTkSLGZ--LUo_L4",
     version: "weekly",
   });
 
