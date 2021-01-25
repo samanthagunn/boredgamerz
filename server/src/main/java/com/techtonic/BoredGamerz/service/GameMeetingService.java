@@ -1,6 +1,8 @@
 package com.techtonic.BoredGamerz.service;
 
 import com.techtonic.BoredGamerz.ServerUtil.Exceptions.BlankBodyException;
+import com.techtonic.BoredGamerz.ServerUtil.Exceptions.GameMeetingDateException;
+import com.techtonic.BoredGamerz.ServerUtil.Exceptions.MaxGamesException;
 import com.techtonic.BoredGamerz.dao.GameMeetingDataAccessObject;
 import com.techtonic.BoredGamerz.dao.UserToGameMeetingJoinDataAccessObject;
 import com.techtonic.BoredGamerz.dto.GameMeetingDataTransferObject;
@@ -13,13 +15,23 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
 /*
-Created: in progress
-Authors: Grant Fields
-(c) Copyright by Company: Techtonic
+Created:
+in progress
+
+Authors:
+Grant Fields
+Christian Glassiognon
+Mark Thompson
+Samantha Hatfield
+
+(c) Copyright by Company:
+Techtonic
+
 Details: Handles the process of taking an http request and converting that to a DB action for
          the game meeting table
  */
@@ -41,19 +53,39 @@ public class GameMeetingService {
                    UserToGameMeetingService utgmService,
                    UserService userService){
 
-        User host;
-        GameMeeting gameMeeting;
+        //Check if this can be converted to a valid Game Meeting model
+        if(!gm.isValid()) {
+            //Dig deeper what caused it to be invalid?
+            if(gm.getDate().getTime() < System.currentTimeMillis()){
+                throw new GameMeetingDateException();
+            }
+            else{
+                throw new BlankBodyException();
+            }
+        }
 
-        if(gm.getHost() == null) throw new BlankBodyException();
+        //User hosting is restricted to no more than 8 games
+        if(GM_DAO.countByHostId(gm.getHost()) >= 8) throw new MaxGamesException();
 
-        host = userService.getById(gm.getHost()).get();
+        //grab host object
+        Optional hostWrapper = userService.getById(gm.getHost());
 
-        if(host == null) throw new BlankBodyException();
+        //Check if host is exists
+        if(!hostWrapper.isPresent()) throw new NoSuchElementException();
 
-        gameMeeting = new GameMeeting(gm);
+        User host = (User)hostWrapper.get();
+
+        //Create new Game Meeting model based on DTO info
+        GameMeeting gameMeeting = new GameMeeting(gm);
+
+        //Declare the host
         gameMeeting.setHost(host);
 
-        if(!gm.isValid()) throw new BlankBodyException();
+        //make sure there's no collisions
+        while(GM_DAO.existsById(gameMeeting.getId())){
+
+            gameMeeting.setId(UUID.randomUUID());
+        }
 
         GM_DAO.save(gameMeeting);
 
@@ -87,10 +119,20 @@ public class GameMeetingService {
     }
 
     //Currently not safe to use
-    public int update(GameMeeting gm){
+    public int update(GameMeetingDataTransferObject gm){
         if(gm.getId() != null){
 
-            GM_DAO.save(gm);
+            GameMeeting gameMeeting = GM_DAO.findById(gm.getId()).get();
+            GameMeeting gameMeetingUpdate = new GameMeeting(gm);
+
+            gameMeetingUpdate.setHost(gameMeeting.getHost());
+
+            if(gameMeetingUpdate.getDate().getTime() < System.currentTimeMillis() ||
+                !(gameMeeting.getGameName().equals(gameMeetingUpdate.getGameName())))
+                return 0;
+
+            GM_DAO.save(gameMeetingUpdate);
+
             return 1;
         }
         else{

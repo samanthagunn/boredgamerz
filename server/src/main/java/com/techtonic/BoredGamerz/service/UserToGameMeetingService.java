@@ -1,7 +1,10 @@
 package com.techtonic.BoredGamerz.service;
 
+import com.techtonic.BoredGamerz.ServerUtil.Exceptions.AlreadyJoinedException;
 import com.techtonic.BoredGamerz.ServerUtil.Exceptions.BlankBodyException;
+import com.techtonic.BoredGamerz.ServerUtil.Exceptions.GameFullException;
 import com.techtonic.BoredGamerz.dao.UserToGameMeetingJoinDataAccessObject;
+import com.techtonic.BoredGamerz.dto.GameMeetingDataTransferObject;
 import com.techtonic.BoredGamerz.dto.UserToGameMeetingDataTransferObject;
 import com.techtonic.BoredGamerz.model.GameMeeting;
 import com.techtonic.BoredGamerz.model.User;
@@ -12,13 +15,23 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
 /*
-Created: in progress
-Authors: Grant Fields
-(c) Copyright by Company: Techtonic
+Created:
+in progress
+
+Authors:
+Grant Fields
+Christian Glassiognon
+Mark Thompson
+Samantha Hatfield
+
+(c) Copyright by Company:
+Techtonic
+
 Details: Handles the process of taking an http request and converting that to a
          DB action for the user game meeting join table
  */
@@ -38,36 +51,42 @@ public class UserToGameMeetingService {
                    GameMeetingService gmService,
                    UserService userService){
 
-        User user;
-        GameMeeting gm;
-
         if(!utgmj.isValid()) throw new BlankBodyException();
 
-        user = userService.getById(utgmj.getUser()).get();
-        gm = gmService.getById(utgmj.getGameMeeting()).get();
+        if(UTGMJ_DAO.existsById(utgmj.getId())) throw new AlreadyJoinedException();
 
-        if(user == null || gm == null) throw new BlankBodyException();
+        Optional userWrapper = userService.getById(utgmj.getUser());
+        Optional gmWrapper = gmService.getById(utgmj.getGameMeeting());
+
+        if(!userWrapper.isPresent() || !gmWrapper.isPresent()) throw new NoSuchElementException();
+
+        User user = (User)userWrapper.get();
+        GameMeeting gm = (GameMeeting)gmWrapper.get();
+
+        GameMeetingDataTransferObject gmUpdate = new GameMeetingDataTransferObject(gm);
 
         //Check if a game has available seats, if it does remove a seat and add the user
-        if(gm.getAvailableSeats() > 0) {
-            gm.setAvailableSeats(gm.getAvailableSeats() - 1);
+        if(gm.getAvailableSeats() <= 0) throw new GameFullException();
 
-            UTGMJ_DAO.save(new UserToGameMeetingJoin(user, gm));
+        gmUpdate.setAvailableSeats(gmUpdate.getAvailableSeats() - 1);
 
-            return 1;
-        }
+        gmService.update(gmUpdate);
 
-        return 0;
+        UTGMJ_DAO.save(new UserToGameMeetingJoin(user, gm));
+
+        return 1;
     }
 
     public int delete(UserToGameMeetingDataTransferObject utgmj,
                       GameMeetingService gmService){
 
         //When we unjoin a user we want to add their seat back to the available seats
-        GameMeeting gm = gmService.getById(utgmj.getGameMeeting()).get();
-        gm.setAvailableSeats(gm.getAvailableSeats() + 1);
+        GameMeetingDataTransferObject gmUpdate =
+                new GameMeetingDataTransferObject(gmService.getById(utgmj.getGameMeeting()).get());
 
-        gmService.update(gm);
+        gmUpdate.setAvailableSeats(gmUpdate.getAvailableSeats() + 1);
+
+        gmService.update(gmUpdate);
         UTGMJ_DAO.deleteById(utgmj.getId());
 
         return UTGMJ_DAO.existsById(utgmj.getId()) ? 0 : 1;

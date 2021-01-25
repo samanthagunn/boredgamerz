@@ -1,8 +1,6 @@
 package com.techtonic.BoredGamerz.api;
 
-import com.techtonic.BoredGamerz.ServerUtil.Exceptions.BlankBodyException;
-import com.techtonic.BoredGamerz.ServerUtil.Exceptions.SQLDeleteFail;
-import com.techtonic.BoredGamerz.ServerUtil.Exceptions.SQLSaveFail;
+import com.techtonic.BoredGamerz.ServerUtil.Exceptions.*;
 import com.techtonic.BoredGamerz.dto.UserToGameMeetingDataTransferObject;
 import com.techtonic.BoredGamerz.model.UserToGameMeetingJoin;
 import com.techtonic.BoredGamerz.service.GameMeetingService;
@@ -26,9 +24,18 @@ import java.util.Optional;
 import java.util.UUID;
 
 /*
-Created: in progress
-Authors: Grant Fields
-(c) Copyright by Company: Techtonic
+Created:
+in progress
+
+Authors:
+Grant Fields
+Christian Glassiognon
+Mark Thompson
+Samantha Hatfield
+
+(c) Copyright by Company:
+Techtonic
+
 Details: handles http requests when joining, unjoining, or listing users from a meeting
  */
 
@@ -102,6 +109,16 @@ public class UserToGameMeetingController {
     @ExceptionHandler(BlankBodyException.class)
     public ResponseEntity<String> handle(BlankBodyException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Body did not contain required attributes");
+    }
+
+    @ExceptionHandler(AlreadyJoinedException.class)
+    public ResponseEntity<String> handle(AlreadyJoinedException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User has already joined this game");
+    }
+
+    @ExceptionHandler(GameFullException.class)
+    public ResponseEntity<String> handle(GameFullException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Game has no available seats");
     }
 
     @ExceptionHandler(SQLSaveFail.class)

@@ -4,22 +4,32 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import com.techtonic.BoredGamerz.ServerUtil.ConsoleUtil;
 
+import com.techtonic.BoredGamerz.model.GameMeeting;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 import java.util.UUID;
 
 /*
-Created: in progress
-Authors: Grant Fields
-(c) Copyright by Company: Techtonic
+Created:
+in progress
+
+Authors:
+Grant Fields
+Christian Glassiognon
+Mark Thompson
+Samantha Hatfield
+
+(c) Copyright by Company:
+Techtonic
+
 Details: Handles the transfer of data from an http request to a database
          model for the game meeting table
  */
 
 public class GameMeetingDataTransferObject {
 
-    private final UUID id = UUID.randomUUID();
+    private UUID id = UUID.randomUUID();
     private UUID hostId;
 
     private Integer availableSeats;
@@ -36,6 +46,7 @@ public class GameMeetingDataTransferObject {
 
     @Autowired
     public GameMeetingDataTransferObject(
+            @JsonProperty("id") UUID id,
             @JsonProperty("availableSeats") Integer availableSeats,
             @JsonProperty("date") Date date,
             @JsonProperty("title") String title,
@@ -44,6 +55,8 @@ public class GameMeetingDataTransferObject {
             @JsonProperty("category") String category,
             @JsonProperty("address") String address,
             @JsonProperty("hostId") UUID hostId){
+        if(id != null)
+            this.id = id;
         this.availableSeats = availableSeats;
         this.date = date;
         this.title = title;
@@ -54,22 +67,39 @@ public class GameMeetingDataTransferObject {
         this.hostId = hostId;
     }
 
+    public GameMeetingDataTransferObject(GameMeeting gm){
+        this.id = gm.getId();
+        this.availableSeats = gm.getAvailableSeats();
+        this.date = gm.getDate();
+        this.title = gm.getTitle();
+        this.description = gm.getDescription();
+        this.gameName = gm.getGameName();
+        this.category = gm.getCategory();
+        this.address = gm.getAddress();
+        this.hostId = gm.getHost().getId();
+    }
+
     public boolean isValid(){
 
-        if( hostId == null ||
-            availableSeats == null ||
-            date == null ||
-            title == null ||
-            description == null ||
-            gameName == null ||
-            category == null ||
-            address == null) return false;
-
-        return true;
+        return(
+                hostId != null &&
+                availableSeats != null &&
+                date != null &&
+                date.getTime() > System.currentTimeMillis() &&
+                title != null &&
+                description != null &&
+                gameName != null &&
+                category != null &&
+                address != null
+        );
     }
 
     public UUID getId() {
         return id;
+    }
+
+    public void setId(UUID id){
+        this.id = id;
     }
 
     public UUID getHost() {

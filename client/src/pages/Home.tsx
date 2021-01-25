@@ -1,27 +1,14 @@
-import {
-  IonActionSheet,
-  IonButton,
-  IonButtons,
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-} from "@ionic/react";
-import React, { useState } from "react";
+import { IonContent, IonHeader, IonPage } from "@ionic/react";
+import React from "react";
+import Header from "../components/header";
 import LandingPage from "../components/landing-page";
 import "./Home.css";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useHistory } from "react-router";
-import ActionSheet from "../components/actionsheet.jsx";
 
 const Home = () => {
-  let history = useHistory();
-  const [showActionSheet, setShowActionSheet] = useState(false);
-  const { loginWithRedirect, isAuthenticated, isLoading, logout } = useAuth0();
   return (
     <IonPage>
       <IonHeader>
+<<<<<<< HEAD
       <IonToolbar color="primary">
         <img className="logo-hero" alt="BoredGamerz Logo" src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png" />
           <IonTitle>Find. Host. Play.</IonTitle>
@@ -40,13 +27,11 @@ const Home = () => {
             )}
           </IonButtons>
         </IonToolbar>
+=======
+        <Header />
+>>>>>>> d0a4e8af0c86574b85b0110be327c8fdd8606035
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Bored Gamerz</IonTitle>
-          </IonToolbar>
-        </IonHeader>
         <LandingPage />
       </IonContent>
     </IonPage>

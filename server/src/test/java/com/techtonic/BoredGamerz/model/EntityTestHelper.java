@@ -116,7 +116,7 @@ public class EntityTestHelper {
 
         gm.setAvailableSeats((int)((Math.random() * 16) + 1));
         gm.setHost(host.getId());
-        gm.setDate(new Date());
+        gm.setDate(new Date(System.currentTimeMillis() + 1000000000));
         gm.setGameName(getRandomString(games));
         gm.setTitle(gm.getGameName());
         gm.setDescription(gm.getGameName());

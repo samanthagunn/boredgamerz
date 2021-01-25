@@ -1,5 +1,6 @@
 package com.techtonic.BoredGamerz.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.techtonic.BoredGamerz.ServerUtil.ConsoleUtil;
 import com.techtonic.BoredGamerz.dto.GameMeetingDataTransferObject;
 
@@ -18,9 +19,18 @@ import java.util.Date;
 import java.util.UUID;
 
 /*
-Created: in progress
-Authors: Grant Fields
-(c) Copyright by Company: Techtonic
+Created:
+in progress
+
+Authors:
+Grant Fields
+Christian Glassiognon
+Mark Thompson
+Samantha Hatfield
+
+(c) Copyright by Company:
+Techtonic
+
 Details: Define a game meeting model to be stored in the game meeting table
  */
 
@@ -43,6 +53,9 @@ public class GameMeeting {
 
     @NotNull
     @Column(name = "date")
+    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
+    //for an actual date
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd-yyyy HH:mm:ss.SSSZ")
     private Date date;
 
     @NotBlank
@@ -68,6 +81,7 @@ public class GameMeeting {
     public GameMeeting(){}
 
     public GameMeeting(GameMeetingDataTransferObject gameMeeting){
+        this.id = gameMeeting.getId();
         this.availableSeats = gameMeeting.getAvailableSeats();
         this.date = gameMeeting.getDate();
         this.title = gameMeeting.getTitle();

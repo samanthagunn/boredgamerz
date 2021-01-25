@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The header component... that is not user authenticated... will display correct header. 1`] = `
+<ion-toolbar>
+  <ion-title>
+    Bored Gamerz
+  </ion-title>
+  <ion-buttons
+    slot="primary"
+  >
+    <ion-button
+      onClick={[Function]}
+    >
+      Login
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
+`;
+
+exports[`The header component... that is user authenticated... will display correct header. 1`] = `
+<ion-toolbar>
+  <ion-title>
+    Bored Gamerz
+  </ion-title>
+  <ion-buttons
+    slot="primary"
+  >
+    <ion-button
+      href="/profile/games"
+      onClick={[Function]}
+    >
+      My Games
+    </ion-button>
+    <ion-button
+      href="/games"
+      onClick={[Function]}
+    >
+      Find Games
+    </ion-button>
+    <ion-button
+      href="/games/create"
+      onClick={[Function]}
+    >
+      Create A Game
+    </ion-button>
+    <ion-button
+      onClick={[Function]}
+    >
+      Profile
+      <img
+        src="https://lh3.googleusercontent.com/a-/AOh14GiG4KuyPH8-ToSqzoBLwPTvb-px4DboWJn_Gujs=s96-c"
+      />
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
+`;

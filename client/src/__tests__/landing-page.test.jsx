@@ -30,21 +30,11 @@ describe("The Homepage componenet...", () => {
       const { baseElement } = render(<Home />);
       expect(baseElement).toBeDefined();
     });
-    describe("has a Profile button...", () => {
-      test("that is displayed.", () => {
-        const { getByText } = render(<Home />);
-        expect(getByText("Profile")).toBeTruthy();
-      });
-    });
     describe("has a Join a game button...", () => {
       test("that displays a users name in the button.", () => {
         const { getByText } = render(<Home />);
         expect(getByText(`Join a Game ${user.given_name}`)).toBeTruthy();
       });
-    });
-    test("will show Profile button", () => {
-      const { getByText } = render(<Home />);
-      expect(getByText("Profile")).toBeTruthy();
     });
   });
   describe("that is not user authenticated...", () => {
@@ -69,17 +59,6 @@ describe("The Homepage componenet...", () => {
       test("that when clicked redirects to authentication.", () => {
         const { getByText } = render(<Home />);
         fireEvent.click(getByText("Login / Sign Up"));
-        expect(useAuth0().loginWithRedirect).toHaveBeenCalled();
-      });
-    });
-    describe("has a Login button...", () => {
-      test("that is displayed", () => {
-        const { getByText } = render(<Home />);
-        expect(getByText("Login")).toBeTruthy();
-      });
-      test("that when clicked redirects to authentication.", () => {
-        const { getByText } = render(<Home />);
-        fireEvent.click(getByText("Login"));
         expect(useAuth0().loginWithRedirect).toHaveBeenCalled();
       });
     });

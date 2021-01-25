@@ -50,6 +50,7 @@ class GameMeetingServiceTests {
         //Iterate through gameMeetingList
         for (GameMeeting gm : gameMeetingList){
             counter++;
+            System.out.println(gm);
             Assertions.assertEquals(gmService.delete(gm.getId(),utgmService),1);
         }
 

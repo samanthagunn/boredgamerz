@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The game item component... will match snapshot. 1`] = `
+<ion-item
+  onClick={[Function]}
+>
+  <ion-card
+    onClick={[Function]}
+  >
+    <ion-card-header>
+      <ion-title>
+        Name: 
+      </ion-title>
+      <ion-card-subtitle>
+        Game: 
+      </ion-card-subtitle>
+      <ion-card-subtitle>
+        Host: 
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <h2>
+        Open Seats: 
+      </h2>
+      <h3>
+        Date: 
+         
+      </h3>
+      <h4>
+        Location: 
+      </h4>
+    </ion-card-content>
+  </ion-card>
+</ion-item>
+`;
