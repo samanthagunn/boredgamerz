@@ -14,6 +14,7 @@ describe("The game item component...", () => {
   });
   test("will render without crashing.", () => {
       const { baseElement } = render(<GameItem />)
+      console.log(baseElement)
       expect(baseElement).toBeDefined();
   })
   test("will render display description when clicked.", () => {

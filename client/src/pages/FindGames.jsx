@@ -18,7 +18,7 @@ const FindGames = () => {
         <IonList>
           <GameList seeData={data}/>
         </IonList>
-        <div id="map"></div>
+        <div id="map" style={{width: "1000px" , height: "1000px"}}></div>
       </IonContent>
     </IonPage>
   );
