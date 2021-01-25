@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -79,9 +80,10 @@ public class GameMeetingService {
     }
 
     public int deleteAllByHostId(UUID hostId){
+
         GM_DAO.deleteAllByHostId(hostId);
 
-        return GM_DAO.existsByHostId(hostId) ? 0 : 1;
+        return 1;
     }
 
     //Currently not safe to use

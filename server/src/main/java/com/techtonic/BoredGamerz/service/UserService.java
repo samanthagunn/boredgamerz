@@ -5,10 +5,12 @@ import com.techtonic.BoredGamerz.dao.UserDataAccessObject;
 import com.techtonic.BoredGamerz.dto.UserDataTransferObject;
 import com.techtonic.BoredGamerz.model.User;
 
+import com.techtonic.BoredGamerz.model.UserToGameMeetingJoin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -34,14 +36,14 @@ public class UserService {
     public int add(UserDataTransferObject user){
 
         if(!user.isValid()) throw new BlankBodyException();
+        User tempUser = new User(user);
+        USER_DAO.save(tempUser);
 
-        USER_DAO.save(new User(user));
-
-        if(USER_DAO.existsById(user.getId())) return 1;
+        if(USER_DAO.existsById(tempUser.getId())) return 1;
 
         return 0;
     }
-
+    @Transactional
     public int delete(UUID userId,
                       GameMeetingService gmService,
                       UserToGameMeetingService utgmService){
@@ -49,11 +51,15 @@ public class UserService {
         //when a user is deleted we want to delete any games they're hosting
         //then we remove them from any meetings they're in
         //then finally we delete the user
-        gmService.deleteAllByHostId(userId);
+
+        Iterable<UserToGameMeetingJoin> seatList = utgmService.getAllByUserId(userId);
+
+        utgmService.deleteAllByGameMeetingHostId(userId);
         utgmService.deleteAllByUserId(userId);
+        gmService.deleteAllByHostId(userId);
         USER_DAO.deleteById(userId);
 
-        return USER_DAO.existsById(userId) ? 0 : 1;
+        return 1; //USER_DAO.existsById(userId) ? 0 : 1;
     }
 
     public int update(UserDataTransferObject user){
