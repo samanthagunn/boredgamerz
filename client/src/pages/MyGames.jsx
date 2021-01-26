@@ -34,10 +34,10 @@ const MyGames = () => {
           }}
           value={segmentState.state}
         >
-          <IonSegmentButton value="Joined" >
+          <IonSegmentButton value="Joined" className="join-button">
             <h1>Joined Games</h1>
           </IonSegmentButton>
-          <IonSegmentButton value="Hosted">
+          <IonSegmentButton value="Hosted" className="host-button">
             <h1>Hosted Games</h1>
           </IonSegmentButton>
         </IonSegment>

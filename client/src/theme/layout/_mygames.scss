@@ -1,0 +1,11 @@
+@use '../partials/colors' as *;
+
+.join-button {
+    color: map-get($colors, tertiary )
+}
+.host-button{
+   color: map-get($colors, ferngully);
+   :hover {
+       color: map-get($colors, tertiary )
+   }
+}

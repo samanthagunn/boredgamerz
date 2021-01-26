@@ -2,8 +2,25 @@
 @use './partials/typography' as *;
 @use './layout/header' as *;
 @use './layout/navigation' as *;
+@use './layout/mygames' as *;
 
-:host {
-    --color-checked: "tertiary";
+// :host {
+//     --color-checked: "tertiary";
 
+// }
+.hero-logo {
+    display: block;
+    margin: 0 auto;
+    width: 60%;
+    padding: 80px 0px 0px;
+}
+
+.landing-hero-container {
+    display: block;
+    margin: 0 auto;
+    width: 60%;
+    
+    p {
+        color: white !important; 
+    }
 }
