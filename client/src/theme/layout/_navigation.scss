@@ -1,0 +1,19 @@
+@use '../partials/colors' as *;
+
+.navigation {
+
+    height: 50px;
+
+    ion-button {
+        font-weight: 700;
+        color: "tertiary";
+    }
+}
+.user-popover .popover-content{
+    --backdrop-opacity: 50%;
+    width: 200px;
+}
+.user-image {
+    padding: 0px 10px 0px 2px;
+    border-radius: 50%;
+}

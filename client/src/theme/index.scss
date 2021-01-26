@@ -1,0 +1,9 @@
+@use './partials/colors' as *;
+@use './partials/typography' as *;
+@use './layout/header' as *;
+@use './layout/navigation' as *;
+
+:host {
+    --color-checked: "tertiary";
+
+}
