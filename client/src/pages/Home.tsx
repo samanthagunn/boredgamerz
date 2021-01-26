@@ -7,9 +7,6 @@ import "./Home.css";
 const Home = () => {
   return (
     <IonPage>
-      <IonHeader>
-        <Header />
-      </IonHeader>
       <IonContent fullscreen>
         <LandingPage />
       </IonContent>

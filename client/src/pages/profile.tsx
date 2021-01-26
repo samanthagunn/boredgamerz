@@ -18,10 +18,7 @@ const Profile: React.FC = () => {
   console.log(user);
   return (
     <IonPage>
-      <IonHeader>
-        <Header />
         <IonTitle>Profile</IonTitle>
-      </IonHeader>
       <IonContent>
         {isLoading ? (
           <IonProgressBar type="indeterminate"></IonProgressBar>
