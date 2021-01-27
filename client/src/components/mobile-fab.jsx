@@ -6,26 +6,26 @@ import {
   IonItem,
 } from "@ionic/react";
 import React from "react";
-import {arrowUpCircle} from 'ionicons/icons'
+import {arrowUpCircle, personCircleOutline, location, diceOutline, addCircleOutline} from 'ionicons/icons'
 
 const FAB = () => {
   return (
     <IonFab vertical="center" horizontal="end" slot="fixed">
       <IonFabButton>
-        <IonIcon icon={arrowUpCircle} />
+      <IonIcon icon={arrowUpCircle} />
       </IonFabButton>
       <IonFabList side="top">
         <IonFabButton href="/profile">
-          <IonItem>Profile</IonItem>
+        <IonIcon icon={personCircleOutline} />
         </IonFabButton>
         <IonFabButton href="/profile/games">
-          <IonItem>My Games</IonItem>
+        <IonIcon icon={diceOutline} />
         </IonFabButton>
         <IonFabButton href="/games">
-          <IonItem>Find Games</IonItem>
+        <IonIcon icon={location} />
         </IonFabButton>
         <IonFabButton profile="/games/create">
-          <IonItem>Create A Gane</IonItem>
+        <IonIcon icon={addCircleOutline} />
         </IonFabButton>
       </IonFabList>
     </IonFab>
