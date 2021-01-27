@@ -11,9 +11,7 @@ const FindGames = () => {
   }, [])
   return (
     <IonPage>
-      <IonHeader>
-        <Header />
-      </IonHeader>
+
       <IonContent>
         <IonList>
           <GameList seeData={data}/>

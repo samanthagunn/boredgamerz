@@ -6,7 +6,10 @@
 
     ion-button {
         font-weight: 700;
-        color: "tertiary";
+        color: map-get($colors, dark );
+    }
+    --ion-color-contrast {
+        color: map-get($colors, giantpeach, base )
     }
 }
 .user-popover .popover-content{

@@ -3,7 +3,6 @@
   --ion-background-color: #36454f;
   --ion-color-primary: #0DCFFF;
   --ion-color-primary-rgb: 13,207,255;
-  --ion-color-primary-contrast: #000000;
   --ion-color-primary-contrast-rgb: 0,0,0;
   --ion-color-primary-shade: #0bb6e0;
   --ion-color-primary-tint: #25d4ff;
@@ -76,9 +75,8 @@
 }
 .navigation ion-button {
   font-weight: 700;
-  color: "tertiary";
+  color: #222428;
 }
-
 .user-popover .popover-content {
   --backdrop-opacity: 50%;
   width: 200px;
@@ -98,8 +96,9 @@
 .host-button {
   color: #588242;
 }
-.host-button :hover {
-  color: #FFC67A;
+
+.container {
+  margin-top: 150px;
 }
 
 .hero-logo {
@@ -107,6 +106,13 @@
   margin: 0 auto;
   width: 60%;
   padding: 80px 0px 0px;
+}
+
+.hero-image {
+  width: 100%;
+  margin: 10px 0px;
+  color: #588242;
+  box-shadow: 0px 15px 20px;
 }
 
 .landing-hero-container {

@@ -1,0 +1,6 @@
+@use '../partials/colors' as *;
+
+.footer-style {
+    color: map-get($colors, giantpeach );
+    position: relative;
+}

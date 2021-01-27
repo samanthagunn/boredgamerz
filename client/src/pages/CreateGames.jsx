@@ -14,9 +14,7 @@ import Header from "../components/header";
 const CreateGame = () => {
   return (
     <IonPage>
-      <IonHeader>
-        <Header />
-      </IonHeader>
+
       <IonContent>
       <h1>Create A Game</h1>
         <IonList>

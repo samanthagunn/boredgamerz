@@ -24,9 +24,6 @@ const MyGames = () => {
   }, [])
   return (
     <IonPage>
-      <IonHeader>
-        <Header />
-      </IonHeader>
       <IonContent>
         <IonSegment
           onIonChange={(e) => {

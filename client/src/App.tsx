@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonHeader, IonPage, IonRouterOutlet } from '@ionic/react';
+import { IonContent, IonApp, IonHeader, IonPage, IonFooter, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 
 /* Core CSS required for Ionic components to work properly */
@@ -31,7 +31,13 @@ import CreateGame from './pages/CreateGames';
 //mimic "/" path to ensure no unauthed users access profiles
 const App = () => (
   <IonApp>
+    <IonPage>
+    
     <IonReactRouter>
+    <IonHeader>
+        <Header />
+      </IonHeader>
+      <IonContent>
       <IonRouterOutlet>
         <Route path="/home" component={Home} exact={true} />
         <Route exact path="/" render={() => <Redirect to="/home" />} />
@@ -40,7 +46,13 @@ const App = () => (
         <Route path="/games" component={FindGames} exact={true} />
         <Route path="/games/create" component={CreateGame} exact={true} />
       </IonRouterOutlet>
+      </IonContent>
+      <IonFooter >
+      <Footer />
+      </IonFooter>
+      
     </IonReactRouter>
+    </IonPage>
   </IonApp>
 );
 

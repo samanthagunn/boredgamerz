@@ -3,8 +3,8 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <IonFooter>
-      <IonToolbar>
+    <IonFooter >
+      <IonToolbar color="tertiary" >
         <IonTitle>Copyright 2020 Bored Gamerz</IonTitle>
       </IonToolbar>
     </IonFooter>
