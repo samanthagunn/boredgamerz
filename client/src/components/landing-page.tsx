@@ -30,7 +30,7 @@ const LandingPage = () => {
      <div className="hero-logo">
       <img alt="BoredGamerz Logo"  src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png" />
       </div>
-      <br />
+
     <div className="landing-hero-container">
       
       <IonCard className="landing-hero" color="secondary">

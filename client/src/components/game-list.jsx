@@ -4,7 +4,7 @@ import GameItem from "./game-item";
 
 const GameList = ({seeData}) => { // props of api call //optional props or cords to google api
     return (
-        <IonList>
+        <IonList >
             {seeData.map((data) => (<GameItem game={data}/>))}
         </IonList>
     )

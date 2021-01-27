@@ -1,0 +1,26 @@
+@use '../partials/colors' as *;
+
+.game-card {
+    --ion-background-color: #FFC67A !important;
+    color: black !important;
+    width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+   
+}
+.game-title {
+    color: black !important;
+    padding: 0;
+    font-weight: 900;
+}
+.game-type {
+    color: black !important;
+
+
+}
+.game-host {
+    color: black !important;
+    padding: 0;
+
+}

@@ -19,15 +19,14 @@ const Profile: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <Header />
-        <IonTitle>Profile</IonTitle>
+        <IonTitle >Profile</IonTitle>
       </IonHeader>
       <IonContent>
         {isLoading ? (
           <IonProgressBar type="indeterminate"></IonProgressBar>
         ) : (
-          <IonCard>
-            <img src={user?.picture}></img>
+          <IonCard className="profile-card">
+            <img className="user-image" alt="profile"  src={user?.picture}></img>
             <IonCardHeader>
               <IonCardTitle>{user?.name}</IonCardTitle>
             </IonCardHeader>
