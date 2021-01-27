@@ -1,9 +1,18 @@
 @use '../partials/colors' as *;
 
 .join-button {
-    color: map-get($colors, giantpeach )
+    color: white;
+    --indicator-color: #8C3BCD !important;
+    --background-hover: white !important;
+    --color-checked: #8C3BCD !important;
+    --color-hover: #588242 !important;
+    --background-hover-opacity: 1;
 }
 .host-button{
-   color: map-get($colors, ferngully);
-   
+   color: white;
+   --indicator-color: #8C3BCD !important;
+   --background-hover: white !important;
+   --color-checked: #8C3BCD !important;
+   --color-hover: #588242 !important;
+   --background-hover-opacity: 1;
 }

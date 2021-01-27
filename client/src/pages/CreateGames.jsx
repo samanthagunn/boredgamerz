@@ -13,13 +13,15 @@ import Header from "../components/header";
 
 const CreateGame = () => {
   return (
-    <IonPage>
+    
 
-      <IonContent>
+      <IonContent > 
+        <div className="create-games">
       <h1>Create A Game</h1>
-        <IonList>
-          <IonItemDivider>Game Name: </IonItemDivider>
-          <IonItem>
+      <div className="game-list">
+        <IonList >
+          <IonItemDivider >Game Name: </IonItemDivider>
+          <IonItem >
             <IonInput type="text" placeholder="Mark's DND Session"></IonInput>
           </IonItem>
           <IonItemDivider>Open Seats: </IonItemDivider>
@@ -41,8 +43,9 @@ const CreateGame = () => {
 
           
         </IonList>
+        </div>
+        </div>
       </IonContent>
-    </IonPage>
   );
 };
 

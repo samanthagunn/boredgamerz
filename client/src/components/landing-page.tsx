@@ -27,15 +27,16 @@ const LandingPage = () => {
   return (
 
     <div className="container">
-     <div className="hero-logo">
-      <img alt="BoredGamerz Logo"  src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png" />
-      </div>
-
+     
+      <img className="hero-image" alt="gameplayers" src="https://storage.googleapis.com/boredgamerz_assets/gameplayers.png" />
     <div className="landing-hero-container">
       
       <IonCard className="landing-hero" color="secondary">
         
-        <IonCardHeader><h1>Easy as Find. Host. Play. </h1></IonCardHeader>
+        <IonCardHeader><h1>Easy as Find. Host. Play. </h1> 
+       <img alt="BoredGamerz Logo" width="40%" src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png" />
+        </IonCardHeader>
+        
         <IonCardContent>
        <IonCardTitle><strong> Step 1</strong></IonCardTitle> 
  <p>Find a game by searching in your area</p>
@@ -48,11 +49,14 @@ const LandingPage = () => {
         <IonCardTitle><strong>Step 3</strong></IonCardTitle>
         <p>Meet and play the game!</p>
         </IonCardContent>
+        {isLoading ? <IonSpinner /> : signedIn()}
         <br />
+        <br />
+        
       </IonCard>
       </div>
-      {isLoading ? <IonSpinner /> : signedIn()}
-      <img className="hero-image" alt="gameplayers" src="https://storage.googleapis.com/boredgamerz_assets/gameplayers.png" />
+      
+      
     </div>
 
   );

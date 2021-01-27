@@ -1,0 +1,19 @@
+@use '../partials/colors' as *;
+
+.create-games {
+    display: block;
+    margin: 0 auto;
+    background-color: map-get($colors, purplepeople ) !important;
+    width: 600px;
+    border-radius: 10px;
+
+    h1 {
+    color: white!important;
+    padding: 10px 0px 0px 10px;
+}
+}
+
+.game-list {
+    --ion-background-color: white !important;
+    --color: black !important;
+}
