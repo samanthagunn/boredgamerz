@@ -6,7 +6,7 @@ import {
   IonCardHeader,
   IonCardSubtitle,
   IonItem,
-  IonTitle,
+  IonCardTitle,
 } from "@ionic/react";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
@@ -35,8 +35,8 @@ const GameItem = ({ game, edit, join }) => {
   };
 
   return (
-    <IonItem>
-      <IonCard
+    <IonItem lines="none" className="games">
+      <IonCard  className="game-card-list" 
         onClick={() => {
           if (!show && join) {
             loadMap();
@@ -46,15 +46,17 @@ const GameItem = ({ game, edit, join }) => {
           }
         }}
       >
-        <IonCardHeader>
-          <IonTitle>Name: {game.title}</IonTitle>
-          <IonCardSubtitle>Game: {game.category}</IonCardSubtitle>
-          <IonCardSubtitle>Host: {game.hostId}</IonCardSubtitle>
+        <IonCardHeader >
+          <IonCardTitle className="game-title">Name: {game.title}</IonCardTitle>
+          <IonCardSubtitle className="game-type"><strong>Type: </strong>{game.category}</IonCardSubtitle>
+          <IonCardSubtitle className="game-host">Host: {game.hostId}</IonCardSubtitle>
         </IonCardHeader>
         <IonCardContent>
-          <h2>Open Seats: {game.availableSeats}</h2>
-          <h3>Date: {game.date}</h3>
-          <h4>Location: {game.address}</h4>
+          <h2><strong>Open Seats:</strong> {game.availableSeats}</h2>
+          <h3>
+            <strong>Date:</strong> {game.date}
+          </h3>
+          <h4><strong>Location:</strong> {game.address}</h4>
           {show ? <p>{game.description}</p> : undefined}
           {edit ? (
             <IonButton onClick={() => history.push(`/games/edit/${game.id}`)}>

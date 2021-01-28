@@ -1,0 +1,33 @@
+@use '../partials/colors' as *;
+@use '../partials/mediaq' as *;
+
+.navigation {
+
+    height: 50px;
+
+    ion-button {
+        font-weight: 700;
+        color: map-get($colors, dark );
+    }
+    --ion-color-contrast {
+        color: map-get($colors, giantpeach, base )
+    }
+    @include mobile {
+        display: none;
+    }
+}
+.mobilenav {
+    @include desktop{
+        display: none;
+    }
+}
+.user-popover .popover-content{
+    --backdrop-opacity: 50%;
+    width: 200px;
+}
+.user-image {
+    margin: 10px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}

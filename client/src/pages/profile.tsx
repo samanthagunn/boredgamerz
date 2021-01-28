@@ -14,6 +14,7 @@ import {
 } from "@ionic/react";
 import Footer from "../components/footer";
 import AuthHeader from "../components/auth-header";
+import FAB from "../components/mobile-fab";
 
 const Profile: React.FC = () => {
   const { user, isLoading, getAccessTokenSilently} = useAuth0();
@@ -26,22 +27,23 @@ const Profile: React.FC = () => {
   return (
     <IonPage>
       <AuthHeader />
-        <IonTitle>Profile</IonTitle>
       <IonContent>
+      <IonTitle className="profile-heading ion-text-center">Profile</IonTitle>
         {isLoading ? (
           <IonProgressBar type="indeterminate"></IonProgressBar>
         ) : (
-          <IonCard>
-            <img src={user?.picture} alt="User profile."></img>
+          <IonCard className="profile-card">
+            <img className="user-image-profile" alt="profile"  src={user?.picture}></img>
             <IonCardHeader>
               <IonCardTitle>{user?.name}</IonCardTitle>
             </IonCardHeader>
             <IonCardContent>
-              <IonButton onClick={deleteUser}>Delete your account</IonButton>
+              <IonButton color="secondary" onClick={deleteUser}>Delete your account</IonButton>
             </IonCardContent>
           </IonCard>
         )}
       </IonContent>
+      <FAB />
       <Footer />
     </IonPage>
   );

@@ -4,7 +4,7 @@ import GameItem from "./game-item";
 
 const GameList = ({ seeData, editMode, joinMode }) => {
   return (
-    <IonRadioGroup>
+    <IonRadioGroup >
       {seeData.map((data) => (
         <GameItem game={data} edit={editMode} join={joinMode} />
       ))}

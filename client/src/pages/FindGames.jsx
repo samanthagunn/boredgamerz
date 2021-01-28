@@ -30,9 +30,13 @@ const FindGames = () => {
     <IonPage>
       <AuthHeader />
       <IonContent>
-        <IonTitle>Find Games</IonTitle>
+        <br />
+
+        <IonTitle color="light" className="ion-text-center">Find Games</IonTitle>
+        <br />
+        <div id="map" style={{ width: "100%", height: "50%" }}></div>
         <GameList seeData={data} joinMode={true} />
-        <div id="map" style={{ width: "1000px", height: "1000px" }}></div>
+       
       </IonContent>
       <FAB />
       <Footer />

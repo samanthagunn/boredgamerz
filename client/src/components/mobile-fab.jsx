@@ -14,7 +14,7 @@ const FAB = () => {
   const { user } = useAuth0();
   let admin = Object.values(user)[0];
   return (
-    <IonFab vertical="center" horizontal="end" slot="fixed">
+    <IonFab className="mobilenav" vertical="center" horizontal="end" slot="fixed">
       <IonFabButton>
         <IonIcon icon={arrowUpCircle} />
       </IonFabButton>

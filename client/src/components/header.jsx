@@ -9,6 +9,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import React, { useState } from "react";
+import { NavLink, Route } from "react-router-dom";
 
 const Header = () => {
   const { isAuthenticated, loginWithRedirect, user, logout } = useAuth0();
@@ -18,13 +19,14 @@ const Header = () => {
   });
   return (
     <IonToolbar color="primary">
-      <img alt="BoredGamerz Logo" height="120"  src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png"/>
-      <IonTitle> </IonTitle>
+      
+        <img className="logo-hero" alt="BoredGamerz Logo"  src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png" />
+        
       {isAuthenticated ? (
-        <IonButtons slot="primary">
-          <IonButton href="/profile/games">My Games</IonButton>
-          <IonButton href="/games">Find Games</IonButton>
-          <IonButton href="/games/create">Create A Game</IonButton>
+        <IonButtons className="navigation" slot="primary" >
+          <IonButton className="navigation__fontweight" href="/profile/games">My Games</IonButton>
+          <IonButton className="navigation__fontweight" href="/games">Find Games</IonButton>
+          <IonButton className="navigation__fontweight" href="/games/create">Create A Game</IonButton>
           <IonButton
             onClick={(e) => {
               e.persist();
@@ -32,9 +34,14 @@ const Header = () => {
             }}
           >
             Profile
-            <img alt="profile" src={user.picture}></img>
+            
           </IonButton>
+          <img className="user-image" alt="profile" height="50px" src={user.picture} onClick={(e) => {
+              e.persist();
+              setShowPopover({ showPopover: true, event: e });
+            }}></img>
           <IonPopover
+            cssClass="user-popover"
             event={popoverState.event}
             isOpen={popoverState.showPopover}
             onDidDismiss={() =>
@@ -43,7 +50,7 @@ const Header = () => {
           >
             <IonList>
               <IonItem>
-                <IonButton href="/profile">Profile</IonButton>
+                <IonButton  href="/profile">Profile</IonButton>
               </IonItem>
               <IonItem>
                 <IonButton href="/profile/games">My Games</IonButton>

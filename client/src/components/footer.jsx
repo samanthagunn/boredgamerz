@@ -3,9 +3,11 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <IonFooter>
-      <IonToolbar>
-        <IonTitle>Copyright 2020 Bored Gamerz</IonTitle>
+    <IonFooter >
+      <IonToolbar className="ion-text-center" color="tertiary" >
+        <div >
+        <p>© 2020 Bored Gamerz, BravoBunch</p>
+        </div>
       </IonToolbar>
     </IonFooter>
   );

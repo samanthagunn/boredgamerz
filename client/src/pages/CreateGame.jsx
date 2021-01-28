@@ -1,4 +1,4 @@
-import { IonContent, IonPage } from "@ionic/react";
+import { IonContent, IonPage, IonTitle } from "@ionic/react";
 import React from "react";
 import AuthHeader from "../components/auth-header";
 import Footer from "../components/footer";
@@ -11,6 +11,7 @@ const CreateGame = () => {
     <IonPage>
       <AuthHeader />
       <IonContent>
+        <IonTitle color="primary ion-text-center">Create New Game</IonTitle>
         <Form editState={edit} />
       </IonContent>
       <FAB />
