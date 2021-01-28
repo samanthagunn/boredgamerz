@@ -1,6 +1,7 @@
 package com.techtonic.BoredGamerz.api;
 
 import com.techtonic.BoredGamerz.ServerUtil.Exceptions.BlankBodyException;
+import com.techtonic.BoredGamerz.ServerUtil.IdTokenDecoder;
 import com.techtonic.BoredGamerz.ServerUtil.Exceptions.SQLDeleteFail;
 import com.techtonic.BoredGamerz.ServerUtil.Exceptions.SQLSaveFail;
 import com.techtonic.BoredGamerz.dto.UserDataTransferObject;
@@ -10,17 +11,10 @@ import com.techtonic.BoredGamerz.service.UserService;
 import com.techtonic.BoredGamerz.service.UserToGameMeetingService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -68,51 +62,29 @@ public class UserController {
     //request mapping annotation from the top
     //ie. GET http://localhost:8080/bored-gamerz/api/user
     @GetMapping
-    public Iterable<User> getAll(){
+    public Iterable<User> getAll(@RequestHeader HttpHeaders headers){
+
+        IdTokenDecoder token = new IdTokenDecoder(headers);
+
+        String id = token.decode("sub");
+
+        //if(id == adminId) allow else dont
 
         return USER_SERVICE.getAll();
     }
 
-    //this one defines an additional path and identifies it as a variable
-    //by using the {}
-    //ie. GET http://localhost:8080/bored-gamerz/api/user/{email}
-    //this method searches users by email
-    @GetMapping(path = "/{email}")
-    public Optional<User> getByEmail(@PathVariable("email") String email){
-
-        //get User object wrapped inside of an optional
-        Optional<User> output = USER_SERVICE.getByHashId(email);
-
-        //if the optional is null then we know that the user doesnt exist and we should
-        //return a 404 error
-        if(output == null) throw new NoSuchElementException();
-
-        return output;
-    }
-
     //ie. GET http://localhost:8080/bored-gamerz/api/user/id/{UUID}
-    @GetMapping(path = "/id/{UUID}")
+    @GetMapping(path = "/current")
     public Optional<User> getById(@PathVariable("UUID") UUID uuid){
 
         return USER_SERVICE.getById(uuid);
     }
 
     //ie. DELETE http://localhost:8080/bored-gamerz/api/user/id/{UUID}
-    @DeleteMapping(path = "/id/{UUID}")
-    public int deleteUserByUUID(@PathVariable("UUID") UUID uuid){
+    @DeleteMapping(path = "/delete")
+    public int deleteUser(@RequestBody UserDataTransferObject user){
 
-        if(USER_SERVICE.delete(uuid, GM_SERVICE, UTGM_SERVICE) == 0) throw new SQLDeleteFail();
-
-        return 200;
-    }
-
-    //ie. PUT http://localhost:8080/bored-gamerz/api/user
-    //this method expects the user being sent in to already have a UUID
-    //if they do we update the user
-    @PutMapping
-    public int updateUser(@RequestBody UserDataTransferObject user){
-
-        if(USER_SERVICE.update(user) == 0) throw new SQLSaveFail();
+        if(USER_SERVICE.delete(user.getId(), GM_SERVICE, UTGM_SERVICE) == 0) throw new SQLDeleteFail();
 
         return 200;
     }
@@ -122,7 +94,7 @@ public class UserController {
     @PostMapping
     public int addUser(@RequestBody UserDataTransferObject user){
 
-        if(USER_SERVICE.add(user) == 0) throw new SQLSaveFail();
+        if(USER_SERVICE.add(user) == null) throw new SQLSaveFail();
 
         return 201;
     }

@@ -1,5 +1,5 @@
 auth0:
-    audience: http://test12351234
+    audience: lbS5AAGz6OmsB863eb48BPPg7sYep1Ys
 spring:
     security:
         oauth2:

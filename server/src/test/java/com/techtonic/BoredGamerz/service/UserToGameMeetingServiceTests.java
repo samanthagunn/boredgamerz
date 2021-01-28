@@ -28,12 +28,12 @@ class UserToGameMeetingServiceTests {
         UserDataTransferObject userPlayerDTO = eth.randomUser();
 
         //Add new users
-        userService.add(userHostDTO);
-        userService.add(userPlayerDTO);
+        userHostDTO.setId(userService.add(userHostDTO));
+        userPlayerDTO.setId(userService.add(userPlayerDTO));
 
         //Selects the users by email address(We don't have their ID yet)
-        Optional optionalHost = userService.getByHashId(userHostDTO.getEmail());
-        Optional optionalPlayer = userService.getByHashId(userPlayerDTO.getEmail());
+        Optional optionalHost = userService.getById(userHostDTO.getId());
+        Optional optionalPlayer = userService.getById(userPlayerDTO.getId());
 
         //Go get users new ID
         User userHost = (User)optionalHost.get();
@@ -85,24 +85,18 @@ class UserToGameMeetingServiceTests {
         UserDataTransferObject userPlayerDTO = eth.randomUser();
 
         //Add new users
-        userService.add(userHostDTO);
-        userService.add(userHost2DTO);
-        userService.add(userPlayerDTO);
+        userHostDTO.setId(userService.add(userHostDTO));
+        userHost2DTO.setId(userService.add(userHost2DTO));
+        userPlayerDTO.setId(userService.add(userPlayerDTO));
 
-        //Selects the users by email address(We don't have their ID yet)
-        Optional optionalHost = userService.getByHashId(userHostDTO.getEmail());
-        Optional optionalHost2 = userService.getByHashId(userHost2DTO.getEmail());
-        Optional optionalPlayer = userService.getByHashId(userPlayerDTO.getEmail());
+        Optional optionalHost = userService.getById(userHostDTO.getId());
+        Optional optionalHost2 = userService.getById(userHost2DTO.getId());
+        Optional optionalPlayer = userService.getById(userPlayerDTO.getId());
 
-        //Go get users new ID
+        //Go get users from DB
         User userHost = (User)optionalHost.get();
         User userHost2 = (User)optionalHost2.get();
         User userPlayer = (User)optionalPlayer.get();
-
-        //Give userID to DTO
-        userHostDTO.setId(userHost.getId());
-        userHost2DTO.setId(userHost2.getId());
-        userPlayerDTO.setId(userPlayer.getId());
 
         // Create gameDTOs with userHost as host
         GameMeetingDataTransferObject gameDTO1 = eth.randomGameMeeting(userHost);
@@ -171,20 +165,16 @@ class UserToGameMeetingServiceTests {
         UserDataTransferObject userPlayerDTO = eth.randomUser();
 
         //Add new users
-        userService.add(userHostDTO);
-        userService.add(userPlayerDTO);
+        userHostDTO.setId(userService.add(userHostDTO));
+        userPlayerDTO.setId(userService.add(userPlayerDTO));
 
-        //Selects the users by email address(We don't have their ID yet)
-        Optional optionalHost = userService.getByHashId(userHostDTO.getEmail());
-        Optional optionalPlayer = userService.getByHashId(userPlayerDTO.getEmail());
+        //Selects the users by id
+        Optional optionalHost = userService.getById(userHostDTO.getId());
+        Optional optionalPlayer = userService.getById(userPlayerDTO.getId());
 
-        //Go get users new ID
+        //Go get users from database
         User userHost = (User)optionalHost.get();
         User userPlayer = (User)optionalPlayer.get();
-
-        //Give userID to DTO
-        userHostDTO.setId(userHost.getId());
-        userPlayerDTO.setId(userPlayer.getId());
 
         // Create gameDTOs with userHost as host
         GameMeetingDataTransferObject gameDTO = eth.randomGameMeeting(userHost);
