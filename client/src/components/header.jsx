@@ -10,7 +10,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Route } from "react-router-dom";
 
 const Header = () => {
   const { isAuthenticated, loginWithRedirect, user, logout } = useAuth0();
@@ -20,9 +20,9 @@ const Header = () => {
   });
   return (
     <IonToolbar color="primary">
-      <NavLink to="/home">
+      
         <img className="logo-hero" alt="BoredGamerz Logo"  src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png" />
-          </NavLink>
+        
       {isAuthenticated ? (
         <IonButtons className="navigation" slot="primary" >
           <IonButton className="navigation__fontweight" href="/profile/games">My Games</IonButton>

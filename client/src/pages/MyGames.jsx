@@ -25,6 +25,7 @@ const MyGames = () => {
   return (
     <IonPage>
       <IonContent>
+      <IonTitle>MyGames</IonTitle>
         <IonSegment
           onIonChange={(e) => {
             setSegmentState({ ...segmentState,  state: e.detail.value });
@@ -38,9 +39,9 @@ const MyGames = () => {
             <h1>Hosted Games</h1>
           </IonSegmentButton>
         </IonSegment>
-        <IonList>{segmentState.state === "Joined" ? <GameList seeData={data}/> : <h1>h2</h1>}</IonList>
+        <IonList>{segmentState.state === "Joined" ? <GameList seeData={data}/> : <GameList seeData={data} editMode={true}/> }</IonList>
       </IonContent>
-    </IonPage>
+      </IonPage>
   );
 };
 

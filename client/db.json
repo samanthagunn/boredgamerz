@@ -1,5 +1,6 @@
 {
-  "games": [{
+  "games": [
+    {
       "id": 1,
       "title": "Marks DND Game",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Auctor eu augue ut lectus arcu bibendum. Metus dictum at tempor commodo ullamcorper a lacus vestibulum sed. Ipsum a arcu cursus vitae congue mauris. Aenean sed adipiscing diam donec adipiscing tristique. Dui id ornare arcu odio ut sem nulla pharetra diam. Condimentum vitae sapien pellentesque habitant. Commodo nulla facilisi nullam vehicula. Sagittis purus sit amet volutpat consequat mauris nunc. Commodo sed egestas egestas fringilla phasellus faucibus scelerisque. Viverra nibh cras pulvinar mattis nunc sed blandit. A iaculis at erat pellentesque adipiscing commodo. Sed cras ornare arcu dui vivamus arcu. Malesuada fames ac turpis egestas sed tempus urna et pharetra. Malesuada pellentesque elit eget gravida cum sociis natoque penatibus et. Tincidunt eget nullam non nisi.",
@@ -9,7 +10,10 @@
       "address": "1234 ACME Street Omaha, Nebraska, 68100",
       "date": "12/20/2021",
       "hostId": 1,
-      "location": {"lat": 39.7531332, "lng": -105.0087434}
+      "location": {
+        "lat": 39.7531332,
+        "lng": -105.0087434
+      }
     },
     {
       "id": 2,
@@ -21,7 +25,10 @@
       "address": "4567 EAMC Street Omaha, Nebraska, 68102",
       "date": "01/21/2021",
       "hostId": 2,
-      "location": {"lat": 41.2573403, "lng": -95.9715007}
+      "location": {
+        "lat": 41.2573403,
+        "lng": -95.9715007
+      }
     },
     {
       "id": 3,
@@ -43,8 +50,37 @@
       "availableSeats": 5,
       "address": "1701 Wynkoop Street Denver, Colorado 80202",
       "date": "11/19/2021",
-      "location": {"lat": 41.2594517, "lng": -95.9168336},
+      "location": {
+        "lat": 41.2594517,
+        "lng": -95.9168336
+      },
       "hostId": 4
+    },
+    {
+      "title": "123",
+      "avaliableSeats": "123",
+      "id": 5
+    },
+    {
+      "position": {
+        "lat": 41.2524074,
+        "lng": -95.9625588
+      },
+      "id": 6
+    },
+    {
+      "position": {
+        "lat": 41.2461302,
+        "lng": -95.9629159
+      },
+      "id": 7
+    },
+    {
+      "position": {
+        "lat": 41.2461302,
+        "lng": -95.9629159
+      },
+      "id": 8
     }
   ],
   "users": [

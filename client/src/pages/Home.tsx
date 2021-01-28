@@ -7,7 +7,6 @@ import Footer from "../components/footer";
 const Home = () => {
   return (
     <IonPage>
-
       <IonContent fullscreen>
         <LandingPage />
       </IonContent>
