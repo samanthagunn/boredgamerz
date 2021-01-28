@@ -1,20 +1,20 @@
 import { IonContent, IonPage } from "@ionic/react";
 import React from "react";
 import Footer from "../components/footer";
+import Form from "../components/form";
 import Header from "../components/header";
-import LandingPage from "../components/landing-page";
-import "./Home.css";
 
-const Home = () => {
+const CreateGame = () => {
+  let edit = false;
   return (
     <IonPage>
       <Header />
-      <IonContent fullscreen>
-        <LandingPage />
+      <IonContent>
+        <Form editState={edit} />
       </IonContent>
       <Footer />
     </IonPage>
   );
 };
 
-export default Home;
+export default CreateGame;

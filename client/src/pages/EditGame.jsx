@@ -1,16 +1,18 @@
-import { Loader } from "@googlemaps/js-api-loader";
-import {
-  IonHeader,
-  IonPage,
-} from "@ionic/react";
+import { IonContent, IonHeader, IonPage } from "@ionic/react";
 import React from "react";
+import Footer from "../components/footer";
 import Form from "../components/form";
+import Header from "../components/header";
 
 const EditGame = () => {
   let edit = true;
   return (
     <IonPage>
-      <Form editState={edit}/>
+      <Header />
+      <IonContent>
+        <Form editState={edit} />
+      </IonContent>
+      <Footer />
     </IonPage>
   );
 };

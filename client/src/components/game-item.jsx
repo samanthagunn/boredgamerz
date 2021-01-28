@@ -9,9 +9,10 @@ import {
   IonTitle,
 } from "@ionic/react";
 import React, { useState } from "react";
+import { useHistory } from "react-router";
 
-const GameItem = ({ game, edit }) => {
-  console.log(game);
+const GameItem = ({ game, edit, join }) => {
+  let history = useHistory();
   const [show, setShow] = useState(false);
   let map;
   let marker;
@@ -21,29 +22,27 @@ const GameItem = ({ game, edit }) => {
   });
 
   const loadMap = () => {
-    loader.load().then(
-      () => {
-        map = new window.google.maps.Map(document.getElementById("map"), {
-          center: game.location,
-          zoom: 15,
-          gestureHandling: "cooperative",
-        });
-        marker = new window.google.maps.Marker({
-          position: game.location,
-          map: map,
-        })
-      }
-    );
+    loader.load().then(() => {
+      map = new window.google.maps.Map(document.getElementById("map"), {
+        center: game.location,
+        zoom: 15,
+        gestureHandling: "cooperative",
+      });
+      marker = new window.google.maps.Marker({
+        position: game.location,
+        map: map,
+      });
+    });
   };
 
   return (
     <IonItem>
       <IonCard
         onClick={() => {
-          if (!show) {
+          if (!show && join) {
             loadMap();
           }
-          if(!edit) {
+          if (!edit) {
             setShow(!show);
           }
         }}
@@ -58,7 +57,18 @@ const GameItem = ({ game, edit }) => {
           <h3>Date: {game.date}</h3>
           <h4>Location: {game.address}</h4>
           {show ? <p>{game.description}</p> : undefined}
-          {edit ? <IonButton href={`games/edit/${game.hostId}`}>Edit</IonButton> : false}
+          {edit ? (
+            <IonButton onClick={() => history.push(`/games/edit/${game.id}`)}>
+              Edit
+            </IonButton>
+          ) : (
+            false
+          )}
+          {join ? (
+            <IonButton onClick={() => console.log("cool")}>join</IonButton>
+          ) : (
+            false
+          )}
         </IonCardContent>
       </IonCard>
     </IonItem>

@@ -1,15 +1,13 @@
 import {
   IonContent,
-  IonHeader,
-  IonItem,
   IonList,
   IonPage,
   IonSegment,
   IonSegmentButton,
-  IonTitle,
 } from "@ionic/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import Footer from "../components/footer";
 import GameList from "../components/game-list";
 import Header from "../components/header";
 
@@ -20,14 +18,18 @@ const MyGames = () => {
   });
   const [data, setData] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:8080/games").then((resp) => resp.data).then(data => setData(data))
-  }, [])
+    axios
+      .get("http://localhost:8080/games")
+      .then((resp) => resp.data)
+      .then((data) => setData(data));
+  }, []);
   return (
+    <IonPage>
+      <Header />
       <IonContent>
-      <IonTitle>MyGames</IonTitle>
         <IonSegment
           onIonChange={(e) => {
-            setSegmentState({ ...segmentState,  state: e.detail.value });
+            setSegmentState({ ...segmentState, state: e.detail.value });
           }}
           value={segmentState.state}
         >
@@ -38,8 +40,16 @@ const MyGames = () => {
             <h1>Hosted Games</h1>
           </IonSegmentButton>
         </IonSegment>
-        <IonList>{segmentState.state === "Joined" ? <GameList seeData={data}/> : <GameList seeData={data} editMode={true}/> }</IonList>
+        <IonList>
+          {segmentState.state === "Joined" ? (
+            <GameList seeData={data} />
+          ) : (
+            <GameList seeData={data} editMode={true} />
+          )}
+        </IonList>
       </IonContent>
+      <Footer />
+    </IonPage>
   );
 };
 
