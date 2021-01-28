@@ -37,8 +37,10 @@ public class UserDataTransferObject {
 
     @Autowired
     public UserDataTransferObject(
-            @JsonProperty("auth0Id") String auth0Id){
+            @JsonProperty("auth0Id") String auth0Id,
+            @JsonProperty("id") UUID id){
         this.auth0Id = auth0Id;
+        this.id = id;
     }
 
     public boolean isValid(){
