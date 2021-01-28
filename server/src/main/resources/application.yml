@@ -1,9 +1,11 @@
+auth0:
+    audience: lbS5AAGz6OmsB863eb48BPPg7sYep1Ys
 spring:
     security:
         oauth2:
-            client:
-                client-id: first-client
-                client-secret: noonewilleverguess
+            resourceserver:
+                jwt:
+                    issuer-uri: https://dev-z2irz81c.us.auth0.com/
     datasource:
         username: root
         password: PWfields!
