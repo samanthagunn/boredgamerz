@@ -12,7 +12,7 @@
   --ion-color-secondary-contrast-rgb: 255,255,255;
   --ion-color-secondary-shade: #7b34b4;
   --ion-color-secondary-tint: #984fd2;
-  --ion-color-tertiary: #FFC67A;
+  --ion-color-tertiary: #77a85d;
   --ion-color-tertiary-rgb: 255,198,122;
   --ion-color-tertiary-contrast: #000000;
   --ion-color-tertiary-contrast-rgb: 0,0,0;
@@ -107,20 +107,35 @@
   --background-hover-opacity: 1;
 }
 
-.game-card {
+.games {
+  margin: 10px 0px;
+}
+
+@media (min-width: 1100px) {
+  .game-card {
+    width: 100%;
+  }
+}
+@media (min-width: 200px) and (max-width: 767px) {
+  .game-card {
+    width: 97%;
+  }
+}
+
+.game-card-list {
   --ion-background-color: #FFC67A !important;
   color: black !important;
-  width: 600px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  margin: 0 auto;
+  padding: 2px 0px;
+  border-radius: 15px;
+  margin: auto;
+  width: 80%;
 }
 
 .game-title {
   color: black !important;
   padding: 0;
   font-weight: 900;
+  font-size: 20px;
 }
 
 .game-type {
@@ -150,7 +165,18 @@
 }
 
 .container {
-  margin-top: 20px;
+  display: block;
+  margin: auto 0;
+}
+@media (min-width: 1100px) {
+  .container {
+    margin-top: 30px;
+  }
+}
+@media (min-width: 200px) and (max-width: 767px) {
+  .container {
+    margin-top: 40px;
+  }
 }
 
 .hero-logo {
@@ -158,25 +184,33 @@
   margin: 0 auto;
   padding: 0;
 }
+@media (min-width: 200px) and (max-width: 767px) {
+  .hero-logo {
+    width: 80%;
+  }
+}
 
 .hero-image {
   width: 70%;
   margin: 10px 0px;
-  color: #588242;
+  color: #77a85d;
   box-shadow: 0px 15px 20px;
+  align-items: center;
+}
+@media (min-width: 200px) and (max-width: 767px) {
+  .hero-image {
+    width: 100%;
+    box-shadow: 0px 8px 15px;
+  }
 }
 
 .landing-hero-container {
   display: block;
   margin: 0 auto;
-  width: 60%;
+  width: 80%;
 }
 .landing-hero-container p {
   color: white !important;
-}
-
-.footer {
-  --ion-background-color: #588242;
 }
 
 /*# sourceMappingURL=index.css.map */

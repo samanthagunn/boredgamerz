@@ -8,17 +8,13 @@ const LandingPage = () => {
   const signedIn = () => {
     if (isAuthenticated) {
       return (
-        <IonButton routerDirection="forward" href="/profile" data-testid="Join a Game Christian">
+        <IonButton routerDirection="forward" href="/profile">
           Join a Game {user.given_name}
         </IonButton>
       );
     } else {
       return (
-        <IonButton
-          onClick={() =>
-            loginWithRedirect()
-          }
-        >
+        <IonButton onClick={() => loginWithRedirect()}>
           Login / Sign Up
         </IonButton>
       );
@@ -34,7 +30,7 @@ const LandingPage = () => {
       <IonCard className="landing-hero" color="secondary">
         
         <IonCardHeader><h1>Easy as Find. Host. Play. </h1> 
-       <img alt="BoredGamerz Logo" width="40%" src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png" />
+       <img alt="BoredGamerz Logo" className="hero-logo" width="40%" src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png" />
         </IonCardHeader>
         
         <IonCardContent>

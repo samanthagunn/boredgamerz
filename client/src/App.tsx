@@ -27,26 +27,27 @@ import Header from "./components/header";
 import Footer from "./components/footer";
 import MyGames from "./pages/MyGames.jsx";
 import FindGames from "./pages/FindGames";
-import CreateGame from "./pages/CreateGames";
+import CreateGame from "./pages/CreateGame";
 import EditGame from "./pages/EditGame";
+import Admin from "./pages/Admin";
+import { withAuthenticationRequired } from "@auth0/auth0-react";
 //mimic "/" path to ensure no unauthed users access profiles
+
+
 const App = () => (
   <IonApp>
-    <Header />
-    <IonPage>
       <IonReactRouter>
         <IonRouterOutlet>
           <Route path="/home" component={Home} exact={true} />
           <Route exact path="/" render={() => <Redirect to="/home" />} />
-          <Route path="/profile" component={Profile} exact={true} />
-          <Route path="/profile/games" component={MyGames} exact={true} />
-          <Route path="/games" component={FindGames} exact={true} />
-          <Route path="/games/create" component={CreateGame} exact={true} />
-          <Route path="/games/edit/" component={EditGame} />
+          <Route path="/profile" component={withAuthenticationRequired(Profile)} exact={true} />
+          <Route path="/profile/games" component={withAuthenticationRequired(MyGames)} exact={true} />
+          <Route path="/games" component={withAuthenticationRequired(FindGames)} exact={true} />
+          <Route path="/games/create" component={withAuthenticationRequired(CreateGame)} exact={true} />
+          <Route path="/games/edit/" component={withAuthenticationRequired(EditGame)} />
+          <Route path="/admin" component={withAuthenticationRequired(Admin)} />
         </IonRouterOutlet>
       </IonReactRouter>
-    </IonPage>
-    <Footer />
   </IonApp>
 );
 

@@ -1,6 +1,7 @@
 @use '../partials/colors' as *;
+@use '../partials/mediaq' as *;
 
-.footer-style {
-    color: map-get($colors, giantpeach );
-    position: relative;
+.footer {
+    --ion-background-color: #77a85d !important;
+   
 }

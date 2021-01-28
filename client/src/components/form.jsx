@@ -1,7 +1,6 @@
 import { Loader } from "@googlemaps/js-api-loader";
 import {
   IonButton,
-  IonContent,
   IonInput,
   IonItem,
   IonItemDivider,
@@ -15,16 +14,11 @@ import { useParams } from "react-router";
 const Form = ({ editState }) => {
   let params = useParams();
   const [formState, setFormState] = useState({});
-  const loader = new Loader({
-    apiKey: "AIzaSyDcIytfVAvhm1Ia51mHHxDMaq-DUuaSlZE",
-    version: "weekly",
-  });
-
   //   useEffect(() => {
   //     axios
   //       .get(`http://localhost:8080/games/${params}`)
   //       .then((resp) => resp.json)
-  //       .then((data) => setFormState(data))
+  //       .then((data) => {let date = new Date(data.date); data = {...data, date: date.ISOString() } ;setFormState({data, date: Date})})
   //       .catch((e) => console.error(e));
   //   });
 
@@ -41,6 +35,10 @@ const Form = ({ editState }) => {
 
   let autocomplete;
   let initAutocomplete = () => {
+    const loader = new Loader({
+      apiKey: "AIzaSyDuZ32gfmKD4XNcQoWGoTkSLGZ--LUo_L4",
+      version: "weekly",
+    });
     loader.load().then(() => {
       autocomplete = new window.google.maps.places.Autocomplete(
         document.getElementById("autocomplete"),
@@ -61,8 +59,7 @@ const Form = ({ editState }) => {
   };
 
   return (
-    <IonContent>
-      <h1>Create A Game</h1>
+    <>
       <IonList>
         <IonItemDivider>Game Name: </IonItemDivider>
         <IonItem>
@@ -131,7 +128,7 @@ const Form = ({ editState }) => {
           <IonButton onClick={submit}>Submit</IonButton>
         </IonItem>
       </IonList>
-    </IonContent>
+    </>
   );
 };
 
