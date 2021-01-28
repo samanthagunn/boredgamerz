@@ -85,8 +85,14 @@ public class UserController {
     }
 
     //ie. DELETE http://localhost:8080/bored-gamerz/api/user/id/{UUID}
-    @DeleteMapping(path = "/delete")
-    public int deleteUser(@RequestBody UserDataTransferObject user){
+    @DeleteMapping(path = "/me")
+    public int deleteUser(@RequestHeader HttpHeaders headers){
+
+        IdTokenDecoder token = new IdTokenDecoder(headers);
+
+        String id = token.decode("sub");
+
+        User user = USER_SERVICE.getByAuthId(id).get();
 
         if(USER_SERVICE.delete(user.getId(), GM_SERVICE, UTGM_SERVICE) == 0) throw new SQLDeleteFail();
 
