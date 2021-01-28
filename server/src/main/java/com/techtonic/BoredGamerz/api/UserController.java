@@ -92,7 +92,15 @@ public class UserController {
     //ie. ADD http://localhost:8080/bored-gamerz/api/user
     //this method is the same as the post except the user does not need a UUID
     @PostMapping
-    public int addUser(@RequestBody UserDataTransferObject user){
+    public int addUser(@RequestHeader HttpHeaders headers){
+
+        IdTokenDecoder token = new IdTokenDecoder(headers);
+
+        String id = token.decode("sub");
+
+        UserDataTransferObject user = new UserDataTransferObject();
+
+        user.setAuth0Id(id);
 
         if(USER_SERVICE.add(user) == null) throw new SQLSaveFail();
 
