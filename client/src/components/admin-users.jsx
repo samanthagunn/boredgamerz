@@ -4,10 +4,7 @@ import {
   IonCardContent,
   IonCardSubtitle,
   IonCardTitle,
-  IonContent,
   IonItem,
-  IonList,
-  IonPage,
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import axios from "axios"

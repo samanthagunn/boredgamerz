@@ -7,9 +7,10 @@ import {
 } from "@ionic/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import AuthHeader from "../components/auth-header";
 import Footer from "../components/footer";
 import GameList from "../components/game-list";
-import Header from "../components/header";
+import FAB from "../components/mobile-fab";
 
 const MyGames = () => {
   const [segmentState, setSegmentState] = useState({
@@ -25,7 +26,7 @@ const MyGames = () => {
   }, []);
   return (
     <IonPage>
-      <Header />
+      <AuthHeader />
       <IonContent>
         <IonSegment
           onIonChange={(e) => {
@@ -48,6 +49,7 @@ const MyGames = () => {
           )}
         </IonList>
       </IonContent>
+      <FAB />
       <Footer />
     </IonPage>
   );
