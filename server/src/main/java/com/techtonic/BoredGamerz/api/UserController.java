@@ -74,10 +74,14 @@ public class UserController {
     }
 
     //ie. GET http://localhost:8080/bored-gamerz/api/user/id/{UUID}
-    @GetMapping(path = "/current")
-    public Optional<User> getById(@PathVariable("UUID") UUID uuid){
+    @GetMapping(path = "/me")
+    public Optional<User> getById(@RequestHeader HttpHeaders headers){
 
-        return USER_SERVICE.getById(uuid);
+        IdTokenDecoder token = new IdTokenDecoder(headers);
+
+        String id = token.decode("sub");
+
+        return USER_SERVICE.getByAuthId(id);
     }
 
     //ie. DELETE http://localhost:8080/bored-gamerz/api/user/id/{UUID}

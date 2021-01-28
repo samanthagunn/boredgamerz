@@ -91,4 +91,9 @@ public class UserService {
 
         return USER_DAO.findById(uuid);
     }
+
+    public Optional<User> getByAuthId(String id){
+
+        return USER_DAO.findByAuth0Id(id);
+    }
 }
