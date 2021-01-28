@@ -4,8 +4,10 @@ import React from "react";
 const Footer = () => {
   return (
     <IonFooter >
-      <IonToolbar color="tertiary" >
-        <IonTitle >Copyright 2020 Bored Gamerz</IonTitle>
+      <IonToolbar className="ion-text-center" color="tertiary" >
+        <div >
+        <p>© 2020 Bored Gamerz, BravoBunch</p>
+        </div>
       </IonToolbar>
     </IonFooter>
   );

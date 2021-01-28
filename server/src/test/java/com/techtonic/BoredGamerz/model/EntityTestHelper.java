@@ -101,11 +101,7 @@ public class EntityTestHelper {
 
         UserDataTransferObject user = new UserDataTransferObject();
 
-        user.setFirstName(getRandomString(names));
-        user.setLastName(getRandomString(names));
-        user.setEmail(generateEmail(user.getFirstName(), user.getLastName()));
-        user.setCountry(getRandomString(countries));
-        user.setUsername(user.getFirstName() + UUID.randomUUID());
+        user.setAuth0Id("Auth0id|" + UUID.randomUUID());
 
         return user;
     }

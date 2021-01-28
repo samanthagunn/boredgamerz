@@ -12,28 +12,32 @@ import {
 import React, { useState } from "react";
 
 const AuthHeader = () => {
-  const { isAuthenticated, loginWithRedirect, user, logout } = useAuth0();
+  const { user, logout } = useAuth0();
   const [popoverState, setShowPopover] = useState({
     showPopover: false,
     event: undefined,
   });
   return (
     <IonHeader>
-      <IonToolbar>
-        <IonTitle>Bored Gamerz</IonTitle>
-        <IonButtons slot="primary">
+      <IonToolbar color="primary">
+        <img className="logo-hero" alt="BoredGamerz Logo"  src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png" />
+        <IonButtons className="navigation" slot="primary">
           <IonButton href="/profile/games">My Games</IonButton>
           <IonButton href="/games">Find Games</IonButton>
           <IonButton href="/games/create">Create A Game</IonButton>
-          <IonButton
+          <IonButton 
             onClick={(e) => {
               e.persist();
               setShowPopover({ showPopover: true, event: e });
             }}
           >
             Profile
-            <img src={user.picture}></img>
+            
           </IonButton>
+          <img className="user-image" alt="profile" height="50px" src={user.picture} onClick={(e) => {
+              e.persist();
+              setShowPopover({ showPopover: true, event: e });
+            }}></img>
           <IonPopover
             event={popoverState.event}
             isOpen={popoverState.showPopover}
@@ -48,6 +52,11 @@ const AuthHeader = () => {
               <IonItem>
                 <IonButton href="/profile/games">My Games</IonButton>
               </IonItem>
+              {Object.values(user)[0] === ["Admin"] ? (
+                <IonItem>
+                  <IonButton href="/admin">Admin</IonButton>
+                </IonItem>
+              ) : undefined}
               <IonItem>
                 <IonButton onClick={logout}>Sign Out</IonButton>
               </IonItem>

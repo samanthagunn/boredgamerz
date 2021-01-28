@@ -42,23 +42,27 @@ public class UserService {
         this.USER_DAO = USER_DAO;
     }
 
-    public int add(UserDataTransferObject user){
+    public UUID add(UserDataTransferObject user){
 
         if(!user.isValid()) throw new BlankBodyException();
 
+        user.setId(UUID.nameUUIDFromBytes(user.getAuth0Id().getBytes()));
+        user.setSalt("");
         //make sure there's no collisions
         while(USER_DAO.existsById(user.getId())){
 
-            user.setId(UUID.randomUUID());
+            user.setSalt(UUID.randomUUID().toString());
+
+            user.setId(UUID.nameUUIDFromBytes((user.getSalt() + user.getAuth0Id()).getBytes()));
         }
 
         User tempUser = new User(user);
 
         USER_DAO.save(tempUser);
 
-        if(USER_DAO.existsById(tempUser.getId())) return 1;
+        if(USER_DAO.existsById(tempUser.getId())) return tempUser.getId();
 
-        return 0;
+        return null;
     }
     @Transactional
     public int delete(UUID userId,
@@ -68,7 +72,6 @@ public class UserService {
         //when a user is deleted we want to delete any games they're hosting
         //then we remove them from any meetings they're in
         //then finally we delete the user
-
         Iterable<UserToGameMeetingJoin> seatList = utgmService.getAllByUserId(userId);
 
         utgmService.deleteAllByGameMeetingHostId(userId);
@@ -77,21 +80,6 @@ public class UserService {
         USER_DAO.deleteById(userId);
 
         return 1; //USER_DAO.existsById(userId) ? 0 : 1;
-    }
-
-    public int update(UserDataTransferObject user){
-
-        if(!user.isValid()) throw new BlankBodyException();
-
-        //make sure the user has a UUID, if they do ask the DB to update
-        //if they don't then we return a 0 as the request has failed
-        if(user.getId() != null){
-
-            USER_DAO.save(new User(user));
-            return 1;
-        }
-
-        return 0;
     }
 
     public Iterable<User> getAll(){
@@ -104,19 +92,8 @@ public class UserService {
         return USER_DAO.findById(uuid);
     }
 
-    public Optional<User> getByHashId(String email){
+    public Optional<User> getByAuthId(String id){
 
-        Iterable<User> list = USER_DAO.findByEmailId(email.hashCode());
-        Optional<User> output = null;
-
-        //Search for a list of emails with a specific hashcode, then search that smaller
-        //list for a matching email
-        for (User user : list) {
-            if(email.equals(user.getEmail())) output = Optional.of(user);
-        }
-
-        if(output == null) throw new NullPointerException("Email not found");
-
-        return output;
+        return USER_DAO.findByAuth0Id(id);
     }
 }

@@ -27,40 +27,25 @@ Details: Handles the transfer of data from an http request to a
 
 public class UserDataTransferObject {
 
-    private UUID id = UUID.randomUUID();
+    private UUID id;
 
-    private String username;
-    private String email;
-    private String firstName;
-    private String lastName;
-    private String country;
+    private String auth0Id;
+
+    private String salt;
 
     public UserDataTransferObject(){}
 
     @Autowired
     public UserDataTransferObject(
-                @JsonProperty("userId") UUID id,
-                @JsonProperty("email") String email,
-                @JsonProperty("firstName") String firstName,
-                @JsonProperty("lastName") String lastName,
-                @JsonProperty("country") String country,
-                @JsonProperty("username") String username){
-        if(id != null)
-            this.id = id;
-        this.email = email;
-        this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.country = country;
+            @JsonProperty("auth0Id") String auth0Id,
+            @JsonProperty("id") UUID id){
+        this.auth0Id = auth0Id;
+        this.id = id;
     }
 
     public boolean isValid(){
 
-        if( username == null ||
-                email == null ||
-                firstName == null ||
-                lastName == null ||
-                country == null ) return false;
+        if( auth0Id == null || auth0Id.trim() == "") return false;
 
         return true;
     }
@@ -74,44 +59,20 @@ public class UserDataTransferObject {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getAuth0Id() {
+        return auth0Id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setAuth0Id(String auth0Id) {
+        this.auth0Id = auth0Id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getSalt() {
+        return salt;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     @Override

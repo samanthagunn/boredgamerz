@@ -1,0 +1,22 @@
+@use '../partials/colors' as *;
+
+
+.profile-heading {
+    height: 50px;
+    color: white;
+    margin-top: 20px;
+}
+.profile-card {
+    --ion-background-color: #FFC67A !important;
+    color: black !important;
+    padding: 2px 0px;
+    border-radius: 15px;
+    margin: auto;
+    width: 80%;
+}
+.user-image-profile {
+    margin: 10px;
+    border-radius: 50%;
+    width: 50px;
+    
+}

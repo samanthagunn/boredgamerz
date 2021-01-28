@@ -2,7 +2,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 import {
   IonButton,
   IonButtons,
-  IonHeader,
   IonItem,
   IonList,
   IonPopover,

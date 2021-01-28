@@ -1,6 +1,6 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
-import { IonApp, IonHeader, IonPage, IonRouterOutlet } from "@ionic/react";
+import { IonApp, IonRouterOutlet } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 
 /* Core CSS required for Ionic components to work properly */
@@ -23,8 +23,6 @@ import "@ionic/react/css/display.css";
 import './theme/index.scss';
 import Profile from "./pages/profile";
 import Home from "./pages/Home";
-import Header from "./components/header";
-import Footer from "./components/footer";
 import MyGames from "./pages/MyGames.jsx";
 import FindGames from "./pages/FindGames";
 import CreateGame from "./pages/CreateGame";

@@ -1,4 +1,5 @@
 @use '../partials/colors' as *;
+@use '../partials/mediaq' as *;
 
 .navigation {
 
@@ -10,6 +11,14 @@
     }
     --ion-color-contrast {
         color: map-get($colors, giantpeach, base )
+    }
+    @include mobile {
+        display: none;
+    }
+}
+.mobilenav {
+    @include desktop{
+        display: none;
     }
 }
 .user-popover .popover-content{

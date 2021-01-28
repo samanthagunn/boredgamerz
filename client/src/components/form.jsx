@@ -9,10 +9,8 @@ import {
 } from "@ionic/react";
 import axios from "axios";
 import React, { useState } from "react";
-import { useParams } from "react-router";
 
 const Form = ({ editState }) => {
-  let params = useParams();
   const [formState, setFormState] = useState({});
   //   useEffect(() => {
   //     axios
@@ -27,7 +25,7 @@ const Form = ({ editState }) => {
   let connectAddress = (googleAddress) => {
     googleAddress.map((part) => (connaddress += part.long_name + " "));
     geocoder.geocode({ address: connaddress }, (result, status) => {
-      if (status == "OK") {
+      if (status === "OK") {
         setFormState({ ...formState, position: result[0].geometry.location });
       }
     });
@@ -59,10 +57,12 @@ const Form = ({ editState }) => {
   };
 
   return (
-    <>
-      <IonList>
-        <IonItemDivider>Game Name: </IonItemDivider>
-        <IonItem>
+   
+    <div className="game-container">
+      <IonList className="create-games ">
+        <div className="game-list game-font">
+        <IonItemDivider ><strong>Game Name:</strong> </IonItemDivider>
+        <IonItem >
           <IonInput
             type="text"
             placeholder="Mark's DND Session"
@@ -73,17 +73,17 @@ const Form = ({ editState }) => {
             }}
           ></IonInput>
         </IonItem>
-        <IonItemDivider>Location: </IonItemDivider>
-        <IonItem>
-          <input
+        <IonItemDivider><strong>Location:</strong> </IonItemDivider>
+        <IonItem >
+          <input className="mapinput"
             type="text"
             id="autocomplete"
             value={formState.address}
             onFocus={initAutocomplete}
-            value={formState.address}
+            
           ></input>
         </IonItem>
-        <IonItemDivider>Date: </IonItemDivider>
+        <IonItemDivider><strong>Date:</strong> </IonItemDivider>
         <IonItem>
           <IonInput
             type="datetime-local"
@@ -96,7 +96,7 @@ const Form = ({ editState }) => {
         </IonItem>
         {!editState ? (
           <>
-            <IonItemDivider>Open Seats: </IonItemDivider>
+            <IonItemDivider><strong>Open Seats:</strong> </IonItemDivider>
             <IonItem>
               <IonInput
                 type="number"
@@ -113,7 +113,7 @@ const Form = ({ editState }) => {
             </IonItem>
           </>
         ) : undefined}
-        <IonItemDivider>Game Description: </IonItemDivider>
+        <IonItemDivider><strong>Game Description:</strong> </IonItemDivider>
         <IonItem>
           <IonTextarea
             placeholder="This DND game..."
@@ -127,8 +127,9 @@ const Form = ({ editState }) => {
         <IonItem>
           <IonButton onClick={submit}>Submit</IonButton>
         </IonItem>
+        </div>
       </IonList>
-    </>
+      </div>
   );
 };
 

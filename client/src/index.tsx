@@ -4,7 +4,6 @@ import * as serviceWorker from "./serviceWorker";
 import ErrorBoundary from "./errorboundary";
 import { Auth0Provider } from "@auth0/auth0-react"
 import App from "./App";
-import Header from "./components/header";
 
 ReactDOM.render(
   <Auth0Provider
@@ -12,8 +11,7 @@ ReactDOM.render(
     clientId="lbS5AAGz6OmsB863eb48BPPg7sYep1Ys"
     redirectUri= "http://localhost:3000/profile"
     response_type="code"
-    scope="openid profile"
-    state="kalnsdf"
+    scope="openid profile email"
     audience="http://test12351234"
     >
     <ErrorBoundary>

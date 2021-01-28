@@ -27,14 +27,11 @@ class GameMeetingServiceTests {
         UserDataTransferObject user1DTO = eth.randomUser();
 
         //Adds the user
-        userService.add(user1DTO);
+        user1DTO.setId(userService.add(user1DTO));
 
         //Selects this user by email address(We don't have their ID yet)
-        Optional optional1 = userService.getByHashId(user1DTO.getEmail());
+        Optional optional1 = userService.getById(user1DTO.getId());
         User user1 = (User)optional1.get();
-
-        //User1DTO now has an ID
-        user1DTO.setId(user1.getId());
 
         // Create gameDTO with user1 as host
         GameMeetingDataTransferObject gameDTO = eth.randomGameMeeting(user1);
@@ -69,14 +66,11 @@ class GameMeetingServiceTests {
         UserDataTransferObject user1DTO = eth.randomUser();
 
         //Adds the user
-        userService.add(user1DTO);
+        user1DTO.setId(userService.add(user1DTO));
 
         //Selects this user by email address(We don't have their ID yet)
-        Optional optional1 = userService.getByHashId(user1DTO.getEmail());
+        Optional optional1 = userService.getById(user1DTO.getId());
         User user1 = (User)optional1.get();
-
-        //User1DTO now has an ID
-        user1DTO.setId(user1.getId());
 
         // Create gameDTO with user1 as host
         GameMeetingDataTransferObject gameDTO1 = eth.randomGameMeeting(user1);
