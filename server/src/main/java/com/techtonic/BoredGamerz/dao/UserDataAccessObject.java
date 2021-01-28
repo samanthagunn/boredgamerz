@@ -33,4 +33,6 @@ public interface UserDataAccessObject extends JpaRepository<User, UUID> {
     //Useful for building your own server queries:
     //https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.repositories
     Optional<User> findById(UUID id);
+
+    Optional<User> findByAuth0Id(String id);
 }
