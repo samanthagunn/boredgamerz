@@ -73,7 +73,7 @@ public class UserController {
         return USER_SERVICE.getAll();
     }
 
-    //ie. GET http://localhost:8080/bored-gamerz/api/user/id/{UUID}
+    //ie. GET http://localhost:8080/bored-gamerz/api/user/me
     @GetMapping(path = "/me")
     public Optional<User> getById(@RequestHeader HttpHeaders headers){
 
@@ -84,7 +84,7 @@ public class UserController {
         return USER_SERVICE.getByAuthId(id);
     }
 
-    //ie. DELETE http://localhost:8080/bored-gamerz/api/user/id/{UUID}
+    //ie. DELETE http://localhost:8080/bored-gamerz/api/user/me
     @DeleteMapping(path = "/me")
     public int deleteUser(@RequestHeader HttpHeaders headers){
 

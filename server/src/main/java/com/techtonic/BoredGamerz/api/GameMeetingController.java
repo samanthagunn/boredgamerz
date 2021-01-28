@@ -1,24 +1,19 @@
 package com.techtonic.BoredGamerz.api;
 
 import com.techtonic.BoredGamerz.ServerUtil.Exceptions.*;
+import com.techtonic.BoredGamerz.ServerUtil.IdTokenDecoder;
 import com.techtonic.BoredGamerz.dto.GameMeetingDataTransferObject;
 import com.techtonic.BoredGamerz.model.GameMeeting;
+import com.techtonic.BoredGamerz.model.User;
 import com.techtonic.BoredGamerz.service.GameMeetingService;
 import com.techtonic.BoredGamerz.service.UserService;
 import com.techtonic.BoredGamerz.service.UserToGameMeetingService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -59,7 +54,15 @@ public class GameMeetingController {
     }
 
     @PostMapping
-    public int add(@RequestBody GameMeetingDataTransferObject gm){
+    public int add(@RequestBody GameMeetingDataTransferObject gm, @RequestHeader HttpHeaders headers){
+
+        IdTokenDecoder token = new IdTokenDecoder(headers);
+
+        String id = token.decode("sub");
+
+        User user = USER_SERVICE.getByAuthId(id).get();
+
+        gm.setHost(user.getId());
 
         if(GM_SERVICE.add(gm, UTGM_SERVICE, USER_SERVICE) == 0) throw new SQLSaveFail();
 
@@ -67,7 +70,13 @@ public class GameMeetingController {
     }
 
     @GetMapping
-    public Iterable<GameMeeting> getAll(){
+    public Iterable<GameMeeting> getAll(@RequestHeader HttpHeaders headers){
+
+        IdTokenDecoder token = new IdTokenDecoder(headers);
+
+        String id = token.decode("sub");
+
+        User user = USER_SERVICE.getByAuthId(id).get();
 
         return GM_SERVICE.getAll();
     }
@@ -82,14 +91,20 @@ public class GameMeetingController {
         return output;
     }
 
-    @GetMapping(path = "/host/{UUID}")
-    public Iterable<GameMeeting> getAllByHostId(@PathVariable("UUID") UUID hostId){
+    @GetMapping(path = "/me")
+    public Iterable<GameMeeting> getAllByHostId(@RequestHeader HttpHeaders headers){
 
-        return GM_SERVICE.getAllByHostId(hostId);
+        IdTokenDecoder token = new IdTokenDecoder(headers);
+
+        String id = token.decode("sub");
+
+        User host = USER_SERVICE.getByAuthId(id).get();
+
+        return GM_SERVICE.getAllByHostId(host.getId());
     }
 
     @DeleteMapping(path = "/{UUID}")
-    public int deleteAllByGameMeetingId(@PathVariable("UUID") UUID gameMeetingId){
+    public int deleteByGameMeetingId(@PathVariable("UUID") UUID gameMeetingId){
 
         if(GM_SERVICE.delete(gameMeetingId, UTGM_SERVICE) == 0) throw new SQLDeleteFail();
 

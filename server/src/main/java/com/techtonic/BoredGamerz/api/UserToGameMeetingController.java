@@ -1,23 +1,19 @@
 package com.techtonic.BoredGamerz.api;
 
 import com.techtonic.BoredGamerz.ServerUtil.Exceptions.*;
+import com.techtonic.BoredGamerz.ServerUtil.IdTokenDecoder;
 import com.techtonic.BoredGamerz.dto.UserToGameMeetingDataTransferObject;
+import com.techtonic.BoredGamerz.model.User;
 import com.techtonic.BoredGamerz.model.UserToGameMeetingJoin;
 import com.techtonic.BoredGamerz.service.GameMeetingService;
 import com.techtonic.BoredGamerz.service.UserService;
 import com.techtonic.BoredGamerz.service.UserToGameMeetingService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -58,7 +54,16 @@ public class UserToGameMeetingController {
     }
 
     @PostMapping
-    public int joinUserToMeeting(@RequestBody UserToGameMeetingDataTransferObject join){
+    public int joinUserToMeeting(@RequestBody UserToGameMeetingDataTransferObject join,
+                                 @RequestHeader HttpHeaders headers){
+
+        IdTokenDecoder token = new IdTokenDecoder(headers);
+
+        String id = token.decode("sub");
+
+        User user = USER_SERVICE.getByAuthId(id).get();
+
+        join.setUser(user.getId());
 
         if(UTGM_SERVICE.add(join, GM_SERVICE, USER_SERVICE) == 0) throw new SQLSaveFail();
 
@@ -66,35 +71,63 @@ public class UserToGameMeetingController {
     }
 
     @GetMapping
-    public Iterable<UserToGameMeetingJoin> getAll(){
+    public Iterable<UserToGameMeetingJoin> getAll(@RequestHeader HttpHeaders headers){
+
+        IdTokenDecoder token = new IdTokenDecoder(headers);
+
+        String id = token.decode("sub");
+
+        User user = USER_SERVICE.getByAuthId(id).get();
 
         return UTGM_SERVICE.getAll();
     }
 
-    @GetMapping(path = "/{id}")
-    public Optional<UserToGameMeetingJoin> getById(@PathVariable("id") String id){
+    @GetMapping(path = "/{gameId}")
+    public Optional<UserToGameMeetingJoin> getById(@PathVariable("gameId") String gameId,
+                                                   @RequestHeader HttpHeaders headers){
 
-        Optional<UserToGameMeetingJoin> output = UTGM_SERVICE.getByCompositeId(id);
+        IdTokenDecoder token = new IdTokenDecoder(headers);
+
+        String id = token.decode("sub");
+
+        User user = USER_SERVICE.getByAuthId(id).get();
+
+        Optional<UserToGameMeetingJoin> output = UTGM_SERVICE.getByCompositeId(gameId);
 
         if(output == null) throw new NoSuchElementException();
 
         return output;
     }
 
-    @GetMapping(path = "/user/{UUID}")
-    public Iterable<UserToGameMeetingJoin> getByUserId(@PathVariable("UUID") UUID id){
+    @GetMapping(path = "/me")
+    public Iterable<UserToGameMeetingJoin> getByUserId(@RequestHeader HttpHeaders headers){
 
-        return UTGM_SERVICE.getAllByUserId(id);
+        IdTokenDecoder token = new IdTokenDecoder(headers);
+
+        String id = token.decode("sub");
+
+        User user = USER_SERVICE.getByAuthId(id).get();
+
+        return UTGM_SERVICE.getAllByUserId(user.getId());
     }
 
-    @GetMapping(path = "/game-meeting/{UUID}")
+    @GetMapping(path = "/game-meeting-id/{UUID}")
     public Iterable<UserToGameMeetingJoin> getByGameMeetingId(@PathVariable("UUID") UUID id){
 
         return UTGM_SERVICE.getAllByGameMeetingId(id);
     }
 
     @DeleteMapping(path = "/unjoin")
-    public int deleteAllByGameMeetingId(@RequestBody UserToGameMeetingDataTransferObject  unjoin){
+    public int deleteAllByGameMeetingId(@RequestBody UserToGameMeetingDataTransferObject unjoin,
+                                        @RequestHeader HttpHeaders headers){
+
+        IdTokenDecoder token = new IdTokenDecoder(headers);
+
+        String id = token.decode("sub");
+
+        User user = USER_SERVICE.getByAuthId(id).get();
+
+        unjoin.setUser(user.getId());
 
         if(UTGM_SERVICE.delete(unjoin, GM_SERVICE) == 0) throw new SQLDeleteFail();
 
