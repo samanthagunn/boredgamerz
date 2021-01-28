@@ -1,7 +1,7 @@
 import React from "react";
 import "./ExploreContainer.css";
 import { useAuth0 } from "@auth0/auth0-react";
-import FAB from "../components/mobile-fab";
+
 import { IonTitle, IonButton, IonCard, IonSpinner, IonCardHeader, IonCardTitle, IonCardContent, IonContent } from "@ionic/react";
 
 const LandingPage = () => {
@@ -49,7 +49,7 @@ const LandingPage = () => {
         {isLoading ? <IonSpinner /> : signedIn()}
         <br />
         <br />
-        <FAB />
+       
       </IonCard>
       </div>
       
