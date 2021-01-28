@@ -15,7 +15,6 @@ const GameItem = ({ game, edit, join }) => {
   let history = useHistory();
   const [show, setShow] = useState(false);
   let map;
-  let marker;
   const loader = new Loader({
     apiKey: "AIzaSyDuZ32gfmKD4XNcQoWGoTkSLGZ--LUo_L4",
     version: "weekly",
@@ -28,7 +27,7 @@ const GameItem = ({ game, edit, join }) => {
         zoom: 15,
         gestureHandling: "cooperative",
       });
-      marker = new window.google.maps.Marker({
+      new window.google.maps.Marker({
         position: game.location,
         map: map,
       });

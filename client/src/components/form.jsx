@@ -9,10 +9,8 @@ import {
 } from "@ionic/react";
 import axios from "axios";
 import React, { useState } from "react";
-import { useParams } from "react-router";
 
 const Form = ({ editState }) => {
-  let params = useParams();
   const [formState, setFormState] = useState({});
   //   useEffect(() => {
   //     axios
@@ -27,7 +25,7 @@ const Form = ({ editState }) => {
   let connectAddress = (googleAddress) => {
     googleAddress.map((part) => (connaddress += part.long_name + " "));
     geocoder.geocode({ address: connaddress }, (result, status) => {
-      if (status == "OK") {
+      if (status === "OK") {
         setFormState({ ...formState, position: result[0].geometry.location });
       }
     });
@@ -80,7 +78,6 @@ const Form = ({ editState }) => {
             id="autocomplete"
             value={formState.address}
             onFocus={initAutocomplete}
-            value={formState.address}
           ></input>
         </IonItem>
         <IonItemDivider>Date: </IonItemDivider>

@@ -12,7 +12,7 @@ import {
 import React, { useState } from "react";
 
 const AuthHeader = () => {
-  const { isAuthenticated, loginWithRedirect, user, logout } = useAuth0();
+  const { user, logout } = useAuth0();
   const [popoverState, setShowPopover] = useState({
     showPopover: false,
     event: undefined,
@@ -32,7 +32,7 @@ const AuthHeader = () => {
             }}
           >
             Profile
-            <img src={user.picture}></img>
+            <img alt="user profile" src={user.picture}></img>
           </IonButton>
           <IonPopover
             event={popoverState.event}
@@ -48,6 +48,11 @@ const AuthHeader = () => {
               <IonItem>
                 <IonButton href="/profile/games">My Games</IonButton>
               </IonItem>
+              {Object.values(user)[0] === ["Admin"] ? (
+                <IonItem>
+                  <IonButton href="/admin">Admin</IonButton>
+                </IonItem>
+              ) : undefined}
               <IonItem>
                 <IonButton onClick={logout}>Sign Out</IonButton>
               </IonItem>

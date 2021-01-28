@@ -8,33 +8,31 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonContent,
-  IonHeader,
   IonPage,
   IonProgressBar,
   IonTitle,
 } from "@ionic/react";
-import Header from "../components/header";
-import axios from "axios";
-import FAB from "../components/mobile-fab";
+import Footer from "../components/footer";
+import AuthHeader from "../components/auth-header";
 
 const Profile: React.FC = () => {
-  const { user, isLoading, getAccessTokenSilently } = useAuth0();
+  const { user, isLoading, getAccessTokenSilently} = useAuth0();
   console.log(user);
-  let token = ""
-  getAccessTokenSilently().then(resp => {token = resp; console.log(resp)})
+  getAccessTokenSilently().then(resp => {console.log(resp)})
   let deleteUser = () => {
     // axios.delete('Backend call')
     console.log("Backend call")
   }
   return (
     <IonPage>
+      <AuthHeader />
         <IonTitle>Profile</IonTitle>
       <IonContent>
         {isLoading ? (
           <IonProgressBar type="indeterminate"></IonProgressBar>
         ) : (
           <IonCard>
-            <img src={user?.picture}></img>
+            <img src={user?.picture} alt="User profile."></img>
             <IonCardHeader>
               <IonCardTitle>{user?.name}</IonCardTitle>
             </IonCardHeader>
@@ -44,6 +42,7 @@ const Profile: React.FC = () => {
           </IonCard>
         )}
       </IonContent>
+      <Footer />
     </IonPage>
   );
 };
