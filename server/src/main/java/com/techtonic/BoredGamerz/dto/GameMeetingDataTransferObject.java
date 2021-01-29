@@ -82,7 +82,6 @@ public class GameMeetingDataTransferObject {
     public boolean isValid(){
 
         return(
-                hostId != null &&
                 availableSeats != null &&
                 date != null &&
                 date.getTime() > System.currentTimeMillis() &&
