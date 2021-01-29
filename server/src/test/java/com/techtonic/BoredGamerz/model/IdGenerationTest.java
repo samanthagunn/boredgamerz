@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static com.techtonic.BoredGamerz.ServerUtil.ConsoleUtil.*;
+import static com.techtonic.BoredGamerz.serverUtil.ConsoleUtil.*;
 
 @SpringBootTest
 class IdGenerationTest {

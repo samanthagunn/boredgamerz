@@ -1,6 +1,6 @@
 package com.techtonic.BoredGamerz.service;
 
-import com.techtonic.BoredGamerz.ServerUtil.Exceptions.BlankBodyException;
+import com.techtonic.BoredGamerz.serverUtil.Exceptions.BlankBodyException;
 import com.techtonic.BoredGamerz.dao.UserDataAccessObject;
 import com.techtonic.BoredGamerz.dto.UserDataTransferObject;
 import com.techtonic.BoredGamerz.model.User;

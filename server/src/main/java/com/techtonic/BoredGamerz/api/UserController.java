@@ -1,9 +1,10 @@
 package com.techtonic.BoredGamerz.api;
 
-import com.techtonic.BoredGamerz.ServerUtil.Exceptions.BlankBodyException;
-import com.techtonic.BoredGamerz.ServerUtil.IdTokenDecoder;
-import com.techtonic.BoredGamerz.ServerUtil.Exceptions.SQLDeleteFail;
-import com.techtonic.BoredGamerz.ServerUtil.Exceptions.SQLSaveFail;
+import com.techtonic.BoredGamerz.serverUtil.Exceptions.BlankBodyException;
+import com.techtonic.BoredGamerz.serverUtil.Exceptions.UnauthorizedException;
+import com.techtonic.BoredGamerz.serverUtil.IdTokenDecoder;
+import com.techtonic.BoredGamerz.serverUtil.Exceptions.SQLDeleteFail;
+import com.techtonic.BoredGamerz.serverUtil.Exceptions.SQLSaveFail;
 import com.techtonic.BoredGamerz.dto.UserDataTransferObject;
 import com.techtonic.BoredGamerz.model.User;
 import com.techtonic.BoredGamerz.service.GameMeetingService;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.UUID;
 
 /*
 Created:
@@ -92,6 +92,28 @@ public class UserController {
 
         String id = token.decode("sub");
 
+        String perms = token.decode("permissions");
+
+        if(!perms.contains("read:allUsers")) throw new UnauthorizedException();
+
+        User user = USER_SERVICE.getByAuthId(id).get();
+
+        if(USER_SERVICE.delete(user.getId(), GM_SERVICE, UTGM_SERVICE) == 0) throw new SQLDeleteFail();
+
+        return 200;
+    }
+
+    @DeleteMapping(path = "/{auth0Id}")
+    public int deleteUser(@RequestHeader HttpHeaders headers, String auth0Id) {
+
+        IdTokenDecoder token = new IdTokenDecoder(headers);
+
+        String id = token.decode("sub");
+
+        String perms = token.decode("permissions");
+
+        if(!perms.contains("delete:users")) throw new UnauthorizedException();
+
         User user = USER_SERVICE.getByAuthId(id).get();
 
         if(USER_SERVICE.delete(user.getId(), GM_SERVICE, UTGM_SERVICE) == 0) throw new SQLDeleteFail();
@@ -100,7 +122,6 @@ public class UserController {
     }
 
     //ie. ADD http://localhost:8080/bored-gamerz/api/user
-    //this method is the same as the post except the user does not need a UUID
     @PostMapping
     public int addUser(@RequestHeader HttpHeaders headers){
 
@@ -137,5 +158,10 @@ public class UserController {
     @ExceptionHandler(SQLDeleteFail.class)
     public ResponseEntity<String> handle(SQLDeleteFail e) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Entity could not be deleted");
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<String> handle(UnauthorizedException e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You are not authorized to read all users");
     }
 }

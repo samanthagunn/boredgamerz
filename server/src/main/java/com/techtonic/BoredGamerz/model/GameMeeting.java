@@ -1,7 +1,7 @@
 package com.techtonic.BoredGamerz.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.techtonic.BoredGamerz.ServerUtil.ConsoleUtil;
+import com.techtonic.BoredGamerz.serverUtil.ConsoleUtil;
 import com.techtonic.BoredGamerz.dto.GameMeetingDataTransferObject;
 
 import javax.persistence.Column;

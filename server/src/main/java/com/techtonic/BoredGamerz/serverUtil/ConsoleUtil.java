@@ -1,4 +1,4 @@
-package com.techtonic.BoredGamerz.ServerUtil;
+package com.techtonic.BoredGamerz.serverUtil;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
