@@ -1,8 +1,8 @@
 package com.techtonic.BoredGamerz.service;
 
-import com.techtonic.BoredGamerz.ServerUtil.Exceptions.BlankBodyException;
-import com.techtonic.BoredGamerz.ServerUtil.Exceptions.GameMeetingDateException;
-import com.techtonic.BoredGamerz.ServerUtil.Exceptions.MaxGamesException;
+import com.techtonic.BoredGamerz.serverUtil.Exceptions.BlankBodyException;
+import com.techtonic.BoredGamerz.serverUtil.Exceptions.GameMeetingDateException;
+import com.techtonic.BoredGamerz.serverUtil.Exceptions.MaxGamesException;
 import com.techtonic.BoredGamerz.dao.GameMeetingDataAccessObject;
 import com.techtonic.BoredGamerz.dao.UserToGameMeetingJoinDataAccessObject;
 import com.techtonic.BoredGamerz.dto.GameMeetingDataTransferObject;
@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;

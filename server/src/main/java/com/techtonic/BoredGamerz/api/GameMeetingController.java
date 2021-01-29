@@ -1,7 +1,7 @@
 package com.techtonic.BoredGamerz.api;
 
-import com.techtonic.BoredGamerz.ServerUtil.Exceptions.*;
-import com.techtonic.BoredGamerz.ServerUtil.IdTokenDecoder;
+import com.techtonic.BoredGamerz.serverUtil.Exceptions.*;
+import com.techtonic.BoredGamerz.serverUtil.IdTokenDecoder;
 import com.techtonic.BoredGamerz.dto.GameMeetingDataTransferObject;
 import com.techtonic.BoredGamerz.model.GameMeeting;
 import com.techtonic.BoredGamerz.model.User;

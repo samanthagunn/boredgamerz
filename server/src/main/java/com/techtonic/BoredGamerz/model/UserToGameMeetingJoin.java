@@ -1,6 +1,6 @@
 package com.techtonic.BoredGamerz.model;
 
-import com.techtonic.BoredGamerz.ServerUtil.ConsoleUtil;
+import com.techtonic.BoredGamerz.serverUtil.ConsoleUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotBlank;
 
 /*
 Created:

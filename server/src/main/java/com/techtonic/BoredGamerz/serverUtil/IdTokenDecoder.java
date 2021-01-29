@@ -1,4 +1,4 @@
-package com.techtonic.BoredGamerz.ServerUtil;
+package com.techtonic.BoredGamerz.serverUtil;
 
 import com.auth0.jwt.impl.JWTParser;
 import org.springframework.http.HttpHeaders;

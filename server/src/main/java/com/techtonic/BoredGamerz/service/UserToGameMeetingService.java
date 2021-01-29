@@ -1,8 +1,8 @@
 package com.techtonic.BoredGamerz.service;
 
-import com.techtonic.BoredGamerz.ServerUtil.Exceptions.AlreadyJoinedException;
-import com.techtonic.BoredGamerz.ServerUtil.Exceptions.BlankBodyException;
-import com.techtonic.BoredGamerz.ServerUtil.Exceptions.GameFullException;
+import com.techtonic.BoredGamerz.serverUtil.Exceptions.AlreadyJoinedException;
+import com.techtonic.BoredGamerz.serverUtil.Exceptions.BlankBodyException;
+import com.techtonic.BoredGamerz.serverUtil.Exceptions.GameFullException;
 import com.techtonic.BoredGamerz.dao.UserToGameMeetingJoinDataAccessObject;
 import com.techtonic.BoredGamerz.dto.GameMeetingDataTransferObject;
 import com.techtonic.BoredGamerz.dto.UserToGameMeetingDataTransferObject;

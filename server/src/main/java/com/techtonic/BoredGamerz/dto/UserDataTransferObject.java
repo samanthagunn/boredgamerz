@@ -2,7 +2,7 @@ package com.techtonic.BoredGamerz.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import com.techtonic.BoredGamerz.ServerUtil.ConsoleUtil;
+import com.techtonic.BoredGamerz.serverUtil.ConsoleUtil;
 
 import java.util.UUID;
 

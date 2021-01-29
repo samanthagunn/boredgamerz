@@ -1,4 +1,4 @@
-package com.techtonic.BoredGamerz.ServerUtil.Exceptions;
+package com.techtonic.BoredGamerz.serverUtil.Exceptions;
 
 public class MaxGamesException extends RuntimeException{
     public MaxGamesException(){
