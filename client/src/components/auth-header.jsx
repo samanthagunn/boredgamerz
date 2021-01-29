@@ -52,7 +52,7 @@ const AuthHeader = () => {
               <IonItem>
                 <IonButton href="/profile/games">My Games</IonButton>
               </IonItem>
-              {Object.values(user)[0] === ["Admin"] ? (
+              {Object.values(user)[0] == "admin" ? (
                 <IonItem>
                   <IonButton href="/admin">Admin</IonButton>
                 </IonItem>

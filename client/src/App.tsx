@@ -22,7 +22,7 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import './theme/index.scss';
 import Profile from "./pages/profile";
-import Home from "./pages/Home";
+import Home from "./pages/Home.jsx";
 import MyGames from "./pages/MyGames.jsx";
 import FindGames from "./pages/FindGames";
 import CreateGame from "./pages/CreateGame";

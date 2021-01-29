@@ -1,5 +1,5 @@
 import { IonFab, IonFabButton, IonFabList, IonIcon } from "@ionic/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   arrowUpCircle,
   personCircleOutline,
@@ -11,10 +11,15 @@ import {
 import { useAuth0 } from "@auth0/auth0-react";
 
 const FAB = () => {
-  const { user } = useAuth0();
-  let admin = Object.values(user)[0];
+  const [authUser, setAuthUser] = useState({default: "test"})
+  const { user, getAccessTokenSilently } = useAuth0();
+  useEffect(() => {
+    getAccessTokenSilently().then(() => setAuthUser(user))
+  }, [])
+  console.log(authUser)
+  console.log(Object.values(authUser)[0])
   return (
-    <IonFab className="mobilenav" vertical="center" horizontal="end" slot="fixed">
+    <IonFab className="mobilenav" vertical="bottom" horizontal="end" slot="fixed">
       <IonFabButton>
         <IonIcon icon={arrowUpCircle} />
       </IonFabButton>
@@ -28,11 +33,11 @@ const FAB = () => {
         <IonFabButton href="/games">
           <IonIcon icon={location} />
         </IonFabButton>
-        <IonFabButton profile="/games/create">
+        <IonFabButton href="/games/create">
           <IonIcon icon={addCircleOutline} />
         </IonFabButton>
-        {admin === ["Admin"] ? (
-          <IonFabButton profile="/admin">
+        {Object.values(authUser)[0] == "admin" ? (
+          <IonFabButton href="/admin">
             <IonIcon icon={clipboard} />
           </IonFabButton>
         ) : undefined}
