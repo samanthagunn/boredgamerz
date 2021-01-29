@@ -10,9 +10,11 @@ import {
 } from "@ionic/react";
 import axios from "axios";
 import React, { useState } from "react";
+import { useHistory } from "react-router";
 
 const Form = ({ editState }) => {
   const [formState, setFormState] = useState({});
+  let history = useHistory();
   //   useEffect(() => {
   //     axios
   //       .get(`http://localhost:8080/games/${params}`)
@@ -25,7 +27,7 @@ const Form = ({ editState }) => {
   let connectAddress = (googleAddress) => {
     console.log(googleAddress);
     googleAddress.map((part) => (connaddress += part.long_name + " "));
-    setFormState({...formState, address: connaddress})
+    setFormState({ ...formState, address: connaddress });
     // geocoder.geocode({ address: connaddress }, (result, status) => {
     //   if (status === "OK") {
     //     console.log(result[0].geometry.location.lat());
@@ -67,8 +69,8 @@ const Form = ({ editState }) => {
         category: formState.category,
         availableSeats: formState.avaliableSeats,
         title: formState.title,
-      }
-      console.log(submitObject)
+      };
+      console.log(submitObject);
       getAccessTokenSilently().then((resp) =>
         axios({
           url: "http://localhost:8080/bored-gamerz/api/game-meeting",
@@ -77,6 +79,11 @@ const Form = ({ editState }) => {
           headers: {
             Authorization: `Bearer ${resp}`,
           },
+        }).then(() => {
+          alert(
+            "Your game has been created, please monitor your email to accept users for your game."
+          );
+          history.push("/games");
         })
       );
     }
@@ -153,7 +160,11 @@ const Form = ({ editState }) => {
               value={formState.dateString}
               onInput={(e) => {
                 e.persist();
-                setFormState({ ...formState, dateString: e.target.value, date : Date.parse(e.target.value)  });
+                setFormState({
+                  ...formState,
+                  dateString: e.target.value,
+                  date: Date.parse(e.target.value),
+                });
               }}
             ></IonInput>
           </IonItem>
