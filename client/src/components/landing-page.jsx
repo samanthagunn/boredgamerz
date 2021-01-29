@@ -10,7 +10,7 @@ const LandingPage = () => {
     if (isAuthenticated) {
       return (
         <IonButton routerDirection="forward" href="/profile">
-          Join a Game {user.given_name}
+          Join a Game {user.given_name}!
         </IonButton>
       );
     } else {

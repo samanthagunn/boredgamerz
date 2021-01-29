@@ -22,11 +22,11 @@ const Admin = () => {
     state: "Users",
   });
   let admin = Object.values(user)[0];
-console.log(admin === ["Admin"]);
+console.log(admin === ["admin"]);
   return (
     <IonPage>
     <AuthHeader />
-      {admin === ["Admin"] ? (
+      {admin === ["admin"] ? (
         <IonContent>
           <IonSegment
             onIonChange={(e) => {

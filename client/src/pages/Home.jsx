@@ -12,7 +12,6 @@ const Home = () => {
       <IonContent className="has-header">
         <LandingPage />
       </IonContent>
-      
       <Footer />
     </IonPage>
   );
