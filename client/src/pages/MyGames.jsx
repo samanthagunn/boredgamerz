@@ -1,3 +1,4 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import {
   IonContent,
   IonList,
@@ -17,12 +18,36 @@ const MyGames = () => {
     event: undefined,
     state: "Joined",
   });
-  const [data, setData] = useState([]);
+  const [joined, setJoined] = useState([]);
+  const [hosted, setHosted] = useState([]);
+  const { getAccessTokenSilently, user } = useAuth0();
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/games")
-      .then((resp) => resp.data)
-      .then((data) => setData(data));
+    let joined = [];
+    let hosted = [];
+    getAccessTokenSilently().then((resp) => {
+      console.log(resp);
+      axios({
+        method: "get",
+        url: "http://localhost:8080/bored-gamerz/api/game-meeting/me",
+        headers: {
+          Authorization: `Bearer ${resp}`,
+        },
+      })
+        .then((resp) => resp.data)
+        .then((data) =>
+          data.map((game) => {
+            if (game.host.auth0id === user.sub) {
+              hosted.push(game);
+            } else {
+              joined.push(game);
+            }
+          })
+        )
+        .then(() => {
+          setJoined(joined);
+          setHosted(hosted);
+        });
+    });
   }, []);
   return (
     <IonPage>
@@ -41,11 +66,11 @@ const MyGames = () => {
             <h1>Hosted Games</h1>
           </IonSegmentButton>
         </IonSegment>
-        <IonList >
+        <IonList>
           {segmentState.state === "Joined" ? (
-            <GameList seeData={data} />
+            <GameList seeData={hosted} />
           ) : (
-            <GameList seeData={data} editMode={true} />
+            <GameList seeData={joined} editMode={true} />
           )}
         </IonList>
       </IonContent>

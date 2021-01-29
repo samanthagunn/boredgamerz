@@ -1,3 +1,4 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import { Loader } from "@googlemaps/js-api-loader";
 import { IonContent, IonPage, IonTitle } from "@ionic/react";
 import axios from "axios";
@@ -9,11 +10,20 @@ import FAB from "../components/mobile-fab";
 
 const FindGames = () => {
   const [data, setData] = useState([]);
+  const { getAccessTokenSilently, user } = useAuth0();
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/games")
-      .then((resp) => resp.data)
-      .then((data) => setData(data));
+    getAccessTokenSilently().then((resp) => {
+      axios({
+        method: "get",
+        url: "http://localhost:8080/bored-gamerz/api/game-meeting/me",
+        headers: {
+          Authorization: `Bearer ${resp}`,
+        },
+      })
+        .then((resp) => resp.data)
+        .then((data) => setData(data)
+        )
+    });
   }, []);
   const loader = new Loader({
     apiKey: "AIzaSyDuZ32gfmKD4XNcQoWGoTkSLGZ--LUo_L4",
