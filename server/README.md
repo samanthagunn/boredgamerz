@@ -52,7 +52,7 @@
 > returns the game meeting with matching id.
 >
 > GET <http://localhost:8080/bored-gamerz/api/game-meeting/me>,  
-> returns all game meetings by a specific host.
+> returns all game meetings by you.
 >
 > DELETE <http://localhost:8080/bored-gamerz/api/game-meeting/{UUID}>,  
 > deletes the game meeting with matching id.
@@ -61,7 +61,7 @@
 > requires a game meeting DTO request body, adds a new game meeting to the database.
 >
 > PUT <http://localhost:8080/bored-gamerz/api/game-meeting>,  
-> requires a game meeting MODEL request body with a UUID, updates the game meeting with the matching UUID with new assets from the request body
+> requires a game meeting DTO request body with a UUID, updates the game meeting with the matching UUID with new assets from the request body
 
 > ### User to Game Meeting DTO
 >
