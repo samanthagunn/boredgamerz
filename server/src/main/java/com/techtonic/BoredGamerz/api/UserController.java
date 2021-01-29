@@ -112,9 +112,9 @@ public class UserController {
 
         user.setAuth0Id(id);
 
-        if(USER_SERVICE.add(user) == null) throw new SQLSaveFail();
+        if(USER_SERVICE.existsByAuth0Id(id) || USER_SERVICE.add(user) != null) return 201;
 
-        return 201;
+        throw new SQLSaveFail();
     }
 
     //Exception handlers tell the server how to respond to certain

@@ -96,4 +96,9 @@ public class UserService {
 
         return USER_DAO.findByAuth0Id(id);
     }
+
+    public boolean existsByAuth0Id(String id){
+
+        return USER_DAO.existsByAuth0Id(id);
+    }
 }

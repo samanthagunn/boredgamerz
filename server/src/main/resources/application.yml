@@ -1,5 +1,5 @@
 auth0:
-    audience: http://BoredGamerzDev
+    audience: https://BoredGamerzDev
 spring:
     security:
         oauth2:
@@ -7,9 +7,9 @@ spring:
                 jwt:
                     issuer-uri: https://dev-z2irz81c.us.auth0.com/
     datasource:
-        username:
-        password:
-        url: jdbc:mysql://----:3306/boredgamerzdb
+        username: root
+        password: PWfields!
+        url: jdbc:mysql://localhost:3306/boredgamerzdb
     jpa:
         hibernate:
             ddl-auto: update

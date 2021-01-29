@@ -35,4 +35,6 @@ public interface UserDataAccessObject extends JpaRepository<User, UUID> {
     Optional<User> findById(UUID id);
 
     Optional<User> findByAuth0Id(String id);
+
+    boolean existsByAuth0Id(String id);
 }
