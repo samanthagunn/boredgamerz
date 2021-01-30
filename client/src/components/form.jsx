@@ -11,6 +11,7 @@ import {
 import axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
+require('dotenv').config()
 
 const Form = ({ editState }) => {
   const [formState, setFormState] = useState({});
@@ -25,7 +26,6 @@ const Form = ({ editState }) => {
   let connaddress = "";
   let geocoder;
   let connectAddress = (googleAddress) => {
-    console.log(googleAddress);
     googleAddress.map((part) => (connaddress += part.long_name + " "));
     setFormState({ ...formState, address: connaddress });
     // geocoder.geocode({ address: connaddress }, (result, status) => {
@@ -39,7 +39,7 @@ const Form = ({ editState }) => {
   let autocomplete;
   let initAutocomplete = () => {
     const loader = new Loader({
-      apiKey: "AIzaSyDuZ32gfmKD4XNcQoWGoTkSLGZ--LUo_L4",
+      apiKey: process.env.MAPS_API_KEY,
       version: "weekly",
     });
     loader.load().then(() => {
@@ -57,7 +57,6 @@ const Form = ({ editState }) => {
   const { getAccessTokenSilently } = useAuth0();
 
   let submit = () => {
-    console.log(formState.date);
     if (formState.date < Date.now()) {
       alert("Date must be after today.");
     } else {
@@ -70,10 +69,9 @@ const Form = ({ editState }) => {
         availableSeats: formState.avaliableSeats,
         title: formState.title,
       };
-      console.log(submitObject);
       getAccessTokenSilently().then((resp) =>
         axios({
-          url: "http://localhost:8080/bored-gamerz/api/game-meeting",
+          url: `${process.env.API_HOST}/bored-gamerz/api/game-meeting`,
           method: "post",
           data: submitObject,
           headers: {

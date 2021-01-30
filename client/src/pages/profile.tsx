@@ -16,6 +16,7 @@ import Footer from "../components/footer";
 import AuthHeader from "../components/auth-header";
 import axios from "axios";
 import FAB from "../components/mobile-fab";
+require('dotenv').config()
 
 const Profile: React.FC = () => {
   const { user, isLoading, getAccessTokenSilently, logout } = useAuth0();
@@ -25,7 +26,7 @@ const Profile: React.FC = () => {
       console.log(resp);
       axios({
         method: "post",
-        url: "http://localhost:8080/bored-gamerz/api/user/",
+        url: `${process.env.API_HOST}/bored-gamerz/api/user/`,
         headers: {
           Authorization: `Bearer ${resp}`,
         },
@@ -38,7 +39,7 @@ const Profile: React.FC = () => {
         console.log(resp);
         axios({
           method: "delete",
-          url: `http://localhost:8080/bored-gamerz/api/user/me`,
+          url: `${process.env.API_HOST}/bored-gamerz/api/user/`,
           headers: {
             Authorization: `Bearer ${resp}`,
           },

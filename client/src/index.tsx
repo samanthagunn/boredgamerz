@@ -4,12 +4,12 @@ import * as serviceWorker from "./serviceWorker";
 import ErrorBoundary from "./errorboundary";
 import { Auth0Provider } from "@auth0/auth0-react"
 import App from "./App";
-
+require('dotenv').config()
 ReactDOM.render(
   <Auth0Provider
     domain="dev-z2irz81c.us.auth0.com"
-    clientId="lbS5AAGz6OmsB863eb48BPPg7sYep1Ys"
-    redirectUri= "http://localhost:3000/profile"
+    clientId={`${process.env.AUTH0_CLIENT_ID}`}
+    redirectUri={`http://${process.env.HOST}/profile`}
     response_type="code"
     scope="openid profile email delete:users delete:current_user"
     audience="https://BoredGamerzDev"

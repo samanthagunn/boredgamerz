@@ -7,6 +7,7 @@ import AuthHeader from "../components/auth-header";
 import Footer from "../components/footer";
 import GameList from "../components/game-list";
 import FAB from "../components/mobile-fab";
+require('dotenv').config()
 
 const FindGames = () => {
   const [data, setData] = useState([]);
@@ -15,7 +16,7 @@ const FindGames = () => {
     getAccessTokenSilently().then((resp) => {
       axios({
         method: "get",
-        url: "http://localhost:8080/bored-gamerz/api/game-meeting/me",
+        url: `${process.env.API_HOST}/api/game-meeting/me`,
         headers: {
           Authorization: `Bearer ${resp}`,
         },
@@ -26,7 +27,7 @@ const FindGames = () => {
     });
   }, []);
   const loader = new Loader({
-    apiKey: "AIzaSyDuZ32gfmKD4XNcQoWGoTkSLGZ--LUo_L4",
+    apiKey: process.env.API_HOST,
     version: "weekly",
   });
   loader.load().then(() => {
