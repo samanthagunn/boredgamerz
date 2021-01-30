@@ -7,14 +7,14 @@ jobs:
           - cd server
      script:
           - ./gradlew test
-     -language: node_js
-     node_js:
-          - lts/*
-     before_script:
-           - cd client
-           - npm ci
-     script:
-          - npm test
+#      -language: node_js
+#      node_js:
+#           - lts/*
+#      before_script:
+#            - cd client
+#            - npm ci
+#      script:
+#           - npm test
 
           
 
