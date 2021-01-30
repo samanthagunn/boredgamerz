@@ -11,7 +11,7 @@ jobs:
      node_js:
           - lts/*
      before_script:
-           - cd ~/client
+           - cd client
            - npm ci
      script:
           - npm test
