@@ -49,7 +49,7 @@ const Profile: React.FC = () => {
   return (
     <IonPage>
       <AuthHeader />
-      <IonContent>e
+      <IonContent>
         <IonTitle className="profile-heading ion-text-center">Profile</IonTitle>
         {isLoading ? (
           <IonProgressBar type="indeterminate"></IonProgressBar>
