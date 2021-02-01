@@ -11,7 +11,8 @@ const CreateGame = () => {
     <IonPage>
       <AuthHeader />
       <IonContent>
-        <IonTitle color="primary ion-text-center">Create New Game</IonTitle>
+        <br />
+        <IonTitle color="light ion-text-center">Create New Game</IonTitle>
         <Form editState={edit} />
       </IonContent>
       <FAB />
