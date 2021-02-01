@@ -69,6 +69,9 @@ const Profile: React.FC = () => {
               <IonButton color="secondary" onClick={deleteUser}>
                 Delete your account
               </IonButton>
+              <IonButton color="secondary" onClick={() => logout()}>
+                Sign Out
+              </IonButton>
             </IonCardContent>
           </IonCard>
         )}
