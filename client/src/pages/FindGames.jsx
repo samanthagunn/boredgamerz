@@ -10,12 +10,12 @@ import FAB from "../components/mobile-fab";
 require('dotenv').config()
 const FindGames = () => {
   const [data, setData] = useState([]);
-  const { getAccessTokenSilently, user } = useAuth0();
+  const { getAccessTokenSilently } = useAuth0();
   useEffect(() => {
     getAccessTokenSilently().then((resp) => {
       axios({
         method: "get",
-        url: `{process.env.API_HOST}/game-meeting`,
+        url: `${process.env.REACT_APP_API_HOST}/game-meeting`,
         headers: {
           Authorization: `Bearer ${resp}`,
         },
@@ -24,18 +24,18 @@ const FindGames = () => {
         .then((data) => setData(data)
         )
     });
-  }, []);
-  const loader = new Loader({
-    apiKey: `{process.env.MAPS_API_KEY`,
-    version: "weekly",
-  });
-  loader.load().then(() => {
-    new window.google.maps.Map(document.getElementById("map"), {
-      center: {lat: 40.0165228, lng: -105.2445022},
-      zoom: 15,
-      gestureHandling: "cooperative",
+    const loader = new Loader({
+      apiKey: `${process.env.REACT_APP_MAPS_API_KEY}`,
+      version: "weekly",
     });
-  });
+    loader.load().then(() => {
+      new window.google.maps.Map(document.getElementById("map"), {
+        center: {lat: 40.0165228, lng: -105.2445022},
+        zoom: 15,
+        gestureHandling: "cooperative",
+      });
+    });
+  }, []);
   return (
     <IonPage>
       <AuthHeader />

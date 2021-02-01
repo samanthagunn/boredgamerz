@@ -24,7 +24,6 @@ const LandingPage = () => {
   return (
 
     <div className="container">
-     
       <img className="hero-image" alt="gameplayers" src="https://storage.googleapis.com/boredgamerz_assets/gameplayers.png" />
     <div className="landing-hero-container">
       

@@ -5,11 +5,9 @@ import {
   IonItem,
   IonList,
   IonPopover,
-  IonTitle,
   IonToolbar,
 } from "@ionic/react";
 import React, { useState } from "react";
-import { NavLink, Route } from "react-router-dom";
 require('dotenv').config()
 
 const Header = () => {
@@ -21,7 +19,7 @@ const Header = () => {
   return (
     <IonToolbar color="primary">
       
-        <img className="logo-hero" alt="BoredGamerz Logo"  src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png" />
+       <a href="/home"><img className="logo-hero" alt="BoredGamerz Logo"  src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png" /></a>
         
       {isAuthenticated ? (
         <IonButtons className="navigation" slot="primary" >

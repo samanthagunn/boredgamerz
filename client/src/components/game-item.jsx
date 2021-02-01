@@ -20,7 +20,7 @@ const GameItem = ({ game, edit, join }) => {
   const [show, setShow] = useState(false);
   let map;
   const loader = new Loader({
-    apiKey: process.env.MAPS_API_KEY,
+    apiKey: process.env.REACT_APP_MAPS_API_KEY,
     version: "weekly",
   });
   let geocoder;
@@ -51,7 +51,7 @@ const GameItem = ({ game, edit, join }) => {
     getAccessTokenSilently().then((resp) => {
       axios({
         method: "post",
-        url: `{process.env.API_HOST}/user-to-game-meeting/`,
+        url: `${process.env.REACT_APP_API_HOST}/user-to-game-meeting/`,
         headers: {
           Authorization: `Bearer ${resp}`,
         },
@@ -63,7 +63,7 @@ const GameItem = ({ game, edit, join }) => {
   }
 
   
-  let date = new Date(game.date);
+  let date = new Date(game?.date);
   return (
     <IonItem lines="none" className="games">
       <IonCard
@@ -78,28 +78,28 @@ const GameItem = ({ game, edit, join }) => {
         }}
       >
         <IonCardHeader>
-          <IonCardTitle className="game-title">Name: {game.title}</IonCardTitle>
+          <IonCardTitle className="game-title">Name: {game?.title}</IonCardTitle>
           <IonCardSubtitle className="game-type">
             <strong>Type: </strong>
-            {game.category}
+            {game?.category}
           </IonCardSubtitle>
           <IonCardSubtitle className="game-host">
-            Host: {game.hostId}
+            Host: {game?.hostId}
           </IonCardSubtitle>
         </IonCardHeader>
         <IonCardContent>
           <h2>
-            <strong>Open Seats:</strong> {game.availableSeats}
+            <strong>Open Seats:</strong> {game?.availableSeats}
           </h2>
           <h3>
             <strong>Date:</strong> {date.toString()}
           </h3>
           <h4>
-            <strong>Location:</strong> {game.address}
+            <strong>Location:</strong> {game?.address}
           </h4>
-          {show ? <p>{game.description}</p> : undefined}
+          {show ? <p>{game?.description}</p> : undefined}
           {edit ? (
-            <IonButton onClick={() => history.push(`/games/edit/${game.id}`)}>
+            <IonButton onClick={() => history.push(`/games/edit/${game?.id}`)}>
               Edit
             </IonButton>
           ) : (

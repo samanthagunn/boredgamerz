@@ -10,7 +10,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import React, { useState } from "react";
-require('dotenv').config()
+require("dotenv").config();
 
 const AuthHeader = () => {
   const { user, logout } = useAuth0();
@@ -21,24 +21,35 @@ const AuthHeader = () => {
   return (
     <IonHeader>
       <IonToolbar color="primary">
-        <img className="logo-hero" alt="BoredGamerz Logo"  src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png" />
+        <a href="/home">
+          <img
+            className="logo-hero"
+            alt="BoredGamerz Logo"
+            src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png"
+          />
+        </a>
         <IonButtons className="navigation" slot="primary">
           <IonButton href="/profile/games">My Games</IonButton>
           <IonButton href="/games">Find Games</IonButton>
           <IonButton href="/games/create">Create A Game</IonButton>
-          <IonButton 
+          <IonButton
             onClick={(e) => {
               e.persist();
               setShowPopover({ showPopover: true, event: e });
             }}
           >
             Profile
-            
           </IonButton>
-          <img className="user-image" alt="profile" height="50px" src={user.picture} onClick={(e) => {
+          <img
+            className="user-image"
+            alt="profile"
+            height="50px"
+            src={user.picture}
+            onClick={(e) => {
               e.persist();
               setShowPopover({ showPopover: true, event: e });
-            }}></img>
+            }}
+          ></img>
           <IonPopover
             event={popoverState.event}
             isOpen={popoverState.showPopover}

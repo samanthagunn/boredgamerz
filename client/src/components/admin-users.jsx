@@ -14,7 +14,7 @@ const Users = () => {
   const [data, setData] = useState([])
   useEffect(() => {
     axios
-      .get(`{process.env.API_HOST}/users`)
+      .get(`${process.env.REACT_APP_API_HOST}/users`)
       .then((resp) => resp.data)
       .then((data) => setData(data));
   }, []);

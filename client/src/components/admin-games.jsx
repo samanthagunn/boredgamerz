@@ -14,7 +14,7 @@ const Games = () => {
   const [data, setData] = useState([])
   useEffect(() => {
     axios
-      .get(`{process.env.API_HOST}/games`)
+      .get(`${process.env.REACT_APP_API_HOST}/games`)
       .then((resp) => resp.data)
       .then((data) => setData(data));
   }, []);

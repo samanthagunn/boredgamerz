@@ -5,11 +5,12 @@ import ErrorBoundary from "./errorboundary";
 import { Auth0Provider } from "@auth0/auth0-react"
 import App from "./App";
 require('dotenv').config()
+
 ReactDOM.render(
   <Auth0Provider
     domain="dev-z2irz81c.us.auth0.com"
     clientId="lbS5AAGz6OmsB863eb48BPPg7sYep1Ys"
-    redirectUri="https://www.boredgamerz.com/profile"
+    redirectUri="http://localhost:3000/profile"
     response_type="code"
     scope="openid profile email"
     audience="https://BoredGamerzDev"

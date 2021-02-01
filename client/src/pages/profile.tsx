@@ -21,12 +21,13 @@ require('dotenv').config();
 const Profile: React.FC = () => {
   const { user, isLoading, getAccessTokenSilently, logout } = useAuth0();
   console.log(user);
+  console.log(process.env.REACT_APP_MAPS_API_KEY)
   useEffect(() => {
     getAccessTokenSilently().then((resp) => {
       console.log(resp);
       axios({
         method: "post",
-        url: `{process.env.API_HOST/user/`,
+        url: `${process.env.REACT_APP_API_HOST}/user`,
         headers: {
           Authorization: `Bearer ${resp}`,
         },
@@ -39,7 +40,7 @@ const Profile: React.FC = () => {
         console.log(resp);
         axios({
           method: "delete",
-          url: `{process.env.API_HOST}/user/me`,
+          url: `${process.env.REACT_APP_API_HOST}/user/me`,
           headers: {
             Authorization: `Bearer ${resp}`,
           },
