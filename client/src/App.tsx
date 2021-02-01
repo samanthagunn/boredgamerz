@@ -49,7 +49,7 @@ const App = () => {
           <Route
             path="/mygames"
             component={withAuthenticationRequired(MyGames, {
-              returnTo: "/profile/games",
+              returnTo: "/mygames",
               loginOptions: {
                 redirectUri: `${process.env.REACT_APP_HOST}/mygames`,
               },

@@ -29,9 +29,9 @@ const AuthHeader = () => {
           />
         </a>
         <IonButtons className="navigation" slot="primary">
-          <IonButton href="/profile/games">My Games</IonButton>
+          <IonButton href="/mygames">My Games</IonButton>
           <IonButton href="/games">Find Games</IonButton>
-          <IonButton href="/games/create">Create A Game</IonButton>
+          <IonButton href="/create">Create A Game</IonButton>
           <IonButton
             onClick={(e) => {
               e.persist();
@@ -62,7 +62,7 @@ const AuthHeader = () => {
                 <IonButton href="/profile">Profile</IonButton>
               </IonItem>
               <IonItem>
-                <IonButton href="/profile/games">My Games</IonButton>
+                <IonButton href="/mygames">My Games</IonButton>
               </IonItem>
               {Object.values(user)[0] == "admin" ? (
                 <IonItem>
