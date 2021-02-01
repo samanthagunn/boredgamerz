@@ -15,7 +15,7 @@ const FindGames = () => {
     getAccessTokenSilently().then((resp) => {
       axios({
         method: "get",
-        url: "http://localhost:8080/bored-gamerz/api/game-meeting/me",
+        url: `{process.env.API_HOST}/game-meeting`,
         headers: {
           Authorization: `Bearer ${resp}`,
         },
@@ -26,7 +26,7 @@ const FindGames = () => {
     });
   }, []);
   const loader = new Loader({
-    apiKey: "AIzaSyDuZ32gfmKD4XNcQoWGoTkSLGZ--LUo_L4",
+    apiKey: `{process.env.MAPS_API_KEY`,
     version: "weekly",
   });
   loader.load().then(() => {

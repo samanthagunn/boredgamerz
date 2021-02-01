@@ -28,7 +28,7 @@ const MyGames = () => {
       console.log(resp);
       axios({
         method: "get",
-        url: `${process.env.API_HOST}/bored-gamerz/api/game-meeting/me`,
+        url: `${process.env.API_HOST}/game-meeting/me`,
         headers: {
           Authorization: `Bearer ${resp}`,
         },

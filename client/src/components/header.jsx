@@ -10,6 +10,7 @@ import {
 } from "@ionic/react";
 import React, { useState } from "react";
 import { NavLink, Route } from "react-router-dom";
+require('dotenv').config()
 
 const Header = () => {
   const { isAuthenticated, loginWithRedirect, user, logout } = useAuth0();

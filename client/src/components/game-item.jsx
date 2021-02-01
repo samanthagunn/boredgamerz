@@ -12,6 +12,7 @@ import {
 import axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
+require('dotenv').config()
 
 const GameItem = ({ game, edit, join }) => {
   console.log(game)
@@ -19,7 +20,7 @@ const GameItem = ({ game, edit, join }) => {
   const [show, setShow] = useState(false);
   let map;
   const loader = new Loader({
-    apiKey: "AIzaSyDuZ32gfmKD4XNcQoWGoTkSLGZ--LUo_L4",
+    apiKey: process.env.MAPS_API_KEY,
     version: "weekly",
   });
   let geocoder;
@@ -50,7 +51,7 @@ const GameItem = ({ game, edit, join }) => {
     getAccessTokenSilently().then((resp) => {
       axios({
         method: "post",
-        url: "http://localhost:8080/bored-gamerz/api/user-to-game-meeting/",
+        url: `{process.env.API_HOST}/user-to-game-meeting/`,
         headers: {
           Authorization: `Bearer ${resp}`,
         },

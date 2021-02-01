@@ -10,6 +10,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import React, { useState } from "react";
+require('dotenv').config()
 
 const AuthHeader = () => {
   const { user, logout } = useAuth0();

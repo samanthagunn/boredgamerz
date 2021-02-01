@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .configure(http);
 
         http.authorizeRequests()
-                .mvcMatchers("/bored-gamerz/api/**")
+                .mvcMatchers("/api/**")
                 .authenticated()
                 .and()
                 .cors()

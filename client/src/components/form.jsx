@@ -11,6 +11,7 @@ import {
 import axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
+require('dotenv').config()
 
 const Form = ({ editState }) => {
   const [formState, setFormState] = useState({});
@@ -39,7 +40,7 @@ const Form = ({ editState }) => {
   let autocomplete;
   let initAutocomplete = () => {
     const loader = new Loader({
-      apiKey: "AIzaSyDuZ32gfmKD4XNcQoWGoTkSLGZ--LUo_L4",
+      apiKey: process.env.MAPS_API_KEY,
       version: "weekly",
     });
     loader.load().then(() => {
@@ -73,7 +74,7 @@ const Form = ({ editState }) => {
       console.log(submitObject);
       getAccessTokenSilently().then((resp) =>
         axios({
-          url: "http://localhost:8080/bored-gamerz/api/game-meeting",
+          url: `{process.env.API_HOST}/game-meeting`,
           method: "post",
           data: submitObject,
           headers: {
