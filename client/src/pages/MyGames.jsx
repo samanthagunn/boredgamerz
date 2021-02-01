@@ -12,7 +12,7 @@ import AuthHeader from "../components/auth-header";
 import Footer from "../components/footer";
 import GameList from "../components/game-list";
 import FAB from "../components/mobile-fab";
-
+require('dotenv').config();
 const MyGames = () => {
   const [segmentState, setSegmentState] = useState({
     event: undefined,
@@ -28,7 +28,7 @@ const MyGames = () => {
       console.log(resp);
       axios({
         method: "get",
-        url: "http://localhost:8080/bored-gamerz/api/game-meeting/me",
+        url: `${process.env.API_HOST}/bored-gamerz/api/game-meeting/me`,
         headers: {
           Authorization: `Bearer ${resp}`,
         },

@@ -7,7 +7,7 @@ import AuthHeader from "../components/auth-header";
 import Footer from "../components/footer";
 import GameList from "../components/game-list";
 import FAB from "../components/mobile-fab";
-
+require('dotenv').config()
 const FindGames = () => {
   const [data, setData] = useState([]);
   const { getAccessTokenSilently, user } = useAuth0();
