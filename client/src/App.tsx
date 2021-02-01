@@ -47,11 +47,11 @@ const App = () => {
             exact={true}
           />
           <Route
-            path="/profile/games"
+            path="/mygames"
             component={withAuthenticationRequired(MyGames, {
               returnTo: "/profile/games",
               loginOptions: {
-                redirectUri: `${process.env.REACT_APP_HOST}/profile/games`,
+                redirectUri: `${process.env.REACT_APP_HOST}/mygames`,
               },
             })}
             exact={true}
@@ -67,11 +67,11 @@ const App = () => {
             exact={true}
           />
           <Route
-            path="/games/create"
+            path="/create"
             component={withAuthenticationRequired(CreateGame, {
-              returnTo: "/games/create",
+              returnTo: "/create",
               loginOptions: {
-                redirectUri: `${process.env.REACT_APP_HOST}/profile/games/create`,
+                redirectUri: `${process.env.REACT_APP_HOST}/create`,
               },
             })}
             exact={true}

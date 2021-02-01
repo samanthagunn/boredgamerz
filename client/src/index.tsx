@@ -9,11 +9,11 @@ require('dotenv').config()
 ReactDOM.render(
   <Auth0Provider
     domain="dev-z2irz81c.us.auth0.com"
-    clientId="lbS5AAGz6OmsB863eb48BPPg7sYep1Ys"
-    redirectUri="http://localhost:3000/profile"
+    clientId="fe4DD756zV9Ti2IIxIM6WsW5oFIRJr2b"
+    redirectUri="https://boredgamerz.com/profile"
     response_type="code"
     scope="openid profile email"
-    audience="https://BoredGamerzDev"
+    audience="https://BoredGamerz"
     >
     <ErrorBoundary>
       <App />
