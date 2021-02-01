@@ -21,7 +21,7 @@ const FindGames = () => {
         },
       })
         .then((resp) => resp.data)
-        .then((data) => setData(data)
+        .then((data) =>{console.log(data); setData(data)}
         )
     });
     const loader = new Loader({
