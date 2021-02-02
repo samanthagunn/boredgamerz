@@ -110,7 +110,7 @@ public class EntityTestHelper {
 
         GameMeetingDataTransferObject gm = new GameMeetingDataTransferObject();
 
-        gm.setAvailableSeats((int)((Math.random() * 16) + 1));
+        gm.setAvailableSeats((int)((Math.random() * 14) + 2));
         gm.setHost(host.getId());
         gm.setDate(new Date(System.currentTimeMillis() + 1000000000));
         gm.setGameName(getRandomString(games));
