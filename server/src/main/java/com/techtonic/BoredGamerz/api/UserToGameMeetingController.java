@@ -1,5 +1,6 @@
 package com.techtonic.BoredGamerz.api;
 
+import com.techtonic.BoredGamerz.auth0.Auth0Users;
 import com.techtonic.BoredGamerz.dto.UserToGameMeetingDataTransferObject;
 import com.techtonic.BoredGamerz.model.User;
 import com.techtonic.BoredGamerz.model.UserToGameMeetingJoin;
@@ -11,6 +12,7 @@ import com.techtonic.BoredGamerz.service.UserService;
 import com.techtonic.BoredGamerz.service.UserToGameMeetingService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,6 +56,15 @@ public class UserToGameMeetingController {
     private final UserToGameMeetingService UTGM_SERVICE;
     private final GameMeetingService GM_SERVICE;
 
+    @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
+    private String issuer;
+
+    @Value("${spring.security.oauth2.resourceserver.jwt.clientId}")
+    private String clientId;
+
+    @Value("${spring.security.oauth2.resourceserver.jwt.clientSecret}")
+    private String clientSecret;
+
     @Autowired
     public UserToGameMeetingController(UserService USER_SERVICE,
                                        UserToGameMeetingService UTGM_SERVICE,
@@ -77,8 +88,12 @@ public class UserToGameMeetingController {
 
         User user = USER_SERVICE.getByAuthId(id).get();
 
+        String title = GM_SERVICE.getById(join.getGameMeeting()).get().getTitle();
+
+        String userName = new Auth0Users(issuer,clientId,clientSecret).getUserInfo(id).getString("given_name");
+
         MAIL_CONTROLLER.sendEmailWithSendGrid("Greetings Game Connoisseur,\n\nYou have successfully joined a game!", "Your in!", id);
-        MAIL_CONTROLLER.sendEmailWithSendGrid("Greetings Game Connoisseur,\n\n Your meeting has been joined by a new user!", "Someone Joined!", hostId);
+        MAIL_CONTROLLER.sendEmailWithSendGrid("Greetings Game Connoisseur,\n\n Your meeting has been joined by " + userName, "Someone Joined " + title + "!", hostId);
 
         join.setUser(user.getId());
 
