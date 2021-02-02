@@ -12,41 +12,31 @@ import AuthHeader from "../components/auth-header";
 import Footer from "../components/footer";
 import GameList from "../components/game-list";
 import FAB from "../components/mobile-fab";
-
+require('dotenv').config();
 const MyGames = () => {
   const [segmentState, setSegmentState] = useState({
     event: undefined,
     state: "Joined",
   });
-  const [joined, setJoined] = useState([]);
-  const [hosted, setHosted] = useState([]);
-  const { getAccessTokenSilently, user } = useAuth0();
+  const [state, setState] = useState([[],[]]);
+  const { getAccessTokenSilently } = useAuth0();
   useEffect(() => {
-    let joined = [];
-    let hosted = [];
     getAccessTokenSilently().then((resp) => {
       console.log(resp);
       axios({
         method: "get",
-        url: "http://localhost:8080/bored-gamerz/api/game-meeting/me",
+        url: `${process.env.REACT_APP_API_HOST}/game-meeting/me`,
         headers: {
           Authorization: `Bearer ${resp}`,
         },
       })
         .then((resp) => resp.data)
-        .then((data) =>
-          data.map((game) => {
-            if (game.host.auth0id === user.sub) {
-              hosted.push(game);
-            } else {
-              joined.push(game);
-            }
-          })
+        .then((data) => 
+        {
+          setState(data)
+          console.log(data[1])
+        }
         )
-        .then(() => {
-          setJoined(joined);
-          setHosted(hosted);
-        });
     });
   }, []);
   return (
@@ -68,9 +58,9 @@ const MyGames = () => {
         </IonSegment>
         <IonList>
           {segmentState.state === "Joined" ? (
-            <GameList seeData={hosted} />
+            <GameList seeData={[state[1]]} />
           ) : (
-            <GameList seeData={joined} editMode={true} />
+            <GameList seeData={[state[0]]} editMode={true} />
           )}
         </IonList>
       </IonContent>

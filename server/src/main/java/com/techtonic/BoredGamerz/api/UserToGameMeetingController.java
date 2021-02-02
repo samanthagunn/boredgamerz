@@ -45,7 +45,7 @@ Techtonic
 Details: handles http requests when joining, unjoining, or listing users from a meeting
  */
 
-@RequestMapping("bored-gamerz/api/user-to-game-meeting")
+@RequestMapping("api/user-to-game-meeting")
 @RestController
 public class UserToGameMeetingController {
 

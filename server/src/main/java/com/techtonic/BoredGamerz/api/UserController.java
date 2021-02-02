@@ -39,7 +39,7 @@ Techtonic
 Details: Handles http requests related to creating, finding, or deleting users
  */
 
-@RequestMapping("bored-gamerz/api/user")
+@RequestMapping("api/user")
 @RestController
 public class UserController {
 
