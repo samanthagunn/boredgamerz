@@ -8,7 +8,7 @@ spring:
                     issuer-uri: https://dev-z2irz81c.us.auth0.com/
     datasource:
         username: root
-        password:
+        password: 
         url: jdbc:mysql://35.202.6.200:3306/boredgamerzdb
     jpa:
         hibernate:

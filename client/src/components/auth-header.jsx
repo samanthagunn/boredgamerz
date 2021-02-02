@@ -19,22 +19,29 @@ const AuthHeader = () => {
   });
   return (
     <IonHeader>
-
       <IonToolbar className="auth-toolbar">
-        <img className="logo-hero" alt="BoredGamerz Logo"  src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerz_Logo.webp" />
-
+        <img
+          className="logo-hero"
+          alt="BoredGamerz Logo"
+          src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerz_Logo.webp"
+        />
         <IonButtons className="navigation" slot="primary">
           <IonButton href="/mygames">My Games</IonButton>
           <IonButton href="/games">Find Games</IonButton>
 
-          <IonButton href="/games/create">Create A Game</IonButton>
-          
-          <img className="user-image" alt="profile" height="50px" src={user.picture} onClick={(e) => {
+          <IonButton href="/create">Create A Game</IonButton>
+
+          <img
+            className="user-image"
+            alt="profile"
+            height="50px"
+            src={user.picture}
+            onClick={(e) => {
               e.persist();
               setShowPopover({ showPopover: true, event: e });
-            }}></img>
-          <IonPopover 
-
+            }}
+          ></img>
+          <IonPopover
             event={popoverState.event}
             isOpen={popoverState.showPopover}
             onDidDismiss={() =>
@@ -43,7 +50,7 @@ const AuthHeader = () => {
           >
             <IonList className="popover-list">
               <IonItem>
-                <IonButton  href="/profile">Profile</IonButton>
+                <IonButton href="/profile">Profile</IonButton>
               </IonItem>
               <IonItem>
                 <IonButton href="/mygames">My Games</IonButton>

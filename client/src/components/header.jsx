@@ -27,9 +27,9 @@ const Header = () => {
         
       {isAuthenticated ? (
         <IonButtons className="navigation" slot="primary" >
-          <IonButton href="/profile/games">My Games</IonButton>
+          <IonButton href="/mygames">My Games</IonButton>
           <IonButton href="/games">Find Games</IonButton>
-          <IonButton  href="/games/create">Create A Game</IonButton>
+          <IonButton  href="/create">Create A Game</IonButton>
           
           <img className="user-image" alt="profile" height="50px" src={user.picture} onClick={(e) => {
               e.persist();
@@ -48,7 +48,7 @@ const Header = () => {
                 <IonButton  href="/profile">Profile</IonButton>
               </IonItem>
               <IonItem>
-                <IonButton href="/profile/games">My Games</IonButton>
+                <IonButton href="/mygames">My Games</IonButton>
               </IonItem>
               <IonItem>
                 <IonButton onClick={logout}>Sign Out</IonButton>
