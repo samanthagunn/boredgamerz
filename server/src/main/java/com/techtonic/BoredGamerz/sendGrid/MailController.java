@@ -1,6 +1,5 @@
 package com.techtonic.BoredGamerz.sendGrid;
 
-import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.sendgrid.Method;
@@ -50,6 +49,8 @@ public class MailController {
             SendGrid sendGrid = new SendGrid(key);
 
             String ourEmail = "gamemaster@boredgamerz.com";
+
+            System.out.println(response.toString());
 
             Email from = new Email(ourEmail);
             Email to = new Email(response.getString("email"));
