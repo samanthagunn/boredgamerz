@@ -123,9 +123,9 @@ const Form = ({ editState }) => {
       );
     }
   };
-  let geocoder;
-  let autocomplete;
   const initAutocomplete = () => {
+    let geocoder;
+    let autocomplete;
     const loader = new Loader({
       apiKey: process.env.REACT_APP_MAPS_API_KEY,
       version: "weekly",

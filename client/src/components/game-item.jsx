@@ -70,7 +70,7 @@ const GameItem = ({ game, edit, join }) => {
             alert("You have joined this game, please monitor your email for your invite and more details.");
             history.push("/mygames")
           }
-        }).catch(e => alert("You have already joined this game?"));
+        }).catch(e => alert("You have already joined this game, please select a different game."));
     });
   };
 
