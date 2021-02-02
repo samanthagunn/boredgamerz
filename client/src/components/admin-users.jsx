@@ -7,11 +7,11 @@ import {
   IonItem,
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
-import axios from "axios"
-require('dotenv').config()
+import axios from "axios";
+require("dotenv").config();
 
 const Users = () => {
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_HOST}/users`)
@@ -23,7 +23,9 @@ const Users = () => {
       {data.map((user) => (
         <IonItem>
           <IonCard>
-            <IonCardTitle>{user.firstName} {user.lastName}</IonCardTitle>
+            <IonCardTitle>
+              {user.firstName} {user.lastName}
+            </IonCardTitle>
             <IonCardSubtitle>{user.email}</IonCardSubtitle>
             <IonCardContent>
               <IonButton

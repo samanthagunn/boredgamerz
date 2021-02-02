@@ -24,9 +24,6 @@ public class IdTokenDecoder {
 
         decodedBytes = Base64.getDecoder().decode(body);
         body = new String(decodedBytes);
-
-        System.out.println(header);
-        System.out.println(body);
     }
 
     public String decode(String find){

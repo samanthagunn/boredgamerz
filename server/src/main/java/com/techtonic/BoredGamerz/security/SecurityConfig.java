@@ -35,6 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .configure(http);
 
         http.authorizeRequests()
+
                 .mvcMatchers("/api/**")
                 .authenticated()
                 .and()

@@ -16,8 +16,6 @@ const FAB = () => {
   useEffect(() => {
     getAccessTokenSilently().then(() => setAuthUser(user))
   }, [])
-  console.log(authUser)
-  console.log(Object.values(authUser)[0])
   return (
     <IonFab className="mobilenav" vertical="bottom" horizontal="end" slot="fixed">
       <IonFabButton>
