@@ -6,7 +6,7 @@ const GameList = ({ seeData, editMode, joinMode }) => {
   return (
     <>
       {typeof seeData === "undefined" ? (
-        <IonItem>No Games Found</IonItem>
+        <IonItem className="no-games">No Games Found</IonItem>
       ) : (
         <IonList>
           {seeData.map((data) => {

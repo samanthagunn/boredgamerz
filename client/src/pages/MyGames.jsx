@@ -56,7 +56,7 @@ const MyGames = () => {
         </IonSegment>
         <IonList>
           {segmentState.state === "Joined" ? (
-            <MyGameList seeData={state[1]} />
+            <MyGameList seeData={state[1]} joinMode={true}/>
           ) : (
             <MyGameList seeData={state[0]} editMode={true} />
           )}

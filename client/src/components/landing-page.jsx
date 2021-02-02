@@ -38,7 +38,6 @@ const LandingPage = () => {
 
       <div className="landing-hero-container">
         <br />
-
         <IonCard className="landing-hero" color="secondary">
           <IonCardHeader className="hero-header">
             <h1>Easy as Find. Host. Play. </h1>
@@ -46,7 +45,7 @@ const LandingPage = () => {
               alt="BoredGamerz Logo"
               className="hero-logo"
               width="50%"
-              src="https://storage.cloud.google.com/boredgamerz_assets/BoredGamerz_Logo.webp"
+              src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerz_Logo.webp"
             />
           </IonCardHeader>
 

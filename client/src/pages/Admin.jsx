@@ -26,7 +26,7 @@ const Admin = () => {
     <IonPage>
       <AuthHeader />
       {admin === ["admin"] ? (
-        <IonContent>
+        <IonContent className="admin-page">
           <IonSegment
             onIonChange={(e) => {
               setSegmentState({ ...segmentState, state: e.detail.value });
@@ -45,8 +45,10 @@ const Admin = () => {
           </IonList>
         </IonContent>
       ) : (
-        <IonContent>
+        <IonContent className="admin-page-denied">
+           <img width="30%" alt="game-piece-crash" src="https://storage.googleapis.com/boredgamerz_assets/crash-denied.webp" />
           <IonTitle>Access Denied</IonTitle>
+         
           <IonButton href="/profile">Return to profile</IonButton>
         </IonContent>
       )}

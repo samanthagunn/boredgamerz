@@ -48,6 +48,7 @@ const FindGames = () => {
         </IonTitle>
         <br />
         <div id="map" style={{ width: "100%", height: "50%" }}></div>
+        <br />
         <GameList seeData={data} joinMode={true} />
       </IonContent>
       <FAB />

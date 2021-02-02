@@ -52,20 +52,27 @@ const Profile: React.FC = () => {
         {isLoading ? (
           <IonProgressBar type="indeterminate"></IonProgressBar>
         ) : (
-          <IonCard className="profile-card">
+          <IonCard className="profile-main">
+            
+            <div className="profile-card">
+            <IonCardHeader>
             <img
               className="user-image-profile"
               alt="profile"
               src={user?.picture}
             ></img>
-            <IonCardHeader>
-              <IonCardTitle><strong>{user?.name}</strong></IonCardTitle>
-            </IonCardHeader>
-            <IonCardContent>
-              
-              <IonButton color="secondary" onClick={deleteUser}>
+              <IonCardTitle>
+                <strong>{user?.name}</strong></IonCardTitle>
+                <br />
+                <IonButton className="delete-button" onClick={deleteUser}>
                 Delete your account
               </IonButton>
+            </IonCardHeader>
+            <img className="player-ready" alt="player ready" src="https://storage.googleapis.com/boredgamerz_assets/player-ready.webp" />
+            </div>
+            <IonCardContent>
+           
+              <br />
               <IonButton color="secondary" onClick={() => logout()}>
                 Sign Out
               </IonButton>

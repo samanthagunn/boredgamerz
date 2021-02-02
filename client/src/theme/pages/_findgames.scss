@@ -19,11 +19,10 @@
     }
 }
 
-.game-card-list {
+.game-card-list, .no-games {
     --ion-background-color: #FFC67A !important;
     color: black !important;
-    padding: 2px 0px;
-    border-radius: 15px;
+    border-radius: 20px;
     margin: auto;
     width: 80%;
 }

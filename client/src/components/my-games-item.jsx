@@ -52,18 +52,19 @@ const MyGameItem = ({ game, edit, join }) => {
       geocode(meeting.address);
     });
   };
-  const joinGame = () => {
+  const leaveGame = () => {
     getAccessTokenSilently().then((resp) => {
       axios({
-        method: "post",
-        url: `${process.env.REACT_APP_API_HOST}/user-to-game-meeting/`,
+        method: "delete",
+        url: `${process.env.REACT_APP_API_HOST}/user-to-game-meeting/unjoin`,
         headers: {
           Authorization: `Bearer ${resp}`,
         },
         data: {
           gameMeetingId: meeting.id,
         },
-      });
+      }).then(() => {alert("You have removed yourself from this game."); history.push("/mygames")})
+      .catch(e => alert("Error removing from game, please try again later."));
     });
   };
 
@@ -111,7 +112,7 @@ const MyGameItem = ({ game, edit, join }) => {
             false
           )}
           {join ? (
-            <IonButton onClick={() => joinGame()}>join</IonButton>
+            <IonButton onClick={() => leaveGame()}>Leave Game</IonButton>
           ) : (
             false
           )}
