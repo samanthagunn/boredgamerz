@@ -21,7 +21,7 @@ const AuthHeader = () => {
     <IonHeader>
 
       <IonToolbar className="auth-toolbar">
-        <img className="logo-hero" alt="BoredGamerz Logo"  src="https://storage.cloud.google.com/boredgamerz_assets/BoredGamerz_Logo.webp" />
+        <img className="logo-hero" alt="BoredGamerz Logo"  src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerz_Logo.webp" />
 
         <IonButtons className="navigation" slot="primary">
           <IonButton href="/mygames">My Games</IonButton>

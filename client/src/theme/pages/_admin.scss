@@ -1,0 +1,16 @@
+.admin-page-denied {
+    text-align: center;
+    ion-title {
+        padding-top: 10px;
+        color: white;
+    }
+    ion-button {
+        color: black;
+        --background: #FFC67A;
+    }
+    img {
+        padding-top: 20px;
+        display: block;
+        margin: 0 auto;
+    }
+}
