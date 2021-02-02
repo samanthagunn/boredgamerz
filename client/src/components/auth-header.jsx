@@ -19,21 +19,13 @@ const AuthHeader = () => {
   });
   return (
     <IonHeader>
-      <IonToolbar color="primary">
-        <img className="logo-hero" alt="BoredGamerz Logo"  src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png" />
+      <IonToolbar className="auth-toolbar">
+        <img className="logo-hero" alt="BoredGamerz Logo"  src="https://storage.cloud.google.com/boredgamerz_assets/BoredGamerz_Logo.webp" />
         <IonButtons className="navigation" slot="primary">
           <IonButton href="/profile/games">My Games</IonButton>
           <IonButton href="/games">Find Games</IonButton>
           <IonButton href="/games/create">Create A Game</IonButton>
-          <IonButton 
-            onClick={(e) => {
-              e.persist();
-              setShowPopover({ showPopover: true, event: e });
-            }}
-          >
-            Profile
-            
-          </IonButton>
+          
           <img className="user-image" alt="profile" height="50px" src={user.picture} onClick={(e) => {
               e.persist();
               setShowPopover({ showPopover: true, event: e });

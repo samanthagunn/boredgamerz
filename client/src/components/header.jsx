@@ -20,14 +20,14 @@ const Header = () => {
   return (
     <IonToolbar color="primary">
       
-        <img className="logo-hero" alt="BoredGamerz Logo"  src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png" />
+        <img className="logo-hero" alt="BoredGamerz Logo"  src="https://storage.cloud.google.com/boredgamerz_assets/BoredGamerz_Logo.webp" />
         
       {isAuthenticated ? (
         <IonButtons className="navigation" slot="primary" >
-          <IonButton className="navigation__fontweight" href="/profile/games">My Games</IonButton>
-          <IonButton className="navigation__fontweight" href="/games">Find Games</IonButton>
-          <IonButton className="navigation__fontweight" href="/games/create">Create A Game</IonButton>
-          <IonButton
+          <IonButton href="/profile/games">My Games</IonButton>
+          <IonButton href="/games">Find Games</IonButton>
+          <IonButton  href="/games/create">Create A Game</IonButton>
+          <IonButton 
             onClick={(e) => {
               e.persist();
               setShowPopover({ showPopover: true, event: e });
@@ -63,7 +63,7 @@ const Header = () => {
         </IonButtons>
       ) : (
         <IonButtons slot="primary">
-          <IonButton onClick={loginWithRedirect}>Login</IonButton>
+          <IonButton className="head-login-button" onClick={loginWithRedirect}><strong>Login</strong></IonButton>
         </IonButtons>
       )}
     </IonToolbar>

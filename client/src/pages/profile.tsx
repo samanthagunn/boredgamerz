@@ -61,13 +61,15 @@ const Profile: React.FC = () => {
               src={user?.picture}
             ></img>
             <IonCardHeader>
-              <IonCardTitle>{user?.name}</IonCardTitle>
+              <IonCardTitle><strong>{user?.name}</strong></IonCardTitle>
             </IonCardHeader>
             <IonCardContent>
+              
               <IonButton color="secondary" onClick={deleteUser}>
                 Delete your account
               </IonButton>
             </IonCardContent>
+          
           </IonCard>
         )}
       </IonContent>

@@ -7,11 +7,16 @@
 @use './pages/creategames' as *;
 @use './partials/mediaq' as *;
 @use './pages/profile' as *;
+@use './layout/footer' as *;
 
 // :host {
 //     --color-checked: "tertiary";
 
 // }
+.head-login-button {
+    font-weight: 700;
+        color: map-get($colors, dark );
+}
 .login-button {
 
   text-align: center;

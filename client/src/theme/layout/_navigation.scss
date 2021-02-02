@@ -7,17 +7,21 @@
 
     ion-button {
         font-weight: 700;
-        color: map-get($colors, dark );
+        color: map-get($colors, light );
+        font-size: 17px;
+        text-shadow: 2px 2px 4px #000000;
     }
-    --ion-color-contrast {
-        color: map-get($colors, giantpeach, base )
-    }
+   
+    
     @include mobile {
         display: none;
     }
 }
 .mobilenav {
     @include desktop{
+        display: none;
+    }
+    @include tablet {
         display: none;
     }
 }
@@ -30,4 +34,18 @@
     border-radius: 50%;
     width: 50px;
     height: 50px;
+}
+
+
+.auth-toolbar {
+    --background: #0DCFFF;
+    --background: -moz-linear-gradient(45deg, rgba(13, 207, 255,1) 0%, rgba(74, 219, 255,1) 100%);
+    --background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(13, 207, 255,1)), color-stop(100%, rgba(77, 190, 133,1)));
+    --background: -webkit-linear-gradient(45deg, rgba(13, 207, 255,1) 0%, rgba(80, 200, 140, 1) 100%);
+    --background: -o-linear-gradient(45deg, rgba(13, 207, 255,1) 0%, rgba(80, 200, 140,1) 100%);
+    --background: -ms-linear-gradient(45deg, rgba(13, 207, 255,1) 0%, rgba(80, 200, 140,1) 100%);
+    --background: linear-gradient(45deg, rgba(13, 207, 255,1) 0%, rgba(80, 200, 140,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0DCFFF', endColorstr='#50C88C', GradientType=1 );
+
+    --color:#ffffff;
 }
