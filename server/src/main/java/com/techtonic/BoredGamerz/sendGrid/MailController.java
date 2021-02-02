@@ -1,7 +1,5 @@
 package com.techtonic.BoredGamerz.sendGrid;
 
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
@@ -9,7 +7,7 @@ import com.sendgrid.SendGrid;
 import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
-import com.techtonic.BoredGamerz.serverUtil.AccessTokenGetter;
+import com.techtonic.BoredGamerz.auth0.Auth0Users;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -36,45 +34,34 @@ public class MailController {
 
     public int sendEmailWithSendGrid(String message, String sub, String userId) {
 
+        JSONObject response = new Auth0Users(issuer, clientId, clientSecret).getUserInfo(userId);
+
+        SendGrid sendGrid = new SendGrid(key);
+
+        String ourEmail = "gamemaster@boredgamerz.com";
+
+        System.out.println(response.toString());
+
+        Email from = new Email(ourEmail);
+        Email to = new Email(response.getString("email"));
+        Content content = new Content("text/html",  message);
+
+        Mail mail = new Mail(from, sub, to, content);
+
+        mail.setReplyTo(new Email(ourEmail));
+
+        Request request = new Request();
+        Response resp = null;
+
         try {
+            request.setMethod(Method.POST);
+            request.setEndpoint("mail/send");
+            request.setBody(mail.build());
 
-            JSONObject responseToken = AccessTokenGetter.getToken(audience, issuer, clientId, clientSecret);
+            resp = sendGrid.api(request);
 
-            JSONObject response = new JSONObject(
-                    Unirest.get(issuer + "/api/v2/users/" + userId)
-                    .header("authorization", "Bearer " + responseToken.getString("access_token"))
-                    .asString().getBody()
-            );
-
-            SendGrid sendGrid = new SendGrid(key);
-
-            String ourEmail = "gamemaster@boredgamerz.com";
-
-            System.out.println(response.toString());
-
-            Email from = new Email(ourEmail);
-            Email to = new Email(response.getString("email"));
-            Content content = new Content("text/html",  message);
-
-            Mail mail = new Mail(from, sub, to, content);
-
-            mail.setReplyTo(new Email(ourEmail));
-
-            Request request = new Request();
-            Response resp = null;
-
-            try {
-                request.setMethod(Method.POST);
-                request.setEndpoint("mail/send");
-                request.setBody(mail.build());
-
-                resp = sendGrid.api(request);
-
-                return resp.getStatusCode();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (UnirestException e) {
+            return resp.getStatusCode();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

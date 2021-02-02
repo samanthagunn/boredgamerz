@@ -1,4 +1,4 @@
-package com.techtonic.BoredGamerz.serverUtil;
+package com.techtonic.BoredGamerz.auth0;
 
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
@@ -10,9 +10,9 @@ public class AccessTokenGetter {
 
     private static JSONObject token = null;
 
-    public static JSONObject getToken(String audience, String issuer, String clientId, String clientSecret){
+    public static JSONObject getToken(String issuer, String clientId, String clientSecret){
 
-        audience = issuer + "api/v2/";
+        String audience = issuer + "api/v2/";
 
         System.out.println(token);
 
