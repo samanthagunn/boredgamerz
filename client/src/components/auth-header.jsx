@@ -27,7 +27,7 @@ const AuthHeader = () => {
           <IonButton href="/mygames">My Games</IonButton>
           <IonButton href="/games">Find Games</IonButton>
 
-          <IonButton href="/games/create">Create A Game</IonButton>
+          <IonButton href="/create">Create A Game</IonButton>
           
           <img className="user-image" alt="profile" height="50px" src={user.picture} onClick={(e) => {
               e.persist();
