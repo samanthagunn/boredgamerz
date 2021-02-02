@@ -8,12 +8,13 @@ import {
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import axios from "axios"
+require('dotenv').config()
 
 const Games = () => {
   const [data, setData] = useState([])
   useEffect(() => {
     axios
-      .get("http://localhost:8080/games")
+      .get(`${process.env.REACT_APP_API_HOST}/games`)
       .then((resp) => resp.data)
       .then((data) => setData(data));
   }, []);

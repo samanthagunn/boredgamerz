@@ -27,13 +27,13 @@ const FAB = () => {
         <IonFabButton href="/profile">
           <IonIcon icon={personCircleOutline} />
         </IonFabButton>
-        <IonFabButton href="/profile/games">
+        <IonFabButton href="/mygames">
           <IonIcon icon={diceOutline} />
         </IonFabButton>
         <IonFabButton href="/games">
           <IonIcon icon={location} />
         </IonFabButton>
-        <IonFabButton href="/games/create">
+        <IonFabButton href="/create">
           <IonIcon icon={addCircleOutline} />
         </IonFabButton>
         {Object.values(authUser)[0] === "admin" ? (

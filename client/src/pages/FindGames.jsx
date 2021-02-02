@@ -7,35 +7,35 @@ import AuthHeader from "../components/auth-header";
 import Footer from "../components/footer";
 import GameList from "../components/game-list";
 import FAB from "../components/mobile-fab";
-
+require('dotenv').config()
 const FindGames = () => {
   const [data, setData] = useState([]);
-  const { getAccessTokenSilently, user } = useAuth0();
+  const { getAccessTokenSilently } = useAuth0();
   useEffect(() => {
     getAccessTokenSilently().then((resp) => {
       axios({
         method: "get",
-        url: "http://localhost:8080/bored-gamerz/api/game-meeting/me",
+        url: `${process.env.REACT_APP_API_HOST}/game-meeting`,
         headers: {
           Authorization: `Bearer ${resp}`,
         },
       })
         .then((resp) => resp.data)
-        .then((data) => setData(data)
+        .then((data) =>{console.log(data); setData(data)}
         )
     });
-  }, []);
-  const loader = new Loader({
-    apiKey: "AIzaSyDuZ32gfmKD4XNcQoWGoTkSLGZ--LUo_L4",
-    version: "weekly",
-  });
-  loader.load().then(() => {
-    new window.google.maps.Map(document.getElementById("map"), {
-      center: {lat: 40.0165228, lng: -105.2445022},
-      zoom: 15,
-      gestureHandling: "cooperative",
+    const loader = new Loader({
+      apiKey: `${process.env.REACT_APP_MAPS_API_KEY}`,
+      version: "weekly",
     });
-  });
+    loader.load().then(() => {
+      new window.google.maps.Map(document.getElementById("map"), {
+        center: {lat: 40.0165228, lng: -105.2445022},
+        zoom: 15,
+        gestureHandling: "cooperative",
+      });
+    });
+  }, []);
   return (
     <IonPage>
       <AuthHeader />

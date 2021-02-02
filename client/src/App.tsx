@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect, Route } from "react-router-dom";
+import { Redirect, Route, useHistory } from "react-router-dom";
 import { IonApp, IonRouterOutlet } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 
@@ -20,7 +20,7 @@ import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 
 /* Theme variables */
-import './theme/index.scss';
+import "./theme/index.scss";
 import Profile from "./pages/profile";
 import Home from "./pages/Home.jsx";
 import MyGames from "./pages/MyGames.jsx";
@@ -30,23 +30,61 @@ import EditGame from "./pages/EditGame";
 import Admin from "./pages/Admin";
 import { withAuthenticationRequired } from "@auth0/auth0-react";
 //mimic "/" path to ensure no unauthed users access profiles
+require('dotenv').config()
 
-
-const App = () => (
-  <IonApp>
+const App = () => {
+  console.log(process.env.REACT_APP_HOST);
+  console.log(process.env.REACT_APP_API_HOST)
+  return (
+    <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
           <Route path="/home" component={Home} exact={true} />
           <Route exact path="/" render={() => <Redirect to="/home" />} />
-          <Route path="/profile" component={withAuthenticationRequired(Profile)} exact={true} />
-          <Route path="/profile/games" component={withAuthenticationRequired(MyGames)} exact={true} />
-          <Route path="/games" component={withAuthenticationRequired(FindGames)} exact={true} />
-          <Route path="/games/create" component={withAuthenticationRequired(CreateGame)} exact={true} />
-          <Route path="/games/edit/" component={withAuthenticationRequired(EditGame)} />
+          <Route
+            path="/profile"
+            component={withAuthenticationRequired(Profile)}
+            exact={true}
+          />
+          <Route
+            path="/mygames"
+            component={withAuthenticationRequired(MyGames, {
+              returnTo: "/mygames",
+              loginOptions: {
+                redirectUri: `${process.env.REACT_APP_HOST}/mygames`,
+              },
+            })}
+            exact={true}
+          />
+          <Route
+            path="/games"
+            component={withAuthenticationRequired(FindGames, {
+              returnTo: "/games",
+              loginOptions: {
+                redirectUri: `${process.env.REACT_APP_HOST}/games`,
+              },
+            })}
+            exact={true}
+          />
+          <Route
+            path="/create"
+            component={withAuthenticationRequired(CreateGame, {
+              returnTo: "/create",
+              loginOptions: {
+                redirectUri: `${process.env.REACT_APP_HOST}/create`,
+              },
+            })}
+            exact={true}
+          />
+          <Route
+            path="/games/edit/:id"
+            component={withAuthenticationRequired(EditGame)}
+          />
           <Route path="/admin" component={withAuthenticationRequired(Admin)} />
         </IonRouterOutlet>
       </IonReactRouter>
-  </IonApp>
-);
+    </IonApp>
+  );
+};
 
 export default App;

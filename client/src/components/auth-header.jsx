@@ -9,6 +9,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import React, { useState } from "react";
+require("dotenv").config();
 
 const AuthHeader = () => {
   const { user, logout } = useAuth0();
@@ -18,11 +19,14 @@ const AuthHeader = () => {
   });
   return (
     <IonHeader>
+
       <IonToolbar className="auth-toolbar">
         <img className="logo-hero" alt="BoredGamerz Logo"  src="https://storage.cloud.google.com/boredgamerz_assets/BoredGamerz_Logo.webp" />
+
         <IonButtons className="navigation" slot="primary">
-          <IonButton href="/profile/games">My Games</IonButton>
+          <IonButton href="/mygames">My Games</IonButton>
           <IonButton href="/games">Find Games</IonButton>
+
           <IonButton href="/games/create">Create A Game</IonButton>
           
           <img className="user-image" alt="profile" height="50px" src={user.picture} onClick={(e) => {
@@ -30,6 +34,7 @@ const AuthHeader = () => {
               setShowPopover({ showPopover: true, event: e });
             }}></img>
           <IonPopover 
+
             event={popoverState.event}
             isOpen={popoverState.showPopover}
             onDidDismiss={() =>
@@ -41,7 +46,7 @@ const AuthHeader = () => {
                 <IonButton  href="/profile">Profile</IonButton>
               </IonItem>
               <IonItem>
-                <IonButton href="/profile/games">My Games</IonButton>
+                <IonButton href="/mygames">My Games</IonButton>
               </IonItem>
               {Object.values(user)[0] === "admin" ? (
                 <IonItem>

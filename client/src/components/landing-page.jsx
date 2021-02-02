@@ -26,6 +26,7 @@ const LandingPage = () => {
 <>
      
       <img className="hero-image" alt="gameplayers" src="https://storage.googleapis.com/boredgamerz_assets/gameplayers_hero.webp" />
+
     <div className="landing-hero-container">
       <br />
 

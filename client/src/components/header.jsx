@@ -9,6 +9,9 @@ import {
 } from "@ionic/react";
 import React, { useState } from "react";
 
+require('dotenv').config()
+
+
 const Header = () => {
   const { isAuthenticated, loginWithRedirect, user, logout } = useAuth0();
   const [popoverState, setShowPopover] = useState({
@@ -18,7 +21,9 @@ const Header = () => {
   return (
     <IonToolbar className="auth-toolbar">
       
+
         <img className="logo-hero" alt="BoredGamerz Logo"  src="https://storage.cloud.google.com/boredgamerz_assets/BoredGamerz_Logo.webp" />
+
         
       {isAuthenticated ? (
         <IonButtons className="navigation" slot="primary" >
