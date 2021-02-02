@@ -14,6 +14,7 @@ const CreateGame = () => {
         <br />
         <IonTitle color="light ion-text-center">Create New Game</IonTitle>
         <Form editState={edit} />
+        <br />
       </IonContent>
       <FAB />
       <Footer />

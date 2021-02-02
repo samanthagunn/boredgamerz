@@ -1,0 +1,19 @@
+version: "3"
+services: 
+  frontend:
+    build: ./client
+    ports:
+      - "5000:5000"
+  backend:
+    build: ./server
+    ports:
+      - "8080:8080"
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: "always"
+volumes:
+    backend:
+    frontend:

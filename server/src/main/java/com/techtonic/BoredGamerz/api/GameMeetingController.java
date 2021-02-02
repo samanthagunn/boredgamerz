@@ -35,7 +35,7 @@ Techtonic
 Details: Handles http requests related to creating, finding, or deleting game meetings
  */
 
-@RequestMapping("bored-gamerz/api/game-meeting")
+@RequestMapping("api/game-meeting")
 @RestController
 public class GameMeetingController {
 

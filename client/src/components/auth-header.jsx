@@ -6,10 +6,10 @@ import {
   IonItem,
   IonList,
   IonPopover,
-  IonTitle,
   IonToolbar,
 } from "@ionic/react";
 import React, { useState } from "react";
+require("dotenv").config();
 
 const AuthHeader = () => {
   const { user, logout } = useAuth0();
@@ -19,40 +19,36 @@ const AuthHeader = () => {
   });
   return (
     <IonHeader>
-      <IonToolbar color="primary">
-        <img className="logo-hero" alt="BoredGamerz Logo"  src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png" />
+
+      <IonToolbar className="auth-toolbar">
+        <img className="logo-hero" alt="BoredGamerz Logo"  src="https://storage.cloud.google.com/boredgamerz_assets/BoredGamerz_Logo.webp" />
+
         <IonButtons className="navigation" slot="primary">
-          <IonButton href="/profile/games">My Games</IonButton>
+          <IonButton href="/mygames">My Games</IonButton>
           <IonButton href="/games">Find Games</IonButton>
+
           <IonButton href="/games/create">Create A Game</IonButton>
-          <IonButton 
-            onClick={(e) => {
-              e.persist();
-              setShowPopover({ showPopover: true, event: e });
-            }}
-          >
-            Profile
-            
-          </IonButton>
+          
           <img className="user-image" alt="profile" height="50px" src={user.picture} onClick={(e) => {
               e.persist();
               setShowPopover({ showPopover: true, event: e });
             }}></img>
-          <IonPopover
+          <IonPopover 
+
             event={popoverState.event}
             isOpen={popoverState.showPopover}
             onDidDismiss={() =>
               setShowPopover({ showPopover: false, event: undefined })
             }
           >
-            <IonList>
+            <IonList className="popover-list">
               <IonItem>
-                <IonButton href="/profile">Profile</IonButton>
+                <IonButton  href="/profile">Profile</IonButton>
               </IonItem>
               <IonItem>
-                <IonButton href="/profile/games">My Games</IonButton>
+                <IonButton href="/mygames">My Games</IonButton>
               </IonItem>
-              {Object.values(user)[0] == "admin" ? (
+              {Object.values(user)[0] === "admin" ? (
                 <IonItem>
                   <IonButton href="/admin">Admin</IonButton>
                 </IonItem>

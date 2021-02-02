@@ -16,16 +16,18 @@ import Footer from "../components/footer";
 import AuthHeader from "../components/auth-header";
 import axios from "axios";
 import FAB from "../components/mobile-fab";
+require('dotenv').config();
 
 const Profile: React.FC = () => {
   const { user, isLoading, getAccessTokenSilently, logout } = useAuth0();
   console.log(user);
+  console.log(process.env.REACT_APP_MAPS_API_KEY)
   useEffect(() => {
     getAccessTokenSilently().then((resp) => {
       console.log(resp);
       axios({
         method: "post",
-        url: "http://localhost:8080/bored-gamerz/api/user/",
+        url: `${process.env.REACT_APP_API_HOST}/user`,
         headers: {
           Authorization: `Bearer ${resp}`,
         },
@@ -38,7 +40,7 @@ const Profile: React.FC = () => {
         console.log(resp);
         axios({
           method: "delete",
-          url: `http://localhost:8080/bored-gamerz/api/user/me`,
+          url: `${process.env.REACT_APP_API_HOST}/user/me`,
           headers: {
             Authorization: `Bearer ${resp}`,
           },
@@ -61,13 +63,18 @@ const Profile: React.FC = () => {
               src={user?.picture}
             ></img>
             <IonCardHeader>
-              <IonCardTitle>{user?.name}</IonCardTitle>
+              <IonCardTitle><strong>{user?.name}</strong></IonCardTitle>
             </IonCardHeader>
             <IonCardContent>
+              
               <IonButton color="secondary" onClick={deleteUser}>
                 Delete your account
               </IonButton>
+              <IonButton color="secondary" onClick={() => logout()}>
+                Sign Out
+              </IonButton>
             </IonCardContent>
+          
           </IonCard>
         )}
       </IonContent>

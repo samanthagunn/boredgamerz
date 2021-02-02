@@ -7,11 +7,13 @@
 @use './pages/creategames' as *;
 @use './partials/mediaq' as *;
 @use './pages/profile' as *;
+@use './layout/footer' as *;
 
 // :host {
 //     --color-checked: "tertiary";
 
 // }
+.button:hover {--background-hover: black} 
 .login-button {
 
   text-align: center;
@@ -57,3 +59,6 @@
 }
 
 
+ion-button, ion-title, ion-segment-button{
+    font-weight: 700;
+}

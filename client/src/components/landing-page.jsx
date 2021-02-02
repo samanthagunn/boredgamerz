@@ -2,7 +2,7 @@ import React from "react";
 import "./ExploreContainer.css";
 import { useAuth0 } from "@auth0/auth0-react";
 
-import {  IonButton, IonCard, IonSpinner, IonCardHeader, IonCardTitle, IonCardContent, IonContent } from "@ionic/react";
+import {  IonButton, IonCard, IonSpinner, IonCardHeader, IonCardTitle, IonCardContent } from "@ionic/react";
 
 const LandingPage = () => {
   const { loginWithRedirect, isAuthenticated, isLoading, user } = useAuth0();
@@ -25,14 +25,15 @@ const LandingPage = () => {
 
 <>
      
-      <img className="hero-image" alt="gameplayers" src="https://storage.googleapis.com/boredgamerz_assets/gameplayers_hero.png" />
+      <img className="hero-image" alt="gameplayers" src="https://storage.googleapis.com/boredgamerz_assets/gameplayers_hero.webp" />
+
     <div className="landing-hero-container">
       <br />
 
       <IonCard className="landing-hero" color="secondary">
         
         <IonCardHeader className="hero-header"><h1>Easy as Find. Host. Play. </h1> 
-       <img alt="BoredGamerz Logo" className="hero-logo" width="40%" src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png" />
+       <img alt="BoredGamerz Logo" className="hero-logo" width="50%" src="https://storage.cloud.google.com/boredgamerz_assets/BoredGamerz_Logo.webp" />
         </IonCardHeader>
         
         <IonCardContent>

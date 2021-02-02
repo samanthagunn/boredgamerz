@@ -9,19 +9,38 @@ import {
   IonTextarea,
 } from "@ionic/react";
 import axios from "axios";
-import React, { useState } from "react";
-import { useHistory } from "react-router";
+import React, { useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router";
+require("dotenv").config();
 
 const Form = ({ editState }) => {
   const [formState, setFormState] = useState({});
   let history = useHistory();
-  //   useEffect(() => {
-  //     axios
-  //       .get(`http://localhost:8080/games/${params}`)
-  //       .then((resp) => resp.json)
-  //       .then((data) => {let date = new Date(data.date); data = {...data, date: date.ISOString() } ;setFormState({data, date: Date})})
-  //       .catch((e) => console.error(e));
-  //   });
+  let params = useParams();
+  const { getAccessTokenSilently } = useAuth0();
+  console.log(params);
+  useEffect(() => {
+    getAccessTokenSilently()
+      .then((resp) => {
+        axios({
+          method: "get",
+          url: `${process.env.REACT_APP_API_HOST}/game-meeting/${params.id}`,
+          headers: {
+            Authorization: `Bearer ${resp}`,
+          },
+        })
+          .then((resp) => resp.data)
+          .then((data) => {
+            console.log(data)
+            let date = new Date(data.date);
+            data = { ...data, dateString: date.toISOString().substring(0, date.toISOString().length-5) };
+            console.log(data)
+            setFormState(data);
+          })
+          .catch((e) => console.error(e));
+      })
+      .catch((e) => console.error(e));
+  }, []);
   let connaddress = "";
   let geocoder;
   let connectAddress = (googleAddress) => {
@@ -39,7 +58,7 @@ const Form = ({ editState }) => {
   let autocomplete;
   let initAutocomplete = () => {
     const loader = new Loader({
-      apiKey: "AIzaSyDuZ32gfmKD4XNcQoWGoTkSLGZ--LUo_L4",
+      apiKey: process.env.REACT_APP_MAPS_API_KEY,
       version: "weekly",
     });
     loader.load().then(() => {
@@ -54,7 +73,6 @@ const Form = ({ editState }) => {
       geocoder = new window.google.maps.Geocoder();
     });
   };
-  const { getAccessTokenSilently } = useAuth0();
 
   let submit = () => {
     console.log(formState.date);
@@ -73,7 +91,7 @@ const Form = ({ editState }) => {
       console.log(submitObject);
       getAccessTokenSilently().then((resp) =>
         axios({
-          url: "http://localhost:8080/bored-gamerz/api/game-meeting",
+          url: `${process.env.REACT_APP_API_HOST}/game-meeting`,
           method: "post",
           data: submitObject,
           headers: {
@@ -98,7 +116,7 @@ const Form = ({ editState }) => {
       <IonList className="create-games ">
         <div className="game-list game-font">
           <IonItemDivider>
-            <strong>Game Title:</strong>{" "}
+            <strong>Game Title:</strong>
           </IonItemDivider>
           <IonItem>
             <IonInput
@@ -112,7 +130,7 @@ const Form = ({ editState }) => {
             ></IonInput>
           </IonItem>
           <IonItemDivider>
-            <strong>Game Name:</strong>{" "}
+            <strong>Game Name:</strong>
           </IonItemDivider>
           <IonItem>
             <IonInput
@@ -126,7 +144,7 @@ const Form = ({ editState }) => {
             ></IonInput>
           </IonItem>
           <IonItemDivider>
-            <strong>Category:</strong>{" "}
+            <strong>Category:</strong>
           </IonItemDivider>
           <IonItem>
             <IonInput
@@ -140,7 +158,7 @@ const Form = ({ editState }) => {
             ></IonInput>
           </IonItem>
           <IonItemDivider>
-            <strong>Location:</strong>{" "}
+            <strong>Location:</strong>
           </IonItemDivider>
           <IonItem>
             <input
@@ -152,7 +170,7 @@ const Form = ({ editState }) => {
             ></input>
           </IonItem>
           <IonItemDivider>
-            <strong>Date: MM:DD:YY MM:HH:AM/PM</strong>{" "}
+            <strong>Date: MM:DD:YY MM:HH:AM/PM</strong>
           </IonItemDivider>
           <IonItem>
             <IonInput
@@ -171,7 +189,7 @@ const Form = ({ editState }) => {
           {!editState ? (
             <>
               <IonItemDivider>
-                <strong>Open Seats:</strong>{" "}
+                <strong>Open Seats:</strong>
               </IonItemDivider>
               <IonItem>
                 <IonInput
@@ -190,7 +208,7 @@ const Form = ({ editState }) => {
             </>
           ) : undefined}
           <IonItemDivider>
-            <strong>Game Description:</strong>{" "}
+            <strong>Game Description:</strong>
           </IonItemDivider>
           <IonItem>
             <IonTextarea

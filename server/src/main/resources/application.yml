@@ -7,9 +7,9 @@ spring:
                 jwt:
                     issuer-uri: https://dev-z2irz81c.us.auth0.com/
     datasource:
-        username: 
-        password:
-        url: jdbc:mysql:---:3306/boredgamerzdb
+        username: root
+        password: 
+        url: jdbc:mysql://35.202.6.200:3306/boredgamerzdb
     jpa:
         hibernate:
             ddl-auto: update
