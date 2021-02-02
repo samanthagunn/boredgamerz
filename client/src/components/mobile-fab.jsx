@@ -36,7 +36,7 @@ const FAB = () => {
         <IonFabButton href="/create">
           <IonIcon icon={addCircleOutline} />
         </IonFabButton>
-        {Object.values(authUser)[0] == "admin" ? (
+        {Object.values(authUser)[0] === "admin" ? (
           <IonFabButton href="/admin">
             <IonIcon icon={clipboard} />
           </IonFabButton>

@@ -1,3 +1,16 @@
 @use '../partials/colors' as *;
 @use '../partials/mediaq' as *;
 
+.footer {
+    --background: #0DCFFF;
+    --background: -moz-linear-gradient(45deg, rgba(140, 59, 205,1) 0%, rgba(74, 219, 255,1) 100%);
+    --background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(13, 207, 255,1)), color-stop(100%, rgba(77, 190, 133,1)));
+    --background: -webkit-linear-gradient(45deg, rgba(140, 59, 205,1) 0%, rgba(255, 198, 122, 1) 100%);
+    --background: -o-linear-gradient(45deg, rgba(140, 59, 205,1) 0%, rgba(255, 198, 122,1) 100%);
+    --background: -ms-linear-gradient(45deg, rgba(140, 59, 205,1) 0%, rgba(255, 198, 122,1) 100%);
+    --background: linear-gradient(45deg, rgba(140, 59, 205,1) 0%, rgba(255, 198, 122,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8C3BCD', endColorstr='#FFC67A', GradientType=1 );
+
+    --color:#ffffff;
+    font-weight: 700;
+}
