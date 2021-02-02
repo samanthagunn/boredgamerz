@@ -1,10 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`The header component... that is not user authenticated... will display correct header. 1`] = `
-<ion-toolbar>
-  <ion-title>
-    Bored Gamerz
-  </ion-title>
+<ion-toolbar
+  color="primary"
+>
+  <a
+    href="/home"
+  >
+    <img
+      alt="BoredGamerz Logo"
+      className="logo-hero"
+      src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png"
+    />
+  </a>
   <ion-buttons
     slot="primary"
   >
@@ -18,10 +26,18 @@ exports[`The header component... that is not user authenticated... will display 
 `;
 
 exports[`The header component... that is user authenticated... will display correct header. 1`] = `
-<ion-toolbar>
-  <ion-title>
-    Bored Gamerz
-  </ion-title>
+<ion-toolbar
+  color="primary"
+>
+  <a
+    href="/home"
+  >
+    <img
+      alt="BoredGamerz Logo"
+      className="logo-hero"
+      src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png"
+    />
+  </a>
   <ion-buttons
     slot="primary"
   >
@@ -47,10 +63,14 @@ exports[`The header component... that is user authenticated... will display corr
       onClick={[Function]}
     >
       Profile
-      <img
-        src="https://lh3.googleusercontent.com/a-/AOh14GiG4KuyPH8-ToSqzoBLwPTvb-px4DboWJn_Gujs=s96-c"
-      />
     </ion-button>
+    <img
+      alt="profile"
+      className="user-image"
+      height="50px"
+      onClick={[Function]}
+      src="https://lh3.googleusercontent.com/a-/AOh14GiG4KuyPH8-ToSqzoBLwPTvb-px4DboWJn_Gujs=s96-c"
+    />
   </ion-buttons>
 </ion-toolbar>
 `;

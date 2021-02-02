@@ -2,17 +2,20 @@
 
 exports[`The game item component... will match snapshot. 1`] = `
 <ion-item
+  lines="none"
   onClick={[Function]}
 >
   <ion-card
     onClick={[Function]}
   >
     <ion-card-header>
-      <ion-title>
+      <ion-card-title>
         Name: 
-      </ion-title>
+      </ion-card-title>
       <ion-card-subtitle>
-        Game: 
+        <strong>
+          Type: 
+        </strong>
       </ion-card-subtitle>
       <ion-card-subtitle>
         Host: 
@@ -20,14 +23,23 @@ exports[`The game item component... will match snapshot. 1`] = `
     </ion-card-header>
     <ion-card-content>
       <h2>
-        Open Seats: 
+        <strong>
+          Open Seats:
+        </strong>
+         
       </h2>
       <h3>
-        Date: 
+        <strong>
+          Date:
+        </strong>
          
+        Invalid Date
       </h3>
       <h4>
-        Location: 
+        <strong>
+          Location:
+        </strong>
+         
       </h4>
     </ion-card-content>
   </ion-card>

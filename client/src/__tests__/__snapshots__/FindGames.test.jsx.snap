@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The Find Games page... that is user authenticated... will display correct... 1`] = `
+<div
+  className="ion-page"
+>
+  <ion-header>
+    <ion-toolbar
+      color="primary"
+    >
+      <a
+        href="/home"
+      >
+        <img
+          alt="BoredGamerz Logo"
+          className="logo-hero"
+          src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png"
+        />
+      </a>
+      <ion-buttons
+        slot="primary"
+      >
+        <ion-button
+          href="/mygames"
+          onClick={[Function]}
+        >
+          My Games
+        </ion-button>
+        <ion-button
+          href="/games"
+          onClick={[Function]}
+        >
+          Find Games
+        </ion-button>
+        <ion-button
+          href="/create"
+          onClick={[Function]}
+        >
+          Create A Game
+        </ion-button>
+        <ion-button
+          onClick={[Function]}
+        >
+          Profile
+        </ion-button>
+        <img
+          alt="profile"
+          className="user-image"
+          height="50px"
+          onClick={[Function]}
+          src="https://lh3.googleusercontent.com/a-/AOh14GiG4KuyPH8-ToSqzoBLwPTvb-px4DboWJn_Gujs=s96-c"
+        />
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <br />
+    <ion-title
+      color="light"
+    >
+      Find Games
+    </ion-title>
+    <br />
+    <div
+      id="map"
+      style={
+        Object {
+          "height": "50%",
+          "width": "100%",
+        }
+      }
+    />
+    <ion-item
+      onClick={[Function]}
+    >
+      No Games Found
+    </ion-item>
+  </ion-content>
+  <ion-footer>
+    <ion-toolbar
+      color="tertiary"
+    >
+      <div>
+        <p>
+          © 2020 Bored Gamerz, BravoBunch
+        </p>
+      </div>
+    </ion-toolbar>
+  </ion-footer>
+</div>
+`;

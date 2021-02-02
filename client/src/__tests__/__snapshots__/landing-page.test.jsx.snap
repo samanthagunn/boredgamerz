@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The Homepage componenet... that is not user authenticated... will match snapshot. 1`] = `
+<div
+  className="container"
+>
+  <img
+    alt="gameplayers"
+    className="hero-image"
+    src="https://storage.googleapis.com/boredgamerz_assets/gameplayers.png"
+  />
+  <div
+    className="landing-hero-container"
+  >
+    <ion-card
+      color="secondary"
+      onClick={[Function]}
+    >
+      <ion-card-header>
+        <h1>
+          Easy as Find. Host. Play. 
+        </h1>
+        <img
+          alt="BoredGamerz Logo"
+          className="hero-logo"
+          src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png"
+          width="40%"
+        />
+      </ion-card-header>
+      <ion-card-content>
+        <ion-card-title>
+          <strong>
+             Step 1
+          </strong>
+        </ion-card-title>
+        <p>
+          Find a game by searching in your area
+        </p>
+      </ion-card-content>
+      <ion-card-content>
+        <ion-card-title>
+          <strong>
+            Step 2
+          </strong>
+        </ion-card-title>
+        <p>
+          Can't find a game? Host one!
+        </p>
+      </ion-card-content>
+      <ion-card-content>
+        <ion-card-title>
+          <strong>
+            Step 3
+          </strong>
+        </ion-card-title>
+        <p>
+          Meet and play the game!
+        </p>
+      </ion-card-content>
+      <ion-button
+        onClick={[Function]}
+      >
+        Login / Sign Up
+      </ion-button>
+      <br />
+      <br />
+    </ion-card>
+  </div>
+</div>
+`;
+
+exports[`The Homepage componenet... that is user authenticated... will display correct snapshot. 1`] = `
+<div
+  className="container"
+>
+  <img
+    alt="gameplayers"
+    className="hero-image"
+    src="https://storage.googleapis.com/boredgamerz_assets/gameplayers.png"
+  />
+  <div
+    className="landing-hero-container"
+  >
+    <ion-card
+      color="secondary"
+      onClick={[Function]}
+    >
+      <ion-card-header>
+        <h1>
+          Easy as Find. Host. Play. 
+        </h1>
+        <img
+          alt="BoredGamerz Logo"
+          className="hero-logo"
+          src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png"
+          width="40%"
+        />
+      </ion-card-header>
+      <ion-card-content>
+        <ion-card-title>
+          <strong>
+             Step 1
+          </strong>
+        </ion-card-title>
+        <p>
+          Find a game by searching in your area
+        </p>
+      </ion-card-content>
+      <ion-card-content>
+        <ion-card-title>
+          <strong>
+            Step 2
+          </strong>
+        </ion-card-title>
+        <p>
+          Can't find a game? Host one!
+        </p>
+      </ion-card-content>
+      <ion-card-content>
+        <ion-card-title>
+          <strong>
+            Step 3
+          </strong>
+        </ion-card-title>
+        <p>
+          Meet and play the game!
+        </p>
+      </ion-card-content>
+      <ion-button
+        href="/profile"
+        onClick={[Function]}
+        router-direction="forward"
+      >
+        Join a Game 
+        Christian
+        !
+      </ion-button>
+      <br />
+      <br />
+    </ion-card>
+  </div>
+</div>
+`;

@@ -2,10 +2,14 @@
 
 exports[`The footer component... matches the snapshot. 1`] = `
 <ion-footer>
-  <ion-toolbar>
-    <ion-title>
-      Copyright 2020 Bored Gamerz
-    </ion-title>
+  <ion-toolbar
+    color="tertiary"
+  >
+    <div>
+      <p>
+        © 2020 Bored Gamerz, BravoBunch
+      </p>
+    </div>
   </ion-toolbar>
 </ion-footer>
 `;

@@ -34,6 +34,7 @@
     "start": "concurrently \"react-scripts start\" \"json-server -p 8081 --watch db.json\"",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
+    "test:coverage": "jest --coverage",
     "eject": "react-scripts eject",
     "cypress:open": "cypress open"
   },

@@ -48,7 +48,7 @@ const FindGames = () => {
         <GameList seeData={data} joinMode={true} />
        
       </IonContent>
-      <FAB />
+      {/* <FAB /> */}
       <Footer />
     </IonPage>
   );

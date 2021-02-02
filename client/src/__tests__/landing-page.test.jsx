@@ -6,6 +6,8 @@ import {
 import "@testing-library/jest-dom/extend-expect";
 import Home from "../pages/Home";
 import { useAuth0 } from "@auth0/auth0-react";
+import renderer from "react-test-renderer";
+import LandingPage from "../components/landing-page";
 jest.mock("@auth0/auth0-react");
 jest.mock("react-router");
 
@@ -27,15 +29,14 @@ describe("The Homepage componenet...", () => {
       });
     });
     test("will render without crashing", () => {
-      const { baseElement } = render(<Home />);
+      const { baseElement } = render(<LandingPage />);
       expect(baseElement).toBeDefined();
     });
-    describe("has a Join a game button...", () => {
-      test("that displays a users name in the button.", () => {
-        const { getByText } = render(<Home />);
-        expect(getByText(`Join a Game ${user.given_name}`)).toBeTruthy();
-      });
+    test("will display correct snapshot.", () => {
+      const tree = renderer.create(<LandingPage />).toJSON();
+      expect(tree).toMatchSnapshot();
     });
+
   });
   describe("that is not user authenticated...", () => {
     beforeAll(() => {
@@ -48,16 +49,20 @@ describe("The Homepage componenet...", () => {
       });
     });
     test("will render without crashing", () => {
-      const { baseElement } = render(<Home />);
+      const { baseElement } = render(<LandingPage />);
       expect(baseElement).toBeDefined();
     });
+    test("will match snapshot.", () => {
+      const tree = renderer.create(<LandingPage />).toJSON();
+      expect(tree).toMatchSnapshot();
+  })
     describe("has a Login / Sign Up button...", () => {
       test("that is displayed.", () => {
-        const { getByText } = render(<Home />);
+        const { getByText } = render(<LandingPage />);
         expect(getByText("Login / Sign Up")).toBeTruthy();
       });
       test("that when clicked redirects to authentication.", () => {
-        const { getByText } = render(<Home />);
+        const { getByText } = render(<LandingPage />);
         fireEvent.click(getByText("Login / Sign Up"));
         expect(useAuth0().loginWithRedirect).toHaveBeenCalled();
       });

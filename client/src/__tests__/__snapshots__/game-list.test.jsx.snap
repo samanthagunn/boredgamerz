@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The Game List Component... matches the snapshot. 1`] = `
+<ion-item
+  onClick={[Function]}
+>
+  No Games Found
+</ion-item>
+`;

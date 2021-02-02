@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Matches the snapshot.. 1`] = `
+<div
+  className="ion-page"
+>
+  <div>
+    Test component
+  </div>
+  <ion-content>
+    <div>
+      Test component
+    </div>
+  </ion-content>
+  <ion-footer>
+    <ion-toolbar
+      color="tertiary"
+    >
+      <div>
+        <p>
+          © 2020 Bored Gamerz, BravoBunch
+        </p>
+      </div>
+    </ion-toolbar>
+  </ion-footer>
+</div>
+`;
