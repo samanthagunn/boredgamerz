@@ -5,11 +5,9 @@ import {
   IonItem,
   IonList,
   IonPopover,
-  IonTitle,
   IonToolbar,
 } from "@ionic/react";
 import React, { useState } from "react";
-import { NavLink, Route } from "react-router-dom";
 
 const Header = () => {
   const { isAuthenticated, loginWithRedirect, user, logout } = useAuth0();
@@ -18,7 +16,7 @@ const Header = () => {
     event: undefined,
   });
   return (
-    <IonToolbar color="primary">
+    <IonToolbar className="auth-toolbar">
       
         <img className="logo-hero" alt="BoredGamerz Logo"  src="https://storage.cloud.google.com/boredgamerz_assets/BoredGamerz_Logo.webp" />
         
@@ -27,15 +25,7 @@ const Header = () => {
           <IonButton href="/profile/games">My Games</IonButton>
           <IonButton href="/games">Find Games</IonButton>
           <IonButton  href="/games/create">Create A Game</IonButton>
-          <IonButton 
-            onClick={(e) => {
-              e.persist();
-              setShowPopover({ showPopover: true, event: e });
-            }}
-          >
-            Profile
-            
-          </IonButton>
+          
           <img className="user-image" alt="profile" height="50px" src={user.picture} onClick={(e) => {
               e.persist();
               setShowPopover({ showPopover: true, event: e });
@@ -62,8 +52,8 @@ const Header = () => {
           </IonPopover>
         </IonButtons>
       ) : (
-        <IonButtons slot="primary">
-          <IonButton className="head-login-button" onClick={loginWithRedirect}><strong>Login</strong></IonButton>
+        <IonButtons className="navigation" slot="primary">
+          <IonButton onClick={loginWithRedirect}><strong>Login</strong></IonButton>
         </IonButtons>
       )}
     </IonToolbar>

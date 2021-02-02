@@ -13,10 +13,7 @@
 //     --color-checked: "tertiary";
 
 // }
-.head-login-button {
-    font-weight: 700;
-        color: map-get($colors, dark );
-}
+.button:hover {--background-hover: black} 
 .login-button {
 
   text-align: center;
@@ -62,3 +59,6 @@
 }
 
 
+ion-button, ion-title, ion-segment-button{
+    font-weight: 700;
+}

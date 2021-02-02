@@ -6,7 +6,6 @@ import {
   IonItem,
   IonList,
   IonPopover,
-  IonTitle,
   IonToolbar,
 } from "@ionic/react";
 import React, { useState } from "react";
@@ -30,21 +29,21 @@ const AuthHeader = () => {
               e.persist();
               setShowPopover({ showPopover: true, event: e });
             }}></img>
-          <IonPopover
+          <IonPopover 
             event={popoverState.event}
             isOpen={popoverState.showPopover}
             onDidDismiss={() =>
               setShowPopover({ showPopover: false, event: undefined })
             }
           >
-            <IonList>
+            <IonList className="popover-list">
               <IonItem>
-                <IonButton href="/profile">Profile</IonButton>
+                <IonButton  href="/profile">Profile</IonButton>
               </IonItem>
               <IonItem>
                 <IonButton href="/profile/games">My Games</IonButton>
               </IonItem>
-              {Object.values(user)[0] == "admin" ? (
+              {Object.values(user)[0] === "admin" ? (
                 <IonItem>
                   <IonButton href="/admin">Admin</IonButton>
                 </IonItem>

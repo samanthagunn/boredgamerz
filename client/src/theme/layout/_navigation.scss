@@ -4,12 +4,11 @@
 .navigation {
 
     height: 50px;
-
     ion-button {
         font-weight: 700;
         color: map-get($colors, light );
         font-size: 17px;
-        text-shadow: 2px 2px 4px #000000;
+        text-shadow: 1px 1px 2px #000000;
     }
    
     
@@ -48,4 +47,13 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0DCFFF', endColorstr='#50C88C', GradientType=1 );
 
     --color:#ffffff;
+}
+
+.popover-list {
+    
+    ion-button {
+        font-weight: 700;
+        --background: #8C3BCD;
+        font-size: 16px;
+    }
 }

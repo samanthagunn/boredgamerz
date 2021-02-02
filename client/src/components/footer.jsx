@@ -1,4 +1,4 @@
-import { IonFooter, IonTitle, IonToolbar } from "@ionic/react";
+import { IonFooter, IonToolbar } from "@ionic/react";
 import React from "react";
 
 const Footer = () => {
