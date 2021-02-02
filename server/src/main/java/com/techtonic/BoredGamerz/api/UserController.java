@@ -1,5 +1,8 @@
 package com.techtonic.BoredGamerz.api;
 
+import com.techtonic.BoredGamerz.model.GameMeeting;
+import com.techtonic.BoredGamerz.model.UserToGameMeetingJoin;
+import com.techtonic.BoredGamerz.sendGrid.MailController;
 import com.techtonic.BoredGamerz.serverUtil.Exceptions.BlankBodyException;
 import com.techtonic.BoredGamerz.serverUtil.Exceptions.UnauthorizedException;
 import com.techtonic.BoredGamerz.serverUtil.IdTokenDecoder;
@@ -40,6 +43,8 @@ Details: Handles http requests related to creating, finding, or deleting users
 @RestController
 public class UserController {
 
+    private final MailController MAIL_CONTROLLER;
+
     //First we create variables to reference our 3 related services
     private final UserService USER_SERVICE;
     private final UserToGameMeetingService UTGM_SERVICE;
@@ -50,12 +55,15 @@ public class UserController {
     @Autowired
     public UserController(UserService USER_SERVICE,
                           UserToGameMeetingService UTGM_SERVICE,
-                          GameMeetingService GM_SERVICE){
+                          GameMeetingService GM_SERVICE,
+                          MailController MAIL_CONTROLLER){
 
         this.USER_SERVICE = USER_SERVICE;
         this.UTGM_SERVICE = UTGM_SERVICE;
         this.GM_SERVICE = GM_SERVICE;
-    }
+        this.MAIL_CONTROLLER = MAIL_CONTROLLER;
+
+        }
 
     //these mapping annotations will direct the clients request
     //one that does not specify a path will just follow the
@@ -68,7 +76,9 @@ public class UserController {
 
         String id = token.decode("sub");
 
-        //if(id == adminId) allow else dont
+        String perms = token.decode("permissions");
+
+        if(!perms.contains("read:allUsers")) throw new UnauthorizedException();
 
         return USER_SERVICE.getAll();
     }
@@ -92,11 +102,24 @@ public class UserController {
 
         String id = token.decode("sub");
 
-        String perms = token.decode("permissions");
-
-        if(!perms.contains("read:allUsers")) throw new UnauthorizedException();
+        MAIL_CONTROLLER.sendEmailWithSendGrid("Greetings ex-Game Connoisseur,\n\nYour account has been successfully deleted", "Account Deletion", id);
 
         User user = USER_SERVICE.getByAuthId(id).get();
+
+        Iterable<GameMeeting> list = GM_SERVICE.getAllByHostId(user.getId());
+
+        for(GameMeeting gm: list){
+
+            Iterable<UserToGameMeetingJoin> userList = UTGM_SERVICE.getAllByGameMeetingId(gm.getId());
+
+            for(UserToGameMeetingJoin joins: userList){
+
+                String userId = joins.getUser().getAuth0Id();
+
+                if(!userId.equals(id))
+                    MAIL_CONTROLLER.sendEmailWithSendGrid("Greetings Game Connoisseur,\n\nA game you joined was deleted", "Meeting Deletion", userId);
+            }
+        }
 
         if(USER_SERVICE.delete(user.getId(), GM_SERVICE, UTGM_SERVICE) == 0) throw new SQLDeleteFail();
 

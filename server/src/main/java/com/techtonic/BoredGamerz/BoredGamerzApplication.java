@@ -14,6 +14,9 @@ Techtonic
 
 package com.techtonic.BoredGamerz;
 
+import com.sendgrid.SendGrid;
+import com.techtonic.BoredGamerz.sendGrid.MailController;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
