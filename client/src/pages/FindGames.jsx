@@ -7,7 +7,7 @@ import AuthHeader from "../components/auth-header";
 import Footer from "../components/footer";
 import GameList from "../components/game-list";
 import FAB from "../components/mobile-fab";
-require('dotenv').config()
+require("dotenv").config();
 const FindGames = () => {
   const [data, setData] = useState([]);
   const { getAccessTokenSilently } = useAuth0();
@@ -21,8 +21,10 @@ const FindGames = () => {
         },
       })
         .then((resp) => resp.data)
-        .then((data) =>{console.log(data); setData(data)}
-        )
+        .then((data) => {
+          console.log(data);
+          setData(data);
+        });
     });
     const loader = new Loader({
       apiKey: `${process.env.REACT_APP_MAPS_API_KEY}`,
@@ -30,7 +32,7 @@ const FindGames = () => {
     });
     loader.load().then(() => {
       new window.google.maps.Map(document.getElementById("map"), {
-        center: {lat: 40.0165228, lng: -105.2445022},
+        center: { lat: 40.0165228, lng: -105.2445022 },
         zoom: 15,
         gestureHandling: "cooperative",
       });
@@ -42,11 +44,12 @@ const FindGames = () => {
       <IonContent>
         <br />
 
-        <IonTitle color="light" className="ion-text-center">Find Games</IonTitle>
+        <IonTitle color="light" className="ion-text-center">
+          Find Games
+        </IonTitle>
         <br />
         <div id="map" style={{ width: "100%", height: "50%" }}></div>
         <GameList seeData={data} joinMode={true} />
-       
       </IonContent>
       <FAB />
       <Footer />

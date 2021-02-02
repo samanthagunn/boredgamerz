@@ -18,64 +18,47 @@ const Form = ({ editState }) => {
   let history = useHistory();
   let params = useParams();
   const { getAccessTokenSilently } = useAuth0();
-  console.log(params);
-  useEffect(() => {
-    getAccessTokenSilently()
-      .then((resp) => {
-        axios({
-          method: "get",
-          url: `${process.env.REACT_APP_API_HOST}/game-meeting/${params.id}`,
-          headers: {
-            Authorization: `Bearer ${resp}`,
-          },
-        })
-          .then((resp) => resp.data)
-          .then((data) => {
-            console.log(data)
-            let date = new Date(data.date);
-            data = { ...data, dateString: date.toISOString().substring(0, date.toISOString().length-5) };
-            console.log(data)
-            setFormState(data);
-          })
-          .catch((e) => console.error(e));
-      })
-      .catch((e) => console.error(e));
-  }, []);
   let connaddress = "";
-  let geocoder;
+  console.log(formState)
+
   let connectAddress = (googleAddress) => {
     console.log(googleAddress);
     googleAddress.map((part) => (connaddress += part.long_name + " "));
     setFormState({ ...formState, address: connaddress });
-    // geocoder.geocode({ address: connaddress }, (result, status) => {
-    //   if (status === "OK") {
-    //     console.log(result[0].geometry.location.lat());
-    //     setFormState({ ...formState, position: result[0].geometry.location });
-    //   }
-    // });
   };
+  console.log(params);
+  useEffect(() => {
+    if (editState) {
+      getAccessTokenSilently()
+        .then((resp) => {
+          axios({
+            method: "get",
+            url: `${process.env.REACT_APP_API_HOST}/game-meeting/${params.id}`,
+            headers: {
+              Authorization: `Bearer ${resp}`,
+            },
+          })
+            .then((resp) => resp.data)
+            .then((data) => {
+              console.log(data);
+              let date = new Date(data.date);
+              data = {
+                ...data,
+                dateString: date
+                  .toISOString()
+                  .substring(0, date.toISOString().length - 5),
+              };
+              console.log(data);
+              setFormState(data);
+            })
+            .catch((e) => console.error(e));
+        })
+        .catch((e) => console.error(e));
+    }
+  }, []);
 
-  let autocomplete;
-  let initAutocomplete = () => {
-    const loader = new Loader({
-      apiKey: process.env.REACT_APP_MAPS_API_KEY,
-      version: "weekly",
-    });
-    loader.load().then(() => {
-      autocomplete = new window.google.maps.places.Autocomplete(
-        document.getElementById("autocomplete"),
-        { types: ["geocode"] }
-      );
-      autocomplete.setFields(["address_component"]);
-      autocomplete.addListener("place_changed", () => {
-        connectAddress(autocomplete.getPlace().address_components);
-      });
-      geocoder = new window.google.maps.Geocoder();
-    });
-  };
-
-  let submit = () => {
-    console.log(formState.date);
+  let edit = () => {
+    console.log(formState);
     if (formState.date < Date.now()) {
       alert("Date must be after today.");
     } else {
@@ -85,7 +68,41 @@ const Form = ({ editState }) => {
         gameName: formState.gameName,
         description: formState.description,
         category: formState.category,
-        availableSeats: formState.avaliableSeats,
+        availableSeats: formState.availableSeats,
+        title: formState.title,
+        id: formState.id
+      };
+      console.log(submitObject);
+      getAccessTokenSilently().then((resp) =>
+        axios({
+          url: `${process.env.REACT_APP_API_HOST}/game-meeting`,
+          method: "put",
+          data: submitObject,
+          headers: {
+            Authorization: `Bearer ${resp}`,
+          },
+        }).then(() => {
+          alert(
+            `Your game has been ${editState ? "edited" : "created"}, please monitor your email to accept users for your game.`
+          );
+          history.push("/games");
+        })
+      );
+    }
+  };
+
+  let submit = () => {
+    console.log(formState);
+    if (formState.date < Date.now()) {
+      alert("Date must be after today.");
+    } else {
+      const submitObject = {
+        address: formState.address,
+        date: formState.date,
+        gameName: formState.gameName,
+        description: formState.description,
+        category: formState.category,
+        availableSeats: formState.availableSeats,
         title: formState.title,
       };
       console.log(submitObject);
@@ -99,18 +116,36 @@ const Form = ({ editState }) => {
           },
         }).then(() => {
           alert(
-            "Your game has been created, please monitor your email to accept users for your game."
+            `Your game has been ${editState ? "edited" : "created"}, please monitor your email to accept users for your game.`
           );
           history.push("/games");
         })
       );
     }
-    // axios
-    //   .post("http://localhost:8080/games", formState)
-    //   .then((resp) => console.log(resp));
-    // console.log(formState)
   };
-
+  let geocoder;
+  let autocomplete;
+  const initAutocomplete = () => {
+    const loader = new Loader({
+      apiKey: process.env.REACT_APP_MAPS_API_KEY,
+      version: "weekly",
+    });
+    loader
+      .load()
+      .then(() => {
+        autocomplete = new window.google.maps.places.Autocomplete(
+          document.getElementById("autocomplete"),
+          { types: ["geocode"] }
+        );
+        autocomplete.setFields(["address_component"]);
+        autocomplete.addListener("place_changed", () => {
+          connectAddress(autocomplete.getPlace().address_components);
+        });
+        geocoder = new window.google.maps.Geocoder();
+      })
+      .catch((e) => console.error(e));
+  };
+  console.log(formState)
   return (
     <div className="game-container">
       <IonList className="create-games ">
@@ -165,8 +200,9 @@ const Form = ({ editState }) => {
               className="mapinput"
               type="text"
               id="autocomplete"
-              value={formState.address}
+              onChange={(e) => setFormState({...formState, address: e.target.value})}
               onFocus={initAutocomplete}
+              value={formState.address}
             ></input>
           </IonItem>
           <IonItemDivider>
@@ -221,7 +257,7 @@ const Form = ({ editState }) => {
             ></IonTextarea>
           </IonItem>
           <IonItem>
-            <IonButton onClick={submit}>Submit</IonButton>
+          {editState ? (<IonButton onClick={edit}>Submit</IonButton>) : <IonButton onClick={submit}>Submit</IonButton>}
           </IonItem>
         </div>
       </IonList>
