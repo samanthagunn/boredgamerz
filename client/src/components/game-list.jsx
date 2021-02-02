@@ -3,7 +3,6 @@ import React from "react";
 import GameItem from "./game-item";
 
 const GameList = ({ seeData, editMode, joinMode }) => {
-  console.log(seeData);
   return (
     <>
       {typeof seeData === "undefined" ? (

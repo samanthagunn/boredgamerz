@@ -14,7 +14,6 @@ import FAB from "../components/mobile-fab";
 import MyGameList from "../components/my-games-list";
 require('dotenv').config();
 const MyGames = () => {
-  console.log("Hello")
   const [segmentState, setSegmentState] = useState({
     event: undefined,
     state: "Joined",
@@ -23,7 +22,6 @@ const MyGames = () => {
   const { getAccessTokenSilently } = useAuth0();
   useEffect(() => {
     getAccessTokenSilently().then((resp) => {
-      console.log(resp);
       axios({
         method: "get",
         url: `${process.env.REACT_APP_API_HOST}/user-to-game-meeting/me`,
@@ -35,7 +33,6 @@ const MyGames = () => {
         .then((data) => 
         {
           setState(data)
-          console.log(data)
         }
         )
     });

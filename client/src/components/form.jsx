@@ -19,14 +19,11 @@ const Form = ({ editState }) => {
   let params = useParams();
   const { getAccessTokenSilently } = useAuth0();
   let connaddress = "";
-  console.log(formState)
 
   let connectAddress = (googleAddress) => {
-    console.log(googleAddress);
     googleAddress.map((part) => (connaddress += part.long_name + " "));
     setFormState({ ...formState, address: connaddress });
   };
-  console.log(params);
   useEffect(() => {
     if (editState) {
       getAccessTokenSilently()
@@ -40,7 +37,6 @@ const Form = ({ editState }) => {
           })
             .then((resp) => resp.data)
             .then((data) => {
-              console.log(data);
               let date = new Date(data.date);
               data = {
                 ...data,
@@ -48,7 +44,6 @@ const Form = ({ editState }) => {
                   .toISOString()
                   .substring(0, date.toISOString().length - 5),
               };
-              console.log(data);
               setFormState(data);
             })
             .catch((e) => console.error(e));
@@ -58,7 +53,6 @@ const Form = ({ editState }) => {
   }, []);
 
   let edit = () => {
-    console.log(formState);
     if (formState.date < Date.now()) {
       alert("Date must be after today.");
     } else {
@@ -70,9 +64,8 @@ const Form = ({ editState }) => {
         category: formState.category,
         availableSeats: formState.availableSeats,
         title: formState.title,
-        id: formState.id
+        id: formState.id,
       };
-      console.log(submitObject);
       getAccessTokenSilently().then((resp) =>
         axios({
           url: `${process.env.REACT_APP_API_HOST}/game-meeting`,
@@ -83,7 +76,9 @@ const Form = ({ editState }) => {
           },
         }).then(() => {
           alert(
-            `Your game has been ${editState ? "edited" : "created"}, please monitor your email to accept users for your game.`
+            `Your game has been ${
+              editState ? "edited" : "created"
+            }, please monitor your email to accept users for your game.`
           );
           history.push("/games");
         })
@@ -92,7 +87,6 @@ const Form = ({ editState }) => {
   };
 
   let submit = () => {
-    console.log(formState);
     if (formState.date < Date.now()) {
       alert("Date must be after today.");
     } else {
@@ -105,7 +99,6 @@ const Form = ({ editState }) => {
         availableSeats: formState.availableSeats,
         title: formState.title,
       };
-      console.log(submitObject);
       getAccessTokenSilently().then((resp) =>
         axios({
           url: `${process.env.REACT_APP_API_HOST}/game-meeting`,
@@ -116,7 +109,9 @@ const Form = ({ editState }) => {
           },
         }).then(() => {
           alert(
-            `Your game has been ${editState ? "edited" : "created"}, please monitor your email to accept users for your game.`
+            `Your game has been ${
+              editState ? "edited" : "created"
+            }, please monitor your email to accept users for your game.`
           );
           history.push("/games");
         })
@@ -145,7 +140,6 @@ const Form = ({ editState }) => {
       })
       .catch((e) => console.error(e));
   };
-  console.log(formState)
   return (
     <div className="game-container">
       <IonList className="create-games ">
@@ -200,7 +194,9 @@ const Form = ({ editState }) => {
               className="mapinput"
               type="text"
               id="autocomplete"
-              onChange={(e) => setFormState({...formState, address: e.target.value})}
+              onChange={(e) =>
+                setFormState({ ...formState, address: e.target.value })
+              }
               onFocus={initAutocomplete}
               value={formState.address}
             ></input>
@@ -231,12 +227,12 @@ const Form = ({ editState }) => {
                 <IonInput
                   type="number"
                   placeholder="6"
-                  value={formState.avaliableSeats}
+                  value={formState.availableSeats}
                   onInput={(e) => {
                     e.persist();
                     setFormState({
                       ...formState,
-                      avaliableSeats: e.target.value,
+                      availableSeats: e.target.value,
                     });
                   }}
                 ></IonInput>
@@ -257,7 +253,11 @@ const Form = ({ editState }) => {
             ></IonTextarea>
           </IonItem>
           <IonItem>
-          {editState ? (<IonButton onClick={edit}>Submit</IonButton>) : <IonButton onClick={submit}>Submit</IonButton>}
+            {editState ? (
+              <IonButton onClick={edit}>Submit</IonButton>
+            ) : (
+              <IonButton onClick={submit}>Submit</IonButton>
+            )}
           </IonItem>
         </div>
       </IonList>

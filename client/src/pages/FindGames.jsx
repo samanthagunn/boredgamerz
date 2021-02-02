@@ -22,7 +22,6 @@ const FindGames = () => {
       })
         .then((resp) => resp.data)
         .then((data) => {
-          console.log(data);
           setData(data);
         });
     });

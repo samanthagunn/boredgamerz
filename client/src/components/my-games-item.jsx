@@ -12,11 +12,10 @@ import {
 import axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-require('dotenv').config()
+require("dotenv").config();
 
 const MyGameItem = ({ game, edit, join }) => {
-  console.log(game)
-  let meeting = game.gameMeeting
+  let meeting = game.gameMeeting;
   let history = useHistory();
   const [show, setShow] = useState(false);
   let map;
@@ -29,23 +28,28 @@ const MyGameItem = ({ game, edit, join }) => {
     geocoder.geocode({ address: location }, (result, status) => {
       if (status === "OK") {
         map = new window.google.maps.Map(document.getElementById("map"), {
-          center: {lat: result[0].geometry.location.lat(), lng: result[0].geometry.location.lng() },
+          center: {
+            lat: result[0].geometry.location.lat(),
+            lng: result[0].geometry.location.lng(),
+          },
           zoom: 15,
           gestureHandling: "cooperative",
         });
         new window.google.maps.Marker({
-          position: {lat: result[0].geometry.location.lat(), lng: result[0].geometry.location.lng() },
+          position: {
+            lat: result[0].geometry.location.lat(),
+            lng: result[0].geometry.location.lng(),
+          },
           map: map,
         });
-        
       }
     });
   };
-  const { getAccessTokenSilently, user } = useAuth0();
+  const { getAccessTokenSilently } = useAuth0();
   const loadMap = () => {
     loader.load().then(() => {
       geocoder = new window.google.maps.Geocoder();
-      geocode(meeting.address)
+      geocode(meeting.address);
     });
   };
   const joinGame = () => {
@@ -56,14 +60,13 @@ const MyGameItem = ({ game, edit, join }) => {
         headers: {
           Authorization: `Bearer ${resp}`,
         },
-        data : {
+        data: {
           gameMeetingId: meeting.id,
-        }
-      }) 
-    })
-  }
+        },
+      });
+    });
+  };
 
-  
   let date = new Date(meeting?.date);
   return (
     <IonItem lines="none" className="games">
@@ -79,7 +82,9 @@ const MyGameItem = ({ game, edit, join }) => {
         }}
       >
         <IonCardHeader>
-          <IonCardTitle className="game-title">Name: {meeting.title}</IonCardTitle>
+          <IonCardTitle className="game-title">
+            Name: {meeting.title}
+          </IonCardTitle>
           <IonCardSubtitle className="game-type">
             <strong>Type: </strong>
             {meeting.category}
@@ -97,7 +102,9 @@ const MyGameItem = ({ game, edit, join }) => {
           </h4>
           {show ? <p>{meeting.description}</p> : undefined}
           {edit ? (
-            <IonButton onClick={() => history.push(`/games/edit/${meeting.id}`)}>
+            <IonButton
+              onClick={() => history.push(`/games/edit/${meeting.id}`)}
+            >
               Edit
             </IonButton>
           ) : (

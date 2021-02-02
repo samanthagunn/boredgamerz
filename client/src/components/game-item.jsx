@@ -15,7 +15,6 @@ import { useHistory } from "react-router";
 require("dotenv").config();
 
 const GameItem = ({ game, edit, join }) => {
-  console.log(game);
   let history = useHistory();
   const [show, setShow] = useState(false);
   let map;
@@ -45,7 +44,7 @@ const GameItem = ({ game, edit, join }) => {
       }
     });
   };
-  const { getAccessTokenSilently, user } = useAuth0();
+  const { getAccessTokenSilently } = useAuth0();
   const loadMap = () => {
     loader.load().then(() => {
       geocoder = new window.google.maps.Geocoder();
@@ -67,10 +66,17 @@ const GameItem = ({ game, edit, join }) => {
         .then((resp) => resp.status)
         .then((status) => {
           if (status == 200) {
-            alert("You have joined this game, please monitor your email for your invite and more details.");
-            history.push("/mygames")
+            alert(
+              "You have joined this game, please monitor your email for your invite and more details."
+            );
+            history.push("/mygames");
           }
-        }).catch(e => alert("You have already joined this game, please select a different game."));
+        })
+        .catch(() =>
+          alert(
+            "You have already joined this game, please select a different game."
+          )
+        );
     });
   };
 

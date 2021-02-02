@@ -20,11 +20,8 @@ require('dotenv').config();
 
 const Profile: React.FC = () => {
   const { user, isLoading, getAccessTokenSilently, logout } = useAuth0();
-  console.log(user);
-  console.log(process.env.REACT_APP_MAPS_API_KEY)
   useEffect(() => {
     getAccessTokenSilently().then((resp) => {
-      console.log(resp);
       axios({
         method: "post",
         url: `${process.env.REACT_APP_API_HOST}/user`,
@@ -37,7 +34,6 @@ const Profile: React.FC = () => {
   let deleteUser = () => {
     if (window.confirm("Are you sure you want to delete your profile?")) {
       getAccessTokenSilently().then((resp) => {
-        console.log(resp);
         axios({
           method: "delete",
           url: `${process.env.REACT_APP_API_HOST}/user/me`,

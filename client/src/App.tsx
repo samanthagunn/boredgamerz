@@ -33,8 +33,6 @@ import { withAuthenticationRequired } from "@auth0/auth0-react";
 require('dotenv').config()
 
 const App = () => {
-  console.log(process.env.REACT_APP_HOST);
-  console.log(process.env.REACT_APP_API_HOST)
   return (
     <IonApp>
       <IonReactRouter>
