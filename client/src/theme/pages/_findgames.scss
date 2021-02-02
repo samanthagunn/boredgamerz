@@ -1,19 +1,21 @@
 @use '../partials/colors' as *;
 @use '../partials/mediaq' as *;
-
+.map {
+    width: 100%;
+    height: 40%;
+}
 .games {
     margin: 10px 0px;
 }
-.game-card {
-   
+.game-list {
+    height: 80%;
+}
 
+.game-card {
     @include desktop{
         width: 100%;
-       
     }
-    
-    
-    
+
     @include mobile {
         width: 97%;
     }

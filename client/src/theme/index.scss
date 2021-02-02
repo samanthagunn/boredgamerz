@@ -10,16 +10,11 @@
 @use './layout/footer' as *;
 @use './pages/admin' as *;
 
-// :host {
-//     --color-checked: "tertiary";
-
-// }
 .button:hover {--background-hover: black} 
 .login-button {
-
+    --color: white;
   text-align: center;
 }
-
 
 .hero-logo {
     display: block;

@@ -39,16 +39,17 @@ const FindGames = () => {
   return (
     <IonPage>
       <AuthHeader />
-      <IonContent>
+      
         <br />
-
+    <div className="map">
         <IonTitle color="light" className="ion-text-center">Find Games</IonTitle>
         <br />
-        <div id="map" style={{ width: "100%", height: "50%" }}></div>
-        <br />
+
+        <div id="map" style={{ width: "100%", height: "100%" }}></div>
+        </div>
+        <IonContent>
         <GameList seeData={data} joinMode={true} />
-       
-      </IonContent>
+    </IonContent>
       <FAB />
       <Footer />
     </IonPage>
