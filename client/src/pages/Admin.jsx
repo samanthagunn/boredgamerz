@@ -22,12 +22,11 @@ const Admin = () => {
     state: "Users",
   });
   let admin = Object.values(user)[0];
-console.log(admin === ["admin"]);
   return (
     <IonPage>
-    <AuthHeader />
+      <AuthHeader />
       {admin === ["admin"] ? (
-        <IonContent>
+        <IonContent className="admin-page">
           <IonSegment
             onIonChange={(e) => {
               setSegmentState({ ...segmentState, state: e.detail.value });
@@ -46,8 +45,10 @@ console.log(admin === ["admin"]);
           </IonList>
         </IonContent>
       ) : (
-        <IonContent>
+        <IonContent className="admin-page-denied">
+           <img width="30%" alt="game-piece-crash" src="https://storage.googleapis.com/boredgamerz_assets/crash-denied.webp" />
           <IonTitle>Access Denied</IonTitle>
+         
           <IonButton href="/profile">Return to profile</IonButton>
         </IonContent>
       )}

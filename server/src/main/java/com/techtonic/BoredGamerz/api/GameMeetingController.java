@@ -1,5 +1,7 @@
 package com.techtonic.BoredGamerz.api;
 
+import com.techtonic.BoredGamerz.model.UserToGameMeetingJoin;
+import com.techtonic.BoredGamerz.sendGrid.MailController;
 import com.techtonic.BoredGamerz.serverUtil.Exceptions.*;
 import com.techtonic.BoredGamerz.serverUtil.IdTokenDecoder;
 import com.techtonic.BoredGamerz.dto.GameMeetingDataTransferObject;
@@ -39,18 +41,21 @@ Details: Handles http requests related to creating, finding, or deleting game me
 @RestController
 public class GameMeetingController {
 
+    private final MailController MAIL_CONTROLLER;
     private final GameMeetingService GM_SERVICE;
     private final UserToGameMeetingService UTGM_SERVICE;
     private final UserService USER_SERVICE;
 
     @Autowired
-    public GameMeetingController(GameMeetingService GM_SERVICE,
-                          UserToGameMeetingService UTGM_SERVICE,
-                                 UserService USER_SERVICE){
+    public GameMeetingController(UserService USER_SERVICE,
+                                 UserToGameMeetingService UTGM_SERVICE,
+                                 GameMeetingService GM_SERVICE,
+                                 MailController MAIL_CONTROLLER){
 
-        this.GM_SERVICE = GM_SERVICE;
-        this.UTGM_SERVICE = UTGM_SERVICE;
         this.USER_SERVICE = USER_SERVICE;
+        this.UTGM_SERVICE = UTGM_SERVICE;
+        this.GM_SERVICE = GM_SERVICE;
+        this.MAIL_CONTROLLER = MAIL_CONTROLLER;
     }
 
     @PostMapping
@@ -61,6 +66,8 @@ public class GameMeetingController {
         String id = token.decode("sub");
 
         User user = USER_SERVICE.getByAuthId(id).get();
+
+        MAIL_CONTROLLER.sendEmailWithSendGrid("Greetings Game Connoisseur,\n\n Your meeting is hosted and waiting for gamers!", "Game Hosting", id);
 
         gm.setHost(user.getId());
 
@@ -106,6 +113,20 @@ public class GameMeetingController {
     @DeleteMapping(path = "/{UUID}")
     public int deleteByGameMeetingId(@PathVariable("UUID") UUID gameMeetingId){
 
+        String id = GM_SERVICE.getById(gameMeetingId).get().getHost().getAuth0Id();
+
+        MAIL_CONTROLLER.sendEmailWithSendGrid("Greetings Game Connoisseur,\n\n Your meeting is hosted and waiting for gamers!", "Game Hosting", id);
+
+        Iterable<UserToGameMeetingJoin> list = UTGM_SERVICE.getAllByGameMeetingId(gameMeetingId);
+
+        for(UserToGameMeetingJoin joins: list){
+
+            String userId = joins.getUser().getAuth0Id();
+
+            if(!userId.equals(id))
+                MAIL_CONTROLLER.sendEmailWithSendGrid("Greetings Game Connoisseur,\n\n A game meeting you joined is no longer being hosted", "Game cancellation", userId);
+        }
+
         if(GM_SERVICE.delete(gameMeetingId, UTGM_SERVICE) == 0) throw new SQLDeleteFail();
 
         return 200;
@@ -117,6 +138,10 @@ public class GameMeetingController {
         if(gameMeeting.getAvailableSeats() !=
                 GM_SERVICE.getById(gameMeeting.getId()).get().getAvailableSeats())
             throw new IllegalArgumentException();
+
+        String id = GM_SERVICE.getById(gameMeeting.getId()).get().getHost().getAuth0Id();
+
+        MAIL_CONTROLLER.sendEmailWithSendGrid("Greetings Game Connoisseur,\n\n Your meeting has been updated and is waiting for gamers!", "Game Hosting", id);
 
         return GM_SERVICE.update(gameMeeting);
     }

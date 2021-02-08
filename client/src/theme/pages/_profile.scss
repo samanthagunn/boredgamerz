@@ -1,22 +1,49 @@
 @use '../partials/colors' as *;
+@use '../partials/mediaq' as *;
 
-
+.profile-main {
+    --ion-background-color: #FFC67A !important;
+    color: black !important;
+    padding: 2px 0px;
+    border-radius: 15px;
+    margin: auto;
+    width: 60%;
+    @include mobile {
+        width: 80%;
+    }
+    ion-button {
+        display: block;
+        margin: 0 auto;
+    }
+}
 .profile-heading {
     height: 50px;
     color: white;
     margin-top: 20px;
 }
 .profile-card {
-    --ion-background-color: #FFC67A !important;
-    color: black !important;
-    padding: 2px 0px;
-    border-radius: 15px;
-    margin: auto;
-    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+
+    
+    .player-ready {
+        padding-top: 20px;
+        width: 50%;
+    
+        
+    }
+    .delete-button {
+        --background: red;
+        height: 25px; 
+        font-size: 12px;
+    }
 }
 .user-image-profile {
     margin: 10px;
     border-radius: 50%;
     width: 50px;
+    height: 50px;
     
 }

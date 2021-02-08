@@ -2,19 +2,19 @@ import React from "react";
 import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
 import ErrorBoundary from "./errorboundary";
-import { Auth0Provider } from "@auth0/auth0-react"
+import { Auth0Provider } from "@auth0/auth0-react";
 import App from "./App";
-require('dotenv').config()
+require("dotenv").config();
 
 ReactDOM.render(
   <Auth0Provider
     domain="dev-z2irz81c.us.auth0.com"
-    clientId="fe4DD756zV9Ti2IIxIM6WsW5oFIRJr2b"
-    redirectUri="https://boredgamerz.com/profile"
+    clientId=""
+    redirectUri=""
     response_type="code"
-    scope="openid profile email"
-    audience="https://BoredGamerz"
-    >
+    scope="openid profile email read:allUsers read:allJoins delete:users delete:current_user"
+    audience=""
+  >
     <ErrorBoundary>
       <App />
     </ErrorBoundary>

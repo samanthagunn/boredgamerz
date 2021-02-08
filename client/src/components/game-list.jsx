@@ -5,13 +5,17 @@ import GameItem from "./game-item";
 const GameList = ({ seeData, editMode, joinMode }) => {
   return (
     <>
-      {typeof seeData[0] === 'undefined' ? (
-        <IonItem>No Games Found</IonItem>
+      {typeof seeData === "undefined" ? (
+        <IonItem className="no-games">No Games Found</IonItem>
       ) : (
         <IonList>
-          {seeData.map((data) => (
-            <GameItem game={data} edit={editMode} join={joinMode} />
-          ))}
+          {seeData.map((data) => {
+            if (data.availableSeats <= 0) {
+              return;
+            } else {
+              return <GameItem game={data} edit={editMode} join={joinMode} />;
+            }
+          })}
         </IonList>
       )}
     </>

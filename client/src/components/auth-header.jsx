@@ -6,7 +6,6 @@ import {
   IonItem,
   IonList,
   IonPopover,
-  IonTitle,
   IonToolbar,
 } from "@ionic/react";
 import React, { useState } from "react";
@@ -20,26 +19,18 @@ const AuthHeader = () => {
   });
   return (
     <IonHeader>
-      <IonToolbar color="primary">
-        <a href="/home">
-          <img
-            className="logo-hero"
-            alt="BoredGamerz Logo"
-            src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerzLogo_72-2.png"
-          />
-        </a>
+      <IonToolbar className="auth-toolbar">
+        <img
+          className="logo-hero"
+          alt="BoredGamerz Logo"
+          src="https://storage.googleapis.com/boredgamerz_assets/BoredGamerz_Logo.webp"
+        />
         <IonButtons className="navigation" slot="primary">
           <IonButton href="/mygames">My Games</IonButton>
           <IonButton href="/games">Find Games</IonButton>
+
           <IonButton href="/create">Create A Game</IonButton>
-          <IonButton
-            onClick={(e) => {
-              e.persist();
-              setShowPopover({ showPopover: true, event: e });
-            }}
-          >
-            Profile
-          </IonButton>
+
           <img
             className="user-image"
             alt="profile"
@@ -57,14 +48,14 @@ const AuthHeader = () => {
               setShowPopover({ showPopover: false, event: undefined })
             }
           >
-            <IonList>
+            <IonList className="popover-list">
               <IonItem>
                 <IonButton href="/profile">Profile</IonButton>
               </IonItem>
               <IonItem>
                 <IonButton href="/mygames">My Games</IonButton>
               </IonItem>
-              {Object.values(user)[0] == "admin" ? (
+              {Object.values(user)[0] === "admin" ? (
                 <IonItem>
                   <IonButton href="/admin">Admin</IonButton>
                 </IonItem>

@@ -10,22 +10,21 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import AuthHeader from "../components/auth-header";
 import Footer from "../components/footer";
-import GameList from "../components/game-list";
 import FAB from "../components/mobile-fab";
+import MyGameList from "../components/my-games-list";
 require('dotenv').config();
 const MyGames = () => {
   const [segmentState, setSegmentState] = useState({
     event: undefined,
     state: "Joined",
   });
-  const [state, setState] = useState([[],[]]);
+  const [state, setState] = useState([]);
   const { getAccessTokenSilently } = useAuth0();
   useEffect(() => {
     getAccessTokenSilently().then((resp) => {
-      console.log(resp);
       axios({
         method: "get",
-        url: `${process.env.REACT_APP_API_HOST}/game-meeting/me`,
+        url: `${process.env.REACT_APP_API_HOST}/user-to-game-meeting/me`,
         headers: {
           Authorization: `Bearer ${resp}`,
         },
@@ -34,7 +33,6 @@ const MyGames = () => {
         .then((data) => 
         {
           setState(data)
-          console.log(data[1])
         }
         )
     });
@@ -58,9 +56,9 @@ const MyGames = () => {
         </IonSegment>
         <IonList>
           {segmentState.state === "Joined" ? (
-            <GameList seeData={[state[1]]} />
+            <MyGameList seeData={state[1]} joinMode={true}/>
           ) : (
-            <GameList seeData={[state[0]]} editMode={true} />
+            <MyGameList seeData={state[0]} editMode={true} />
           )}
         </IonList>
       </IonContent>

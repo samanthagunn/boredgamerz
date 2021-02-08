@@ -16,8 +16,6 @@ const FAB = () => {
   useEffect(() => {
     getAccessTokenSilently().then(() => setAuthUser(user))
   }, [])
-  console.log(authUser)
-  console.log(Object.values(authUser)[0])
   return (
     <IonFab className="mobilenav" vertical="bottom" horizontal="end" slot="fixed">
       <IonFabButton>
@@ -36,7 +34,7 @@ const FAB = () => {
         <IonFabButton href="/create">
           <IonIcon icon={addCircleOutline} />
         </IonFabButton>
-        {Object.values(authUser)[0] == "admin" ? (
+        {Object.values(authUser)[0] === "admin" ? (
           <IonFabButton href="/admin">
             <IonIcon icon={clipboard} />
           </IonFabButton>

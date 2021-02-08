@@ -1,8 +1,10 @@
 package com.techtonic.BoredGamerz.api;
 
+import com.techtonic.BoredGamerz.auth0.Auth0Users;
 import com.techtonic.BoredGamerz.dto.UserToGameMeetingDataTransferObject;
 import com.techtonic.BoredGamerz.model.User;
 import com.techtonic.BoredGamerz.model.UserToGameMeetingJoin;
+import com.techtonic.BoredGamerz.sendGrid.MailController;
 import com.techtonic.BoredGamerz.serverUtil.Exceptions.*;
 import com.techtonic.BoredGamerz.serverUtil.IdTokenDecoder;
 import com.techtonic.BoredGamerz.service.GameMeetingService;
@@ -10,6 +12,7 @@ import com.techtonic.BoredGamerz.service.UserService;
 import com.techtonic.BoredGamerz.service.UserToGameMeetingService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,18 +51,30 @@ Details: handles http requests when joining, unjoining, or listing users from a 
 @RestController
 public class UserToGameMeetingController {
 
+    private final MailController MAIL_CONTROLLER;
     private final UserService USER_SERVICE;
     private final UserToGameMeetingService UTGM_SERVICE;
     private final GameMeetingService GM_SERVICE;
 
+    @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
+    private String issuer;
+
+    @Value("${spring.security.oauth2.resourceserver.jwt.clientId}")
+    private String clientId;
+
+    @Value("${spring.security.oauth2.resourceserver.jwt.clientSecret}")
+    private String clientSecret;
+
     @Autowired
     public UserToGameMeetingController(UserService USER_SERVICE,
-                          UserToGameMeetingService UTGM_SERVICE,
-                          GameMeetingService GM_SERVICE){
+                                       UserToGameMeetingService UTGM_SERVICE,
+                                       GameMeetingService GM_SERVICE,
+                                       MailController MAIL_CONTROLLER){
 
         this.USER_SERVICE = USER_SERVICE;
         this.UTGM_SERVICE = UTGM_SERVICE;
         this.GM_SERVICE = GM_SERVICE;
+        this.MAIL_CONTROLLER = MAIL_CONTROLLER;
     }
 
     @PostMapping
@@ -69,8 +84,16 @@ public class UserToGameMeetingController {
         IdTokenDecoder token = new IdTokenDecoder(headers);
 
         String id = token.decode("sub");
+        String hostId = GM_SERVICE.getById(join.getGameMeeting()).get().getHost().getAuth0Id();
 
         User user = USER_SERVICE.getByAuthId(id).get();
+
+        String title = GM_SERVICE.getById(join.getGameMeeting()).get().getTitle();
+
+        String userName = new Auth0Users(issuer,clientId,clientSecret).getUserInfo(id).getString("given_name");
+
+        MAIL_CONTROLLER.sendEmailWithSendGrid("Greetings Game Connoisseur,\n\nYou have successfully joined a game!", "Your in!", id);
+        MAIL_CONTROLLER.sendEmailWithSendGrid("Greetings Game Connoisseur,\n\n Your meeting has been joined by " + userName, "Someone Joined " + title + "!", hostId);
 
         join.setUser(user.getId());
 
@@ -153,6 +176,11 @@ public class UserToGameMeetingController {
         IdTokenDecoder token = new IdTokenDecoder(headers);
 
         String id = token.decode("sub");
+
+        String hostId = GM_SERVICE.getById(unjoin.getGameMeeting()).get().getHost().getAuth0Id();
+
+        MAIL_CONTROLLER.sendEmailWithSendGrid("Hello Game Connoisseur,\n\nYou have successfully abandoned a game.", "Seat Cancellation", id);
+        MAIL_CONTROLLER.sendEmailWithSendGrid("Greetings Game Connoisseur,\n\nSomeone left your meeting, Your meeting now has another seat available", "Seat Cancellation", hostId);
 
         User user = USER_SERVICE.getByAuthId(id).get();
 
