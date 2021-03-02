@@ -31,6 +31,9 @@
     .player-ready {
         padding-top: 20px;
         width: 50%;
+	@include mobile {
+	     display: none;
+	}
     
         
     }

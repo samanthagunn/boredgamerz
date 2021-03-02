@@ -27,10 +27,18 @@ const Header = () => {
         
       {isAuthenticated ? (
         <IonButtons className="navigation" slot="primary" >
-          <IonButton href="/mygames">My Games</IonButton>
-          <IonButton href="/games">Find Games</IonButton>
-          <IonButton  href="/create">Create A Game</IonButton>
-          
+          <IonButton className="navigation__fontweight" href="/mygames">My Games</IonButton>
+          <IonButton className="navigation__fontweight" href="/games">Find Games</IonButton>
+          <IonButton className="navigation__fontweight" href="/create">Create A Game</IonButton>
+          <IonButton
+            onClick={(e) => {
+              e.persist();
+              setShowPopover({ showPopover: true, event: e });
+            }}
+          >
+            Profile
+            
+          </IonButton>
           <img className="user-image" alt="profile" height="50px" src={user.picture} onClick={(e) => {
               e.persist();
               setShowPopover({ showPopover: true, event: e });

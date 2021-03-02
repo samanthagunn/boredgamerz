@@ -1,13 +1,17 @@
 auth0:
-    audience: https://BoredGamerzDev
+    audience: https://BoredGamerz
 spring:
+    sendgrid:
+        key: 
     security:
         oauth2:
             resourceserver:
                 jwt:
                     issuer-uri: https://dev-z2irz81c.us.auth0.com/
+                    clientId: Z5nnmXJO8bA1UeqgvjchD5bGaq1N75m4
+                    clientSecret: 
     datasource:
-        username: root
+        username: boredgamerzprod
         password: 
         url: jdbc:mysql://35.202.6.200:3306/boredgamerzdb
     jpa:

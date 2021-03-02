@@ -63,7 +63,7 @@ const MyGameItem = ({ game, edit, join }) => {
         data: {
           gameMeetingId: meeting.id,
         },
-      }).then(() => {alert("You have removed yourself from this game."); history.push("/mygames")})
+      }).then(() => {alert("You have removed yourself from this game."); window.location.reload()})
       .catch(e => alert("Error removing from game, please try again later."));
     });
   };

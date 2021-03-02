@@ -9,12 +9,12 @@ require("dotenv").config();
 ReactDOM.render(
   <Auth0Provider
     domain="dev-z2irz81c.us.auth0.com"
-    clientId=""
-    redirectUri=""
+    clientId="fe4DD756zV9Ti2IIxIM6WsW5oFIRJr2b"
+    redirectUri="https://boredgamerz.com/profile"
     response_type="code"
     scope="openid profile email read:allUsers read:allJoins delete:users delete:current_user"
-    audience=""
-  >
+    audience="https://BoredGamerz"
+    >
     <ErrorBoundary>
       <App />
     </ErrorBoundary>
