@@ -1,0 +1,30 @@
+@use '../partials/colors' as *;
+@use '../partials/mediaq' as *;
+
+.join-button {
+    color: white;
+    --indicator-color: #8C3BCD !important;
+    --background-hover: white !important;
+    --color-checked: #8C3BCD !important;
+    --color-hover: #588242 !important;
+    --background-hover-opacity: 1;
+}
+.host-button{
+   color: white;
+   --indicator-color: #8C3BCD !important;
+   --background-hover: white !important;
+   --color-checked: #8C3BCD !important;
+   --color-hover: #588242 !important;
+   --background-hover-opacity: 1;
+}
+// @include mobile {
+//  .mobile-game {
+//      padding: 10px ;
+//  }
+// .game-card {
+//     margin: 10px;
+// }
+// .game-title {
+//     padding: 10px !important;
+// }
+// }
